@@ -1,0 +1,71 @@
+@charset "UTF-8";
+/* CSS Document */
+/* Universal Selector Reset cssreset.com */
+ * { margin: 0; padding: 0; }
+/* End Reset */
+:root {
+ --background-color: #a7b7c6;
+ --accent-color: #f0f0f0;
+ --emphasis-color: #dedfe1;
+}
+body {
+  background-color: var(--background-color);
+}
+nav {
+  background-color: #ffffff;
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0px;
+  width: 100%;
+  height: 30px;
+  margin: 0px auto 30px;
+  font-family: 'Overpass', sans-serif;
+}
+nav ul li {
+  background-color: var(--accent-color);
+  display: inline;
+  border: none;
+  padding: 10px 10px;
+  margin: 0px 10px;
+}
+nav ul li.current-menu-item,
+nav ul li.current-page-ancestor,
+nav ul li.current-menu-ancestor {
+  background-color: var(--emphasis-color);
+}
+nav ul li:hover {
+  background-color: var(--emphasis-color);
+}
+main {
+  font-family: 'Overpass', sans-serif;
+  margin: 20px auto;
+  width: 90%;
+  max-width: 1700px;
+  min-width: 0%;
+}
+#converter {
+  width: 100%;
+  height: 50px;
+  margin: 20px auto;
+}
+#primary {
+  background-color: var(--accent-color);
+  display: inline-block;
+  height: 50px;
+  width: 45%;
+}
+#swap{
+  display: inline-block;
+}
+#secondary {
+  background-color: var(--accent-color);
+  display: inline-block;
+  height: 50px;
+  width: 45%;
+}
+#visual{
+  background-color: var(--accent-color);
+  width: 100%;
+  height: 300px;
+  margin: 20px auto;
+}
