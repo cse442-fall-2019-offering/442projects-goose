@@ -21,6 +21,10 @@ nav {
   margin: 0px auto 30px;
   font-family: 'Overpass', sans-serif;
 }
+nav ul{
+  margin: 0px auto;
+  width: 90%;
+}
 nav ul li {
   background-color: var(--accent-color);
   display: inline;
@@ -50,16 +54,18 @@ main {
 }
 #primary {
   background-color: var(--accent-color);
-  display: inline-block;
+  float: left;
   height: 50px;
   width: 45%;
 }
 #swap{
-  display: inline-block;
+  float: left;
+  height: 50px;
+  width: 10%;
 }
 #secondary {
   background-color: var(--accent-color);
-  display: inline-block;
+  float: right;
   height: 50px;
   width: 45%;
 }
