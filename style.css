@@ -74,4 +74,11 @@ main {
   width: 100%;
   height: 300px;
   margin: 20px auto;
+  overflow: auto;
+}
+#placeholder-visual{
+  background-color: #ffffff;
+  width: 95%;
+  height: 250px;
+  margin: 25px auto;
 }
