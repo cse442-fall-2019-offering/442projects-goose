@@ -1,8 +1,6 @@
 @charset "UTF-8";
 /* CSS Document */
 /* Universal Selector Reset cssreset.com */
-/* random text for test commit */
-/* more random test */
  * { margin: 0; padding: 0; }
 /* End Reset */
 :root {
@@ -48,6 +46,12 @@ main {
   width: 90%;
   max-width: 1700px;
   min-width: 0%;
+}
+main form {
+  padding: 15px 25px;
+}
+main form input, select, option{
+  font-family: 'Overpass', sans-serif;
 }
 #converter {
   width: 100%;
