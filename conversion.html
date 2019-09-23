@@ -10,8 +10,6 @@
         <!-- TODO: change dropdown menu based on tile selection -->
         <!-- TODO: create visual output based on entered values -->
         <!-- TODO: create rest of website -->
-        <!-- random text for tet commit -->
-        <!-- more commit test -->
         <header>
           <!-- select measures here -->
           <nav>
@@ -31,14 +29,30 @@
           <div id="converter">
             <!-- select one unit here -->
             <div id="primary">
-
+              <form>
+                <input type="number" name="primary">
+                <select>
+                  <option value="inches">Inches</option>
+                  <option value="feet">Feet</option>
+                  <option value="yard">Yard</option>
+                  <option value="mile">Mile</option>
+                </select>
+              </form>
             </div>
             <div id="swap">
               <p>⇌</p>
             </div>
             <!-- select the other unit here -->
             <div id="secondary">
-
+              <form>
+                <input type="number" name="secondary">
+                <select>
+                  <option value="inches">Inches</option>
+                  <option value="feet">Feet</option>
+                  <option value="yard">Yard</option>
+                  <option value="mile">Mile</option>
+                </select>
+              </form>
             </div>
           </div>
           <!-- visual output is displayed here -->
@@ -56,7 +70,6 @@
           and convert it to the unit in unit2
           */
             function convertDist(input, unit1, unit2){
-
               switch(unit1){
                 case "millimeter":
                   input = input *0.001;
