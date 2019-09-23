@@ -47,6 +47,70 @@
             <div id="placeholder-visual">
             </div>
           </div>
+          <script>
+          /*
+          unimplimented unit conversion function for distance using general units
+          first parameter is the input in the primary div class, the second parameter
+          unit1 is the first unit to be converted to meters for ease of conversion
+          and reduce hard coding. than it will take the input already converted to meters
+          and convert it to the unit in unit2
+          */
+            function convertDist(input, unit1, unit2){
+
+              switch(unit1){
+                case "millimeter":
+                  input = input *0.001;
+                  break;
+                case "centimeter":
+                  input = input *0.01;
+                  break;
+                case "meter":
+                  break;
+                case "kilometer":
+                  input = input *1000;
+                  break;
+                case "inch":
+                  input = input *0.0254;
+                  break;
+                case "feet":
+                  input = input *0.3048;
+                  break;
+                case "yard":
+                  input = input *0.9144;
+                  break;
+                case "mile":
+                  input = input *160934.4;
+                  break;
+              }
+              switch(unit2){
+                case "millimeter":
+                  input = input *1000;
+                  break;
+                case "centimeter":
+                  input = input *100;
+                  break;
+                case "meter":
+                  break;
+                case "kilometer":
+                  input = input *0.001;
+                  break;
+                case "inch":
+                  input = input *39.370078740157;
+                  break;
+                case "feet":
+                  input = input *3.2808398950131;
+                  break;
+                case "yard":
+                  input = input *1.0936132983377;
+                  break;
+                case "mile":
+                  input = input *0.00062137119223733;
+                  break;
+              }
+              return input;
+              //just returns the input for now, subject to change
+            }
+          </script>
         </main>
     </body>
 </html>
