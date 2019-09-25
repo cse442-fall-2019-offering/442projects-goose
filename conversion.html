@@ -32,8 +32,8 @@
             <!-- select one unit here -->
             <div id="primary">
               <form>
-                <input type="number" name="primary">
-                <select>
+                <input type="number" name="primary" id="first">
+                <select id="unit1">
                   <option value="inches">Inches</option>
                   <option value="feet">Feet</option>
                   <option value="yard">Yard</option>
@@ -49,8 +49,8 @@
             <!-- select the other unit here -->
             <div id="secondary">
               <form>
-                <input type="number" name="secondary">
-                <select>
+                <input type="number" name="secondary" id="second">
+                <select id="unit2">
                   <option value="inches">Inches</option>
                   <option value="feet">Feet</option>
                   <option value="yard">Yard</option>
@@ -60,7 +60,7 @@
             </div>
           </div>
           <div class="center">
-            <button class="convertButton">
+            <button class="convertButton" onclick="convertDist()">
               Convert
             </button>
           </div>
@@ -78,7 +78,11 @@
           and reduce hard coding. than it will take the input already converted to meters
           and convert it to the unit in unit2
           */
-            function convertDist(input, unit1, unit2){
+            function convertDist(){
+              input = document.getElementById("first").value;
+
+              unit1 = document.getElementById("unit1").value;
+              unit2 = document.getElementById("unit2").value;
               switch(unit1){
                 case "millimeter":
                   input = input *0.001;
@@ -129,7 +133,7 @@
                   input = input *0.00062137119223733;
                   break;
               }
-              return input;
+              document.getElementById("second").value = input;
               //just returns the input for now, subject to change
             }
           </script>
