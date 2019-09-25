@@ -42,7 +42,7 @@
               </form>
             </div>
             <div id="swap">
-              <button class="swapButton">
+              <button class="swapButton" onclick="switchUnits()">
                 ⇌
               </button>
             </div>
@@ -71,6 +71,12 @@
             </div>
           </div>
           <script>
+            function switchUnits(){
+              hold = document.getElementById("unit1").value;
+              document.getElementById("unit1").value = document.getElementById("unit2").value;
+              document.getElementById("unit2").value = hold;
+
+            }
           /*
           unimplimented unit conversion function for distance using general units
           first parameter is the input in the primary div class, the second parameter
