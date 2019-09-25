@@ -10,6 +10,8 @@
         <!-- TODO: change dropdown menu based on tile selection -->
         <!-- TODO: create visual output based on entered values -->
         <!-- TODO: create rest of website -->
+        <!-- random text for tet commit -->
+        <!-- more commit test -->
         <header>
           <!-- select measures here -->
           <nav>
@@ -30,37 +32,190 @@
             <!-- select one unit here -->
             <div id="primary">
               <form>
+<<<<<<< HEAD
                 <input type="number" name="primary">
                 <select>
                   <option value="inches">Inches</option>
                   <option value="feet">Feet</option>
                   <option value="yard">Yard</option>
                   <option value="mile">Mile</option>
+=======
+                <input type="number" name="primary" id="first">
+                <select id="unit1">
+                  <option value="inch">Inches</option>
+                  <option value="feet">Feet</option>
+                  <option value="yard">Yard</option>
+                  <option value="mile">Mile</option>
+                  <option value="kilometer">Kilometer</option>
+                  <option value="centimeter">Centimeter</option>
+>>>>>>> develop
                 </select>
               </form>
             </div>
             <div id="swap">
-              <p>⇌</p>
+              <button class="swapButton" onclick="switchUnits()">
+                ⇌
+              </button>
             </div>
             <!-- select the other unit here -->
             <div id="secondary">
               <form>
+<<<<<<< HEAD
                 <input type="number" name="secondary">
                 <select>
                   <option value="inches">Inches</option>
                   <option value="feet">Feet</option>
                   <option value="yard">Yard</option>
                   <option value="mile">Mile</option>
+=======
+                <input type="number" name="secondary" id="second">
+                <select id="unit2">
+                  <option value="inch">Inches</option>
+                  <option value="feet">Feet</option>
+                  <option value="yard">Yard</option>
+                  <option value="mile">Mile</option>
+                  <option value="kilometer">Kilometer</option>
+                  <option value="centimeter">Centimeter</option>
+>>>>>>> develop
                 </select>
               </form>
             </div>
           </div>
-          <!-- visual output is displayed here -->
-          <div id="visual">
-            <!-- just a placeholder shape -->
-            <div id="placeholder-visual">
-            </div>
+          <div class="center">
+            <button class="convertButton" onclick="convertDist(); visual_display();">
+              Convert
+            </button>
           </div>
+          <!-- visual output is displayed here -->
+          <div class="center" id="visual">
+            <!-- just a placeholder shape -->
+            <img id="comparison_image">
+          </img>
+          </div>
+          <script>
+            function switchUnits(){
+              hold = document.getElementById("unit1").value;
+              document.getElementById("unit1").value = document.getElementById("unit2").value;
+              document.getElementById("unit2").value = hold;
+
+            }
+          /*
+          unimplimented unit conversion function for distance using general units
+          first parameter is the input in the primary div class, the second parameter
+          unit1 is the first unit to be converted to meters for ease of conversion
+          and reduce hard coding. than it will take the input already converted to meters
+          and convert it to the unit in unit2
+          */
+            function convertDist(){
+              input = document.getElementById("first").value;//this is the right value of the text
+
+              unit1 = document.getElementById("unit1").value;//
+              unit2 = document.getElementById("unit2").value;
+              switch(unit1){
+                case "millimeter":
+                  input = input *0.001;
+                  break;
+                case "centimeter":
+                  input = input *0.01;
+                  break;
+                case "meter":
+                  break;
+                case "kilometer":
+                  input = input *1000;
+                  break;
+                case "inch":
+                  input = input *0.0254;
+                  break;
+                case "feet":
+                  input = input *0.3048;
+                  break;
+                case "yard":
+                  input = input *0.9144;
+                  break;
+                case "mile":
+                  input = input *1609.34;
+                  break;
+              }
+              switch(unit2){
+                case "millimeter":
+                  input = input *1000;
+                  break;
+                case "centimeter":
+                  input = input *100;
+                  break;
+                case "meter":
+                  break;
+                case "kilometer":
+                  input = input *0.001;
+                  break;
+                case "inch":
+                  input = input *39.370078740157;
+                  break;
+                case "feet":
+                  input = input *3.2808398950131;
+                  break;
+                case "yard":
+                  input = input *1.0936132983377;
+                  break;
+                case "mile":
+                  input = input *0.00062137119223733;
+                  break;
+              }
+              document.getElementById("second").value = input;
+              //just returns the input for now, subject to change
+            }
+            /*this takes in the two converted values and scales images based on the 
+            *relative sizes
+            */
+            function visual_display()
+            {
+
+              unit1 = document.getElementById("unit1").value;
+              unit2 = document.getElementById("unit2").value;
+
+                first
+                second
+
+                switch(unit1){
+                    case "inch":
+                      first = 0;
+                      break;
+                    case "feet":
+                        first = 1;
+                      break;
+                    case "yard":
+                        first = 2;
+                      break;
+                }
+
+                switch(unit2){
+                    case "inch":
+                        second = 0;
+                      break;
+                    case "feet":
+                        second = 1;
+                      break;
+                    case "yard":
+                        second = 2;
+                      break;
+                }
+
+                /*
+                * in-in, in-ft, in-yd
+                * ft-in, ft-ft, ft-yd
+                * yd-in, yd-ft, yd-yd
+                */
+
+                images = [
+                    ["same.png", "inToFt.png", "inToYd.png"],
+                    ["inToFt.png", "same.png", "ftToYd.png"],
+                    ["inToYd.png", "ftToYd.png", "same.png"]
+                ]
+
+                document.getElementById("comparison_image").src = images[first][second];
+
+            }
+          </script>
         </main>
     </body>
 </html>
