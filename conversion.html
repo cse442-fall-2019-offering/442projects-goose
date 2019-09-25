@@ -71,7 +71,7 @@
           <!-- visual output is displayed here -->
           <div id="visual">
             <!-- just a placeholder shape -->
-            <div id="placeholder-visual">
+            <div id="comparison_image">
             </div>
           </div>
           <script>
@@ -146,6 +146,15 @@
               document.getElementById("second").value = input;
               //just returns the input for now, subject to change
             }
+<<<<<<< Updated upstream
+=======
+
+          </script>
+          <script src="visual_display.js">
+            unit1 = document.getElementById("unit1").value;
+            unit2 = document.getElementById("unit2").value;
+            document.getElementById("comparison_image").src = visual_display(unit1, unit2);
+>>>>>>> Stashed changes
           </script>
         </main>
     </body>
