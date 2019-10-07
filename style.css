@@ -9,8 +9,8 @@
  --background-color: #a7b7c6;
  --accent-color: #f0f0f0;
  --emphasis-color: #dedfe1;
- --primary-color: #8a8a8a;
- --secondary-color: #6598c7;
+ --primary-color: #747881;
+ --secondary-color: #6791b8;
 }
 body {
   background-color: var(--background-color);
@@ -93,7 +93,7 @@ main form input, select, option, button{
   height: 250px;
   margin: 25px auto;
 }
-.convertButton {
+#convertButton {
   background-color: #f0f0f0;
   border: none;
   color: black;
@@ -103,6 +103,13 @@ main form input, select, option, button{
   display: inline-block;
   font-size: 16px;
   border-radius: 12px;
+}
+#convertButton:hover {
+  background-color: var(--emphasis-color);
+}
+#convertButton:disabled {
+  color: #888888;
+  background-color: var(--emphasis-color);
 }
 .swapButton {
   background-color: #f0f0f0;
@@ -115,6 +122,9 @@ main form input, select, option, button{
   display: inline-block;
   font-size: 16px;
   border-radius: 12px;
+}
+.swapButton:hover {
+  background-color: var(--emphasis-color);
 }
 .center{
   text-align: center;

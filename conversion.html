@@ -32,7 +32,7 @@
             <!-- select one unit here -->
             <div id="primary">
               <form>
-                <input type="number" id="primaryInput">
+                <input type="number" id="primaryInput" onkeyup="checkInput()">
                 <select id="primarySelect">
                   <option value="millisecond">Millisecond</option>
                   <option value="second">Second</option>
@@ -49,7 +49,7 @@
             <!-- select the other unit here -->
             <div id="secondary">
               <form>
-                <input type="number" id="secondaryInput">
+                <input type="number" id="secondaryInput" readonly="readonly">
                 <select id="secondarySelect">
                   <option value="millisecond">Millisecond</option>
                   <option value="second">Second</option>
@@ -60,7 +60,7 @@
             </div>
           </div>
           <div class="center">
-            <button class="convertButton" onclick="convertUnits(); generateVisual();">
+            <button id="convertButton" disabled="disabled" onclick="convertUnits(); generateVisual();">
               Convert
             </button>
           </div>
@@ -76,6 +76,15 @@
               document.getElementById("primaryInput").value = document.getElementById("secondaryInput").value;
               document.getElementById("secondarySelect").value = holdSelect;
               document.getElementById("secondaryInput").value = holdInput;
+            }
+            function checkInput() {
+              var input = document.getElementById('primaryInput').value;
+              if (input != '') {
+                  document.getElementById('convertButton').disabled = false;
+              }
+              else {
+                  document.getElementById('convertButton').disabled = true;
+              }
             }
             function convertUnits(){
               var seconds; //this is the base unit
