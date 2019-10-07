@@ -53,7 +53,7 @@ main {
 main form {
   padding: 15px 25px;
 }
-main form input, select, option{
+main form input, select, option, button{
   font-family: 'Overpass', sans-serif;
 }
 #converter {
