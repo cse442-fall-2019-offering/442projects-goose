@@ -32,8 +32,8 @@
             <!-- select one unit here -->
             <div id="primary">
               <form>
-                <input type="number" name="primary">
-                <select>
+                <input type="number" id="primaryInput">
+                <select id="primarySelect">
                   <option value="millisecond">Millisecond</option>
                   <option value="second">Second</option>
                   <option value="minute">Minute</option>
@@ -49,8 +49,8 @@
             <!-- select the other unit here -->
             <div id="secondary">
               <form>
-                <input type="number" name="secondary">
-                <select>
+                <input type="number" id="secondaryInput">
+                <select id="secondarySelect">
                   <option value="millisecond">Millisecond</option>
                   <option value="second">Second</option>
                   <option value="minute">Minute</option>
@@ -60,138 +60,63 @@
             </div>
           </div>
           <div class="center">
-            <button class="convertButton" onclick="convertDist(); visual_display();">
+            <button class="convertButton" onclick="convertUnits(); generateVisual();">
               Convert
             </button>
           </div>
           <!-- visual output is displayed here -->
-          <div class="center" id="visual">
-            <!-- just a placeholder shape -->
-            <img id="comparison_image">
-          </img>
+          <div class="center" id="visualizer">
+            <canvas id="visual">
           </div>
           <script>
             function switchUnits(){
-              hold = document.getElementById("unit1").value;
-              document.getElementById("unit1").value = document.getElementById("unit2").value;
-              document.getElementById("unit2").value = hold;
-
+              var holdSelect = document.getElementById("primarySelect").options[document.getElementById("primarySelect").selectedIndex].value;
+              var holdInput = document.getElementById("primaryInput").value;
+              document.getElementById("primarySelect").value = document.getElementById("secondarySelect").options[document.getElementById("secondarySelect").selectedIndex].value;
+              document.getElementById("primaryInput").value = document.getElementById("secondaryInput").value;
+              document.getElementById("secondarySelect").value = holdSelect;
+              document.getElementById("secondaryInput").value = holdInput;
             }
-          /*
-          unimplimented unit conversion function for distance using general units
-          first parameter is the input in the primary div class, the second parameter
-          unit1 is the first unit to be converted to meters for ease of conversion
-          and reduce hard coding. than it will take the input already converted to meters
-          and convert it to the unit in unit2
-          */
-            function convertDist(){
-              input = document.getElementById("first").value;//this is the right value of the text
-
-              unit1 = document.getElementById("unit1").value;//
-              unit2 = document.getElementById("unit2").value;
-              switch(unit1){
-                case "millimeter":
-                  input = input *0.001;
+            function convertUnits(){
+              var seconds; //this is the base unit
+              var input = document.getElementById("primaryInput").value;
+              var primaryUnit = document.getElementById("primarySelect").value;
+              var secondaryUnit = document.getElementById("secondarySelect").value;
+              switch(primaryUnit){
+                case "millisecond":
+                  seconds = input*.001;
                   break;
-                case "centimeter":
-                  input = input *0.01;
+                case "second":
+                  seconds = input;
                   break;
-                case "meter":
+                case "minute":
+                  seconds = input*60;
                   break;
-                case "kilometer":
-                  input = input *1000;
-                  break;
-                case "inch":
-                  input = input *0.0254;
-                  break;
-                case "feet":
-                  input = input *0.3048;
-                  break;
-                case "yard":
-                  input = input *0.9144;
-                  break;
-                case "mile":
-                  input = input *1609.34;
+                case "hour":
+                  seconds = input*3600;
                   break;
               }
-              switch(unit2){
-                case "millimeter":
-                  input = input *1000;
+              switch(secondaryUnit){
+                case "millisecond":
+                  document.getElementById("secondaryInput").value = seconds*1000;
                   break;
-                case "centimeter":
-                  input = input *100;
+                case "second":
+                  document.getElementById("secondaryInput").value = seconds;
                   break;
-                case "meter":
+                case "minute":
+                  document.getElementById("secondaryInput").value = seconds/60;
                   break;
-                case "kilometer":
-                  input = input *0.001;
-                  break;
-                case "inch":
-                  input = input *39.370078740157;
-                  break;
-                case "feet":
-                  input = input *3.2808398950131;
-                  break;
-                case "yard":
-                  input = input *1.0936132983377;
-                  break;
-                case "mile":
-                  input = input *0.00062137119223733;
+                case "hour":
+                  document.getElementById("secondaryInput").value = seconds/3600;
                   break;
               }
-              document.getElementById("second").value = input;
-              //just returns the input for now, subject to change
             }
-            /*this takes in the two converted values and scales images based on the
-            *relative sizes
-            */
-            function visual_display()
+            function generateVisual()
             {
-
-              unit1 = document.getElementById("unit1").value;
-              unit2 = document.getElementById("unit2").value;
-
-                first
-                second
-
-                switch(unit1){
-                    case "inch":
-                      first = 0;
-                      break;
-                    case "feet":
-                        first = 1;
-                      break;
-                    case "yard":
-                        first = 2;
-                      break;
-                }
-
-                switch(unit2){
-                    case "inch":
-                        second = 0;
-                      break;
-                    case "feet":
-                        second = 1;
-                      break;
-                    case "yard":
-                        second = 2;
-                      break;
-                }
-
-                /*
-                * in-in, in-ft, in-yd
-                * ft-in, ft-ft, ft-yd
-                * yd-in, yd-ft, yd-yd
-                */
-
-                images = [
-                    ["same.png", "inToFt.png", "inToYd.png"],
-                    ["inToFt.png", "same.png", "ftToYd.png"],
-                    ["inToYd.png", "ftToYd.png", "same.png"]
-                ]
-
-                document.getElementById("comparison_image").src = images[first][second];
-
+              var canvas = document.getElementById("visual");
+              var ctx = canvas.getContext("2d");
+              ctx.fillStyle = "#FFFFFF";
+              ctx.fillRect(0, 0, canvas.width, canvas.width);
             }
           </script>
         </main>
