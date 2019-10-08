@@ -77,7 +77,7 @@
               document.getElementById("secondarySelect").value = holdSelect;
               document.getElementById("secondaryInput").value = holdInput;
             }
-            function checkInput() {
+            function checkInput(){
               var input = document.getElementById('primaryInput').value;
               if (input != '') {
                   document.getElementById('convertButton').disabled = false;
@@ -86,11 +86,8 @@
                   document.getElementById('convertButton').disabled = true;
               }
             }
-            function convertUnits(){
+            function calculateConversion(input, primaryUnit, secondaryUnit){
               var seconds; //this is the base unit
-              var input = document.getElementById("primaryInput").value;
-              var primaryUnit = document.getElementById("primarySelect").value;
-              var secondaryUnit = document.getElementById("secondarySelect").value;
               switch(primaryUnit){
                 case "millisecond":
                   seconds = input*.001;
@@ -107,18 +104,21 @@
               }
               switch(secondaryUnit){
                 case "millisecond":
-                  document.getElementById("secondaryInput").value = seconds*1000;
-                  break;
+                  return seconds*1000;
                 case "second":
-                  document.getElementById("secondaryInput").value = seconds;
-                  break;
+                  return seconds;
                 case "minute":
-                  document.getElementById("secondaryInput").value = seconds/60;
-                  break;
+                  return seconds/60;
                 case "hour":
-                  document.getElementById("secondaryInput").value = seconds/3600;
-                  break;
+                  return seconds/3600;
               }
+              return seconds;
+            }
+            function convertUnits(){
+              var input = document.getElementById("primaryInput").value;
+              var primaryUnit = document.getElementById("primarySelect").value;
+              var secondaryUnit = document.getElementById("secondarySelect").value;
+              document.getElementById("secondaryInput").value = calculateConversion(input, primaryUnit, secondaryUnit);
             }
             function generateVisual()
             {

@@ -89,8 +89,6 @@ main form input, select, option, button{
   overflow: hidden;
 }
 #visual{
-  width: 95%;
-  height: 250px;
   margin: 25px auto;
 }
 #convertButton {
