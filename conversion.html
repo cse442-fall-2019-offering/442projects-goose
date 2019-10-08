@@ -32,7 +32,7 @@
             <!-- select one unit here -->
             <div id="primary">
               <form>
-                <input type="number" id="primaryInput" onkeyup="checkInput()">
+                <input type="number" id="primaryInput" placeholder="Enter a value here" onkeyup="checkInput()">
                 <select id="primarySelect">
                   <option value="millisecond">Millisecond</option>
                   <option value="second">Second</option>
@@ -42,14 +42,14 @@
               </form>
             </div>
             <div id="swap">
-              <button class="swapButton" onclick="switchUnits()">
+              <button class="swapButton" onclick="switchUnits(); checkInput();">
                 ⇌
               </button>
             </div>
             <!-- select the other unit here -->
             <div id="secondary">
               <form>
-                <input type="number" id="secondaryInput" readonly="readonly">
+                <input type="number" id="secondaryInput" placeholder="Result shows up here" readonly="readonly">
                 <select id="secondarySelect">
                   <option value="millisecond">Millisecond</option>
                   <option value="second">Second</option>
