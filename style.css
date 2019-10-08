@@ -13,7 +13,7 @@
 body {
   background-color: var(--background-color);
 }
-nav {
+.nav {
   background-color: #ffffff;
   position: -webkit-sticky;
   position: sticky;
@@ -21,26 +21,32 @@ nav {
   width: 100%;
   height: 60px;
   margin: 0px auto 30px;
-  font-family: 'Overpass', sans-serif;
+
 }
-nav ul{
+.nav ul{
   margin: 0px auto;
   padding: 10px auto;
   width: 90%;
 }
-nav ul li {
+.nav ul a {
   background-color: var(--accent-color);
   display: inline-flex;
   border: none;
   padding: 10px 10px;
   margin: 10px 10px;
+  text-decoration: none;
+  font-family: 'Overpass', sans-serif;
+  color: black;
 }
-nav ul li.current-menu-item,
-nav ul li.current-page-ancestor,
-nav ul li.current-menu-ancestor {
+.nav ul a.current-menu-item,
+.nav ul a.current-page-ancestor,
+.nav ul a.current-menu-ancestor {
   background-color: var(--emphasis-color);
 }
-nav ul li:hover {
+.nav ul a:hover {
+  background-color: var(--emphasis-color);
+}
+.nav ul a.active {
   background-color: var(--emphasis-color);
 }
 main {

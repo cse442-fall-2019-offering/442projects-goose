@@ -1,0 +1,215 @@
+<!doctype html>
+<html>
+    <head>
+        <title>Converter</title>
+        <link href="style.css" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Overpass&display=swap" rel="stylesheet">
+    </head>
+    <body>
+        <!-- TODO: add tiles, text inputs, dropdowns, and swap box -->
+        <!-- TODO: change dropdown menu based on tile selection -->
+        <!-- TODO: create visual output based on entered values -->
+        <!-- TODO: create rest of website -->
+        <!-- random text for tet commit -->
+        <!-- more commit test -->
+        <header>
+          <!-- select measures here -->
+          <div class="nav">
+              <ul>
+                <a href="temp.html">Temperature</a>
+                <a href="conversion.html">Length</a>
+                <a class="active" href="area.html">Area</a>
+                <a href="vol.html">Volume</a>
+                <a href="time.html">Time</a>
+                <a href="speed.html">Speed</a>
+              </ul>
+          </div>
+        </header>
+        <main>
+          <!-- values are inputted here -->
+          <div id="converter">
+            <!-- select one unit here -->
+            <div id="primary">
+              <form>
+<!-- HEAD
+                <input type="number" name="primary">
+                <select>
+                  <option value="inches">Inches</option>
+                  <option value="feet">Feet</option>
+                  <option value="yard">Yard</option>
+                  <option value="mile">Mile</option>
+======= -->
+                <input type="number" name="primary" id="first">
+                <select id="unit1">
+                  <option value="meter">Meters per Second</option>
+                  <option value="Kilo">Kilometers per Hour</option>
+                  <option value="mile">Miles per Hour</option>
+                  <option value="knot">Knots</option>
+                  <option value="feet">Feet per Second</option>
+<!-->>>>>>> develop -->
+                </select>
+              </form>
+            </div>
+            <div id="swap">
+              <button class="swapButton" onclick="switchUnits()">
+                ⇌
+              </button>
+            </div>
+            <!-- select the other unit here -->
+            <div id="secondary">
+              <form>
+<!--<<<<<<< HEAD
+                <input type="number" name="secondary">
+                <select>
+                  <option value="inches">Inches</option>
+                  <option value="feet">Feet</option>
+                  <option value="yard">Yard</option>
+                  <option value="mile">Mile</option>
+======= -->
+                <input type="number" name="secondary" id="second">
+                <select id="unit2">
+                  <option value="meter">Meters per Second</option>
+                  <option value="Kilo">Kilometers per Hour</option>
+                  <option value="mile">Miles per Hour</option>
+                  <option value="knot">Knots</option>
+                  <option value="feet">Feet per Second</option>
+<!-->>>>>>> develop -->
+                </select>
+              </form>
+            </div>
+          </div>
+          <div class="center">
+            <button class="convertButton" onclick="convertDist(); visual_display();">
+              Convert
+            </button>
+          </div>
+          <!-- visual output is displayed here -->
+          <div class="center" id="visual">
+            <!-- just a placeholder shape -->
+            <img id="comparison_image">
+          </img>
+          </div>
+          <script>
+            function switchUnits(){
+              hold = document.getElementById("unit1").value;
+              document.getElementById("unit1").value = document.getElementById("unit2").value;
+              document.getElementById("unit2").value = hold;
+
+            }
+          /*
+          unimplimented unit conversion function for distance using general units
+          first parameter is the input in the primary div class, the second parameter
+          unit1 is the first unit to be converted to meters for ease of conversion
+          and reduce hard coding. than it will take the input already converted to meters
+          and convert it to the unit in unit2
+          */
+            function convertDist(){
+              input = document.getElementById("first").value;//this is the right value of the text
+
+              unit1 = document.getElementById("unit1").value;//
+              unit2 = document.getElementById("unit2").value;
+              switch(unit1){
+                case "meter":
+                  input = input *0.001;
+                  break;
+                case "kilo":
+                  input = input *0.01;
+                  break;
+                case "mile":
+                  break;
+                case "knot":
+                  input = input *1000;
+                  break;
+                case "feet":
+                  input = input *0.0254;
+                  break;
+              }
+              switch(unit2){
+                case "meter":
+                  input = input *1000;
+                  break;
+                case "kilo":
+                  input = input *100;
+                  break;
+                case "mile":
+                  break;
+                case "knot":
+                  input = input *0.001;
+                  break;
+                case "feet":
+                  input = input *39.370078740157;
+                  break;
+                }
+              document.getElementById("second").value = input;
+              //just returns the input for now, subject to change
+            }
+            /*this takes in the two converted values and scales images based on the
+            *relative sizes
+            */
+            function visual_display()
+            {
+
+              unit1 = document.getElementById("unit1").value;
+              unit2 = document.getElementById("unit2").value;
+
+                first
+                second
+
+                switch(unit1){
+                    case "meter":
+                      first = 0;
+                      break;
+                    case "kilo":
+                      first = 1;
+                      break;
+                    case "mile":
+                      first = 2;
+                      break;
+                    case "knot":
+                      first = 3;
+                      break;
+                    case "feet":
+                      first = 4;
+                      break;
+                }
+
+                switch(unit2){
+                    case "meter":
+                      first = 0;
+                      break;
+                    case "kilo":
+                      first = 1;
+                      break;
+                    case "mile":
+                      first = 2;
+                      break;
+                    case "knot":
+                      first = 3;
+                      break;
+                    case "feet":
+                      first = 4;
+                      break;
+                  }
+
+                /*
+                * meps-meps, meps-kph, meps-mph, meps-knot, meps-fps,
+                * kph-meps, kph-kph, kph-mph, kph-knot, kph-fps,
+                * mps-meps, mps-kph, mps-mph, mps-knot, mps-fps,
+                * knot-meps, knot-kph, knot-mph, knot-knot, knot-fps,
+                * fps-meps, fps-kph, fps-mph, fps-knot, fps-fps,
+                */
+
+                /* TODO Joey: Change these png and make new ones */
+                images = [
+                    ["same.png", "inToFt.png", "inToYd.png"],
+                    ["inToFt.png", "same.png", "ftToYd.png"],
+                    ["inToYd.png", "ftToYd.png", "same.png"]
+                ]
+
+                document.getElementById("comparison_image").src = images[first][second];
+
+            }
+          </script>
+        </main>
+    </body>
+</html>
