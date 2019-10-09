@@ -41,11 +41,9 @@
 ======= -->
                 <input type="number" name="primary" id="first">
                 <select id="unit1">
-                  <option value="meter">Meters per Second</option>
-                  <option value="Kilo">Kilometers per Hour</option>
-                  <option value="mile">Miles per Hour</option>
-                  <option value="knot">Knots</option>
-                  <option value="feet">Feet per Second</option>
+                  <option value="Celsius">Celsius</option>
+                  <option value="Kelvin">Kelvin</option>
+                  <option value="Fahrenheit">Fahrenheit</option>
 <!-->>>>>>> develop -->
                 </select>
               </form>
@@ -68,18 +66,16 @@
 ======= -->
                 <input type="number" name="secondary" id="second">
                 <select id="unit2">
-                  <option value="meter">Meters per Second</option>
-                  <option value="Kilo">Kilometers per Hour</option>
-                  <option value="mile">Miles per Hour</option>
-                  <option value="knot">Knots</option>
-                  <option value="feet">Feet per Second</option>
+                  <option value="Celsius">Celsius</option>
+                  <option value="Kelvin">Kelvin</option>
+                  <option value="Fahrenheit">Fahrenheit</option>
 <!-->>>>>>> develop -->
                 </select>
               </form>
             </div>
           </div>
           <div class="center">
-            <button class="convertButton" onclick="convertDist(); visual_display();">
+            <button class="convertButton" onclick="convertTemp(); visual_display();">
               Convert
             </button>
           </div>
@@ -103,41 +99,29 @@
           and reduce hard coding. than it will take the input already converted to meters
           and convert it to the unit in unit2
           */
-            function convertDist(){
+            function convertTemp(){
               input = document.getElementById("first").value;//this is the right value of the text
-
+              input = parseFloat(input)
               unit1 = document.getElementById("unit1").value;//
               unit2 = document.getElementById("unit2").value;
               switch(unit1){
-                case "meter":
-                  input = input *0.001;
+                case "Celsius":
                   break;
-                case "kilo":
-                  input = input *0.01;
+                case "Kelvin":
+                  input = input - 273.15;
                   break;
-                case "mile":
-                  break;
-                case "knot":
-                  input = input *1000;
-                  break;
-                case "feet":
-                  input = input *0.0254;
+                case "Fahrenheit":
+                  input = (input - 32) / 1.8;
                   break;
               }
               switch(unit2){
-                case "meter":
-                  input = input *1000;
+                case "Celsius":
                   break;
-                case "kilo":
-                  input = input *100;
+                case "Kelvin":
+                  input = input + 273.15;
                   break;
-                case "mile":
-                  break;
-                case "knot":
-                  input = input *0.001;
-                  break;
-                case "feet":
-                  input = input *39.370078740157;
+                case "Fahrenheit":
+                  input = (input * 1.8) + 32;
                   break;
                 }
               document.getElementById("second").value = input;
@@ -156,39 +140,27 @@
                 second
 
                 switch(unit1){
-                    case "meter":
+                    case "Celsius":
                       first = 0;
                       break;
-                    case "kilo":
+                    case "Kelvin":
+                      first = 0;
+                      break;
+                    case "Fahrenheit":
                       first = 1;
-                      break;
-                    case "mile":
-                      first = 2;
-                      break;
-                    case "knot":
-                      first = 3;
-                      break;
-                    case "feet":
-                      first = 4;
                       break;
                 }
 
                 switch(unit2){
-                    case "meter":
-                      first = 0;
-                      break;
-                    case "kilo":
-                      first = 1;
-                      break;
-                    case "mile":
-                      first = 2;
-                      break;
-                    case "knot":
-                      first = 3;
-                      break;
-                    case "feet":
-                      first = 4;
-                      break;
+                  case "Celsius":
+                    second = 0;
+                    break;
+                  case "Kelvin":
+                    second = 0;
+                    break;
+                  case "Fahrenheit":
+                    second = 1;
+                    break;
                   }
 
                 /*
@@ -201,9 +173,8 @@
 
                 /* TODO David: Change these png and make new ones */
                 images = [
-                    ["same.png", "inToFt.png", "inToYd.png"],
-                    ["inToFt.png", "same.png", "ftToYd.png"],
-                    ["inToYd.png", "ftToYd.png", "same.png"]
+                    ["same.png", "CelToFah.png"],
+                    ["CelToFah.png", "same.png"]
                 ]
 
                 document.getElementById("comparison_image").src = images[first][second];
