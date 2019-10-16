@@ -50,7 +50,7 @@ function convertVolume(){
 }
 
 
-//Cubic Centimeter Conversions
+//Cubic Centimeter (Milliliter) Conversions
 function convertCM(){
   //input to be converted
   input = document.getElementById("first").value;
@@ -65,7 +65,7 @@ function convertCM(){
       ret = input / 1000;
       break;
     case "cubicME":
-      ret = input / 1e-6;
+      ret = input / 1e+6;
       break;
     case "cubicIN":
       ret = input / 16.387;
@@ -100,7 +100,7 @@ function convertCM(){
 }
 
 
-//Cubic Decimeter Conversions
+//Cubic Decimeter (Liter) Conversions
 function convertDM(){
   //input to be converted
   input = document.getElementById("first").value;
