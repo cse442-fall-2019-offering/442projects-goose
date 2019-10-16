@@ -1,0 +1,213 @@
+<!doctype html>
+<html>
+    <head>
+        <title>Converter</title>
+        <link href="style.css" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Overpass&display=swap" rel="stylesheet">
+        <script src="index.js"></script>
+    </head>
+    <body>
+        <!-- TODO: add tiles, text inputs, dropdowns, and swap box -->
+        <!-- TODO: change dropdown menu based on tile selection -->
+        <!-- TODO: create visual output based on entered values -->
+        <!-- TODO: create rest of website -->
+        <!-- random text for tet commit -->
+        <!-- more commit test -->
+        <header>
+          <!-- select measures here -->
+          <nav>
+            <!-- place -->
+            <ul>
+              <li>Temperature</li>
+              <li>Length</li>
+              <li>Area</li>
+              <li>Volume</li>
+              <li>Time</li>
+              <li>Speed</li>
+            </ul>
+          </nav>
+        </header>
+        <main>
+          <!-- values are inputted here -->
+          <div id="converter">
+            <!-- select one unit here -->
+            <div id="primary">
+              <form>
+                <input type="number" id="primaryInput" placeholder="Enter a value here" onkeyup="checkInput()">
+                <select id="primarySelect">
+                  <option value="millisecond">Millisecond</option>
+                  <option value="second">Second</option>
+                  <option value="minute">Minute</option>
+                  <option value="hour">Hour</option>
+                </select>
+              </form>
+            </div>
+            <div id="swap">
+              <button class="swapButton" onclick="switchUnits(); checkInput();">
+                ⇌
+              </button>
+            </div>
+            <!-- select the other unit here -->
+            <div id="secondary">
+              <form>
+                <input type="number" id="secondaryInput" placeholder="Result shows up here" readonly="readonly">
+                <select id="secondarySelect">
+                  <option value="millisecond">Millisecond</option>
+                  <option value="second">Second</option>
+                  <option value="minute">Minute</option>
+                  <option value="hour">Hour</option>
+                </select>
+              </form>
+            </div>
+          </div>
+          <div class="center">
+            <button id="convertButton" disabled="disabled" onclick="convertUnits(); generateVisual();">
+              Convert
+            </button>
+          </div>
+          <!-- visual output is displayed here -->
+          <div class="center" id="visualizer">
+            <canvas id="visual">
+          </div>
+          <script>
+            function switchUnits(){
+              var holdSelect = document.getElementById("primarySelect").options[document.getElementById("primarySelect").selectedIndex].value;
+              var holdInput = document.getElementById("primaryInput").value;
+              document.getElementById("primarySelect").value = document.getElementById("secondarySelect").options[document.getElementById("secondarySelect").selectedIndex].value;
+              document.getElementById("primaryInput").value = document.getElementById("secondaryInput").value;
+              document.getElementById("secondarySelect").value = holdSelect;
+              document.getElementById("secondaryInput").value = holdInput;
+            }
+            function checkInput(){
+              var input = document.getElementById('primaryInput').value;
+              if (input != '') {
+                  document.getElementById('convertButton').disabled = false;
+              }
+              else {
+                  document.getElementById('convertButton').disabled = true;
+              }
+            }
+            function calculateConversion(input, primaryUnit, secondaryUnit){
+              var seconds; //this is the base unit
+              switch(primaryUnit){
+                case "millisecond":
+                  seconds = input*.001;
+                  break;
+                case "second":
+                  seconds = input;
+                  break;
+                case "minute":
+                  seconds = input*60;
+                  break;
+                case "hour":
+                  seconds = input*3600;
+                  break;
+              }
+              switch(secondaryUnit){
+                case "millisecond":
+                  return seconds*1000;
+                case "second":
+                  return seconds;
+                case "minute":
+                  return seconds/60;
+                case "hour":
+                  return seconds/3600;
+              }
+              return seconds;
+            }
+            function convertUnits(){
+              var input = document.getElementById("primaryInput").value;
+              var primaryUnit = document.getElementById("primarySelect").value;
+              var secondaryUnit = document.getElementById("secondarySelect").value;
+              document.getElementById("secondaryInput").value = calculateConversion(input, primaryUnit, secondaryUnit);
+            }
+            function generateVisual()
+            {
+              /* creating the canvas */
+              var canvas = document.getElementById("visual");
+              var visualizer = document.getElementById("visualizer");
+              canvas.width = visualizer.offsetWidth-50;
+              canvas.height = visualizer.offsetHeight-50;
+              var ctx = canvas.getContext("2d");
+              ctx.fillStyle = "#FFFFFF";
+              ctx.fillRect(0, 0, canvas.width, canvas.width);
+              /* drawing the axes */
+              ctx.beginPath();
+              ctx.moveTo(0, canvas.height/2 - 3);
+              ctx.lineTo(canvas.width, canvas.height/2 - 3);
+              ctx.strokeStyle = String(getComputedStyle(document.documentElement).getPropertyValue('--primary-color'));
+              ctx.stroke();
+              ctx.beginPath();
+              ctx.moveTo(0, canvas.height/2 + 3);
+              ctx.lineTo(canvas.width, canvas.height/2 + 3);
+              ctx.strokeStyle = String(getComputedStyle(document.documentElement).getPropertyValue('--secondary-color'));
+              ctx.stroke();
+              /*labelling axes*/
+              ctx.font = "20px Overpass";
+              ctx.fillStyle = "#000000";
+              ctx.fillText(document.getElementById("primarySelect").value, 10, 30);
+              ctx.fillText(document.getElementById("secondarySelect").value, 10, canvas.height-30);
+              /* drawing the markings */
+              ctx.beginPath();
+              ctx.moveTo(canvas.width/2, canvas.height/3);
+              ctx.lineTo(canvas.width/2, canvas.height-(canvas.height/3));
+              ctx.strokeStyle = "#000000";
+              ctx.stroke();
+              ctx.textAlign = "center";
+              ctx.fillText(document.getElementById("primaryInput").value, canvas.width/2, 30);
+              ctx.fillText(document.getElementById("secondaryInput").value, canvas.width/2, canvas.height-30);
+              var lowerBoundPrimary = parseFloat(document.getElementById("primaryInput").value) - 30;
+              var upperBoundPrimary = parseFloat(document.getElementById("primaryInput").value) + 30;
+              var scaleFactor = canvas.width/(upperBoundPrimary - lowerBoundPrimary);
+              for (var i = Math.ceil(lowerBoundPrimary); i <= upperBoundPrimary; i++){
+                if (i != document.getElementById("primaryInput").value && i >= 0){
+                  ctx.beginPath();
+                  ctx.moveTo(scaleFactor*(i-lowerBoundPrimary), canvas.height/2.6);
+                  ctx.lineTo(scaleFactor*(i-lowerBoundPrimary), canvas.height/2 - 3);
+                  ctx.strokeStyle = String(getComputedStyle(document.documentElement).getPropertyValue('--primary-color'));
+                  ctx.stroke();
+                  ctx.font = "10px Overpass";
+                  ctx.fillText(i, scaleFactor*(i-lowerBoundPrimary), canvas.height/2.8);
+                }
+              }
+              var lowerBoundSecondary = calculateConversion(lowerBoundPrimary, document.getElementById("primarySelect").value, document.getElementById("secondarySelect").value);
+              var upperBoundSecondary = calculateConversion(upperBoundPrimary, document.getElementById("primarySelect").value, document.getElementById("secondarySelect").value);
+              var scaleFactor = canvas.width/(upperBoundSecondary - lowerBoundSecondary);
+              var increment = 1;
+              while ((upperBoundSecondary - lowerBoundSecondary)/increment < 2){
+                increment /= 10;
+              }
+              while ((upperBoundSecondary - lowerBoundSecondary)/increment > 60){
+                increment *= 10;
+              }
+              if (increment < 1){
+                for (var i = Math.ceil(lowerBoundSecondary)*increment; i <= upperBoundSecondary; i += increment){
+                  if (i != document.getElementById("secondaryInput").value && i >= 0){
+                    ctx.beginPath();
+                    ctx.moveTo(scaleFactor*(i-lowerBoundSecondary), canvas.height/2 + 3);
+                    ctx.lineTo(scaleFactor*(i-lowerBoundSecondary), canvas.height - canvas.height/2.6);
+                    ctx.strokeStyle = String(getComputedStyle(document.documentElement).getPropertyValue('--secondary-color'));
+                    ctx.stroke();
+                    ctx.font = "10px Overpass";
+                    ctx.fillText(i, scaleFactor*(i-lowerBoundSecondary), canvas.height - canvas.height/2.8);
+                  }
+                }
+              }
+              else{
+                for (var i = Math.ceil(lowerBoundSecondary); i <= upperBoundSecondary; i += increment){
+                  if (i != document.getElementById("secondaryInput").value && i >= 0){
+                    ctx.beginPath();
+                    ctx.moveTo(scaleFactor*(i-lowerBoundSecondary), canvas.height/2 + 3);
+                    ctx.lineTo(scaleFactor*(i-lowerBoundSecondary), canvas.height - canvas.height/2.6);
+                    ctx.strokeStyle = String(getComputedStyle(document.documentElement).getPropertyValue('--secondary-color'));
+                    ctx.stroke();
+                    ctx.font = "10px Overpass";
+                    ctx.fillText(i, scaleFactor*(i-lowerBoundSecondary), canvas.height - canvas.height/2.8);
+                  }
+                }
+              }
+            }
+          </script>
+        </main>
+    </body>
+</html>
