@@ -9,6 +9,8 @@
  --background-color: #a7b7c6;
  --accent-color: #f0f0f0;
  --emphasis-color: #dedfe1;
+ --primary-color: #747881;
+ --secondary-color: #6791b8;
 }
 body {
   background-color: var(--background-color);
@@ -59,7 +61,7 @@ main {
 main form {
   padding: 15px 25px;
 }
-main form input, select, option{
+main form input, select, option, button{
   font-family: 'Overpass', sans-serif;
 }
 #converter {
@@ -85,20 +87,17 @@ main form input, select, option{
   height: 50px;
   width: 45%;
 }
-#visual{
+#visualizer{
   background-color: var(--accent-color);
   width: 100%;
   height: 300px;
   margin: 20px auto;
-  overflow: auto;
+  overflow: hidden;
 }
-#placeholder-visual{
-  background-color: #ffffff;
-  width: 95%;
-  height: 250px;
+#visual{
   margin: 25px auto;
 }
-.convertButton {
+#convertButton {
   background-color: #f0f0f0;
   border: none;
   color: black;
@@ -108,6 +107,13 @@ main form input, select, option{
   display: inline-block;
   font-size: 16px;
   border-radius: 12px;
+}
+#convertButton:hover {
+  background-color: var(--emphasis-color);
+}
+#convertButton:disabled {
+  color: #888888;
+  background-color: var(--emphasis-color);
 }
 .swapButton {
   background-color: #f0f0f0;
@@ -120,6 +126,9 @@ main form input, select, option{
   display: inline-block;
   font-size: 16px;
   border-radius: 12px;
+}
+.swapButton:hover {
+  background-color: var(--emphasis-color);
 }
 .center{
   text-align: center;
