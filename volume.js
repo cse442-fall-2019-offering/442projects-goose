@@ -5,7 +5,7 @@
 // its related fuction to execute the proper conversion
 function convertVolume(){
   //unit we are converting from
-  unit1 = document.getElementById("unit1").value;
+  unit1 = document.getElementById("primarySelect").value;
 
   switch(unit1){
     case "cubicCM":
@@ -46,16 +46,16 @@ function convertVolume(){
       break;
   }
   //display conversion
-  document.getElementById("second").value = ret;
+  document.getElementById("secondaryInput").value = ret;
 }
 
 
 //Cubic Centimeter (Milliliter) Conversions
 function convertCM(){
   //input to be converted
-  input = document.getElementById("first").value;
+  input = document.getElementById("primaryInput").value;
   //unit we are converting to
-  unit2 = document.getElementById("unit2").value;
+  unit2 = document.getElementById("secondarySelect").value;
 
   switch(unit2){
     case "cubicCM":
@@ -103,9 +103,9 @@ function convertCM(){
 //Cubic Decimeter (Liter) Conversions
 function convertDM(){
   //input to be converted
-  input = document.getElementById("first").value;
+  input = document.getElementById("primaryInput").value;
   //unit we are converting to
-  unit2 = document.getElementById("unit2").value;
+  unit2 = document.getElementById("secondarySelect").value;
 
   switch(unit2){
     case "cubicCM":
@@ -153,9 +153,9 @@ function convertDM(){
 //Cubic Meter Conversions
 function convertME(){
   //input to be converted
-  input = document.getElementById("first").value;
+  input = document.getElementById("primaryInput").value;
   //unit we are converting to
-  unit2 = document.getElementById("unit2").value;
+  unit2 = document.getElementById("secondarySelect").value;
 
   switch(unit2){
     case "cubicCM":
@@ -203,9 +203,9 @@ function convertME(){
 //Cubic Inch Conversions
 function convertIN(){
   //input to be converted
-  input = document.getElementById("first").value;
+  input = document.getElementById("primaryInput").value;
   //unit we are converting to
-  unit2 = document.getElementById("unit2").value;
+  unit2 = document.getElementById("secondarySelect").value;
 
   switch(unit2){
     case "cubicCM":
@@ -253,9 +253,9 @@ function convertIN(){
 //Cubic Feet Conversions
 function convertFT(){
   //input to be converted
-  input = document.getElementById("first").value;
+  input = document.getElementById("primaryInput").value;
   //unit we are converting to
-  unit2 = document.getElementById("unit2").value;
+  unit2 = document.getElementById("secondarySelect").value;
 
   switch(unit2){
     case "cubicCM":
@@ -303,9 +303,9 @@ function convertFT(){
 //Cubic Yard Conversions
 function convertYD(){
   //input to be converted
-  input = document.getElementById("first").value;
+  input = document.getElementById("primaryInput").value;
   //unit we are converting to
-  unit2 = document.getElementById("unit2").value;
+  unit2 = document.getElementById("secondarySelect").value;
 
   switch(unit2){
     case "cubicCM":
@@ -353,9 +353,9 @@ function convertYD(){
 // Fluid Ounce Conversions
 function convertFL(){
   //input to be converted
-  input = document.getElementById("first").value;
+  input = document.getElementById("primaryInput").value;
   //unit we are converting to
-  unit2 = document.getElementById("unit2").value;
+  unit2 = document.getElementById("secondarySelect").value;
 
   switch(unit2){
     case "cubicCM":
@@ -403,9 +403,9 @@ function convertFL(){
 // Pint Conversions
 function convertPT(){
   //input to be converted
-  input = document.getElementById("first").value;
+  input = document.getElementById("primaryInput").value;
   //unit we are converting to
-  unit2 = document.getElementById("unit2").value;
+  unit2 = document.getElementById("secondarySelect").value;
 
   switch(unit2){
     case "cubicCM":
@@ -453,9 +453,9 @@ function convertPT(){
 // Gallon Conversions
 function convertGAL(){
   //input to be converted
-  input = document.getElementById("first").value;
+  input = document.getElementById("primaryInput").value;
   //unit we are converting to
-  unit2 = document.getElementById("unit2").value;
+  unit2 = document.getElementById("secondarySelect").value;
 
   switch(unit2){
     case "cubicCM":
@@ -503,9 +503,9 @@ function convertGAL(){
 // Fluide Ounce US Conversions
 function convertFLUS(){
   //input to be converted
-  input = document.getElementById("first").value;
+  input = document.getElementById("primaryInput").value;
   //unit we are converting to
-  unit2 = document.getElementById("unit2").value;
+  unit2 = document.getElementById("secondarySelect").value;
 
   switch(unit2){
     case "cubicCM":
@@ -553,9 +553,9 @@ function convertFLUS(){
 // Pint US Conversions
 function convertPTUS(){
   //input to be converted
-  input = document.getElementById("first").value;
+  input = document.getElementById("primaryInput").value;
   //unit we are converting to
-  unit2 = document.getElementById("unit2").value;
+  unit2 = document.getElementById("secondarySelect").value;
 
   switch(unit2){
     case "cubicCM":
@@ -603,9 +603,9 @@ function convertPTUS(){
 // Gallon US Conversions
 function convertGALUS(){
   //input to be converted
-  input = document.getElementById("first").value;
+  input = document.getElementById("primaryInput").value;
   //unit we are converting to
-  unit2 = document.getElementById("unit2").value;
+  unit2 = document.getElementById("secondarySelect").value;
 
   switch(unit2){
     case "cubicCM":
@@ -650,8 +650,96 @@ function convertGALUS(){
 }
 
 
-function switchUnits(){
-  hold = document.getElementById("unit1").value;
-  document.getElementById("unit1").value = document.getElementById("unit2").value;
-  document.getElementById("unit2").value = hold;
+function generateVisual(){
+  /* creating the canvas */
+  var canvas = document.getElementById("visual");
+  var visualizer = document.getElementById("visualizer");
+  canvas.width = visualizer.offsetWidth-50;
+  canvas.height = visualizer.offsetHeight-50;
+  var ctx = canvas.getContext("2d");
+  ctx.fillStyle = "#FFFFFF";
+  ctx.fillRect(0, 0, canvas.width, canvas.width);
+  /* drawing the axes */
+  ctx.beginPath();
+  ctx.moveTo(0, canvas.height/2 - 3);
+  ctx.lineTo(canvas.width, canvas.height/2 - 3);
+  ctx.strokeStyle = String(getComputedStyle(document.documentElement).getPropertyValue('--primary-color'));
+  ctx.stroke();
+  ctx.beginPath();
+  ctx.moveTo(0, canvas.height/2 + 3);
+  ctx.lineTo(canvas.width, canvas.height/2 + 3);
+  ctx.strokeStyle = String(getComputedStyle(document.documentElement).getPropertyValue('--secondary-color'));
+  ctx.stroke();
+  /*labelling axes*/
+  ctx.font = "20px Overpass";
+  ctx.fillStyle = "#000000";
+  ctx.fillText(document.getElementById("primarySelect").value, 10, 30);
+  ctx.fillText(document.getElementById("secondarySelect").value, 10, canvas.height-30);
+  /* drawing the markings */
+  ctx.beginPath();
+  ctx.moveTo(canvas.width/2, canvas.height/3);
+  ctx.lineTo(canvas.width/2, canvas.height-(canvas.height/3));
+  ctx.strokeStyle = "#000000";
+  ctx.stroke();
+  ctx.textAlign = "center";
+  ctx.fillText(document.getElementById("primaryInput").value, canvas.width/2, 30);
+  ctx.fillText(document.getElementById("secondaryInput").value, canvas.width/2, canvas.height-30);
+  var lowerBoundPrimary = parseFloat(document.getElementById("primaryInput").value) - 30;
+  var upperBoundPrimary = parseFloat(document.getElementById("primaryInput").value) + 30;
+  var scaleFactor = canvas.width/(upperBoundPrimary - lowerBoundPrimary);
+  for (var i = Math.ceil(lowerBoundPrimary); i <= upperBoundPrimary; i++){
+    if (i != document.getElementById("primaryInput").value && i >= 0){
+      ctx.beginPath();
+      ctx.moveTo(scaleFactor*(i-lowerBoundPrimary), canvas.height/2.6);
+      ctx.lineTo(scaleFactor*(i-lowerBoundPrimary), canvas.height/2 - 3);
+      ctx.strokeStyle = String(getComputedStyle(document.documentElement).getPropertyValue('--primary-color'));
+      ctx.stroke();
+      ctx.font = "10px Overpass";
+      ctx.fillText(i, scaleFactor*(i-lowerBoundPrimary), canvas.height/2.8);
+    }
+  }
+  var lowerBoundSecondary = convertVolume();
+  var upperBoundSecondary = convertVolume();
+  var increment = 1;
+  while ((upperBoundSecondary - lowerBoundSecondary)/increment < 2){
+    increment /= 10;
+  }
+  while ((upperBoundSecondary - lowerBoundSecondary)/increment > 60){
+    increment *= 10;
+  }
+  if (increment < 1){
+    for (var i = Math.ceil(lowerBoundSecondary)*increment; i <= upperBoundSecondary; i += increment){
+      if (i != document.getElementById("secondaryInput").value && i >= 0){
+        ctx.beginPath();
+        ctx.moveTo(scaleFactor*(i-lowerBoundSecondary), canvas.height/2 + 3);
+        ctx.lineTo(scaleFactor*(i-lowerBoundSecondary), canvas.height - canvas.height/2.6);
+        ctx.strokeStyle = String(getComputedStyle(document.documentElement).getPropertyValue('--secondary-color'));
+        ctx.stroke();
+        ctx.font = "10px Overpass";
+        ctx.fillText(i, scaleFactor*(i-lowerBoundSecondary), canvas.height - canvas.height/2.8);
+      }
+    }
+  }
+  else{
+    for (var i = Math.ceil(lowerBoundSecondary); i <= upperBoundSecondary; i += increment){
+      if (i != document.getElementById("secondaryInput").value && i >= 0){
+        ctx.beginPath();
+        ctx.moveTo(scaleFactor*(i-lowerBoundSecondary), canvas.height/2 + 3);
+        ctx.lineTo(scaleFactor*(i-lowerBoundSecondary), canvas.height - canvas.height/2.6);
+        ctx.strokeStyle = String(getComputedStyle(document.documentElement).getPropertyValue('--secondary-color'));
+        ctx.stroke();
+        ctx.font = "10px Overpass";
+        ctx.fillText(i, scaleFactor*(i-lowerBoundSecondary), canvas.height - canvas.height/2.8);
+      }
+    }
+  }
 }
+
+//Swaps units
+function switchUnits(){
+  hold = document.getElementById("primarySelect").value;
+  document.getElementById("primarySelect").value = document.getElementById("secondarySelect").value;
+  document.getElementById("secondarySelect").value = hold;
+}
+
+//File ends here

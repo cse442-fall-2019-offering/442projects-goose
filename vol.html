@@ -4,7 +4,7 @@
         <title>Converter</title>
         <link href="style.css" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css?family=Overpass&display=swap" rel="stylesheet">
-        <script src="Volume.js" charset="utf-8"></script>
+        <script src="volume.js" charset="utf-8"></script>
     </head>
     <body>
         <!-- TODO: add tiles, text inputs, dropdowns, and swap box -->
@@ -32,8 +32,8 @@
             <!-- select one unit here -->
             <div id="primary">
               <form>
-                <input type="number" name="primary" id="first">
-                <select id="unit1">
+                <input type="number" name="primary" id="primaryInput" placeholder="Enter a value here" onkeyup="convertVolume(); generateVisual();">
+                <select id="primarySelect" onchange="convertVolume(); generateVisual();">
                   <option value="cubicCM">Milliliter (mL)</option>
                   <option value="cubicDM">Liter (L)</option>
                   <option value="cubicME">Cubic Meter (m3)</option>
@@ -50,15 +50,15 @@
               </form>
             </div>
             <div id="swap">
-              <button class="swapButton" onclick="switchUnits()">
+              <button class="swapButton" onclick="switchUnits(); convertVolume(); generateVisual();">
                 ⇌
               </button>
             </div>
             <!-- select the other unit here -->
             <div id="secondary">
               <form>
-                <input type="number" name="secondary" id="second" readonly>
-                <select id="unit2">
+                <input type="number"  id="secondaryInput" placeholder="Result shows up here" readonly>
+                <select id="secondarySelect" onchange="convertVolume(); generateVisual();">
                   <option value="cubicCM">Milliliter (mL)</option>
                   <option value="cubicDM">Liter (L)</option>
                   <option value="cubicME">Cubic Meter (m3)</option>
@@ -76,15 +76,13 @@
             </div>
           </div>
           <div class="center">
-            <button class="convertButton" onclick="convertVolume();">
+            <button id="convertButton" onclick="convertVolume();">
               Convert
             </button>
           </div>
           <!-- visual output is displayed here -->
-          <div class="center" id="visual">
-            <!-- just a placeholder shape -->
-            <img id="comparison_image">
-          </img>
+          <div class="center" id="visualizer">
+            <canvas id="visual">
           </div>
         </main>
     </body>
