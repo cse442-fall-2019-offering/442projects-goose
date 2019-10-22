@@ -32,8 +32,8 @@
             <!-- select one unit here -->
             <div id="primary">
               <form>
-                <input type="number" name="primary" id="primaryInput" placeholder="Enter a value here" onkeyup="convertVolume(); generateVisual();">
-                <select id="primarySelect" onchange="convertVolume(); generateVisual();">
+                <input type="number" name="primary" id="primaryInput" placeholder="Enter a value here" onkeyup="convertUnits(); generateVisual();">
+                <select id="primarySelect" onchange="convertUnits(); generateVisual();">
                   <option value="cubicCM">Milliliter (mL)</option>
                   <option value="cubicDM">Liter (L)</option>
                   <option value="cubicME">Cubic Meter (m3)</option>
@@ -50,15 +50,15 @@
               </form>
             </div>
             <div id="swap">
-              <button class="swapButton" onclick="switchUnits(); convertVolume(); generateVisual();">
+              <button class="swapButton" onclick="switchUnits(); convertUnits(); generateVisual();">
                 ⇌
               </button>
             </div>
             <!-- select the other unit here -->
             <div id="secondary">
               <form>
-                <input type="number"  id="secondaryInput" placeholder="Result shows up here" readonly>
-                <select id="secondarySelect" onchange="convertVolume(); generateVisual();">
+                <input type="number" id="secondaryInput" placeholder="Result shows up here" readonly>
+                <select id="secondarySelect" onchange="convertUnits(); generateVisual();">
                   <option value="cubicCM">Milliliter (mL)</option>
                   <option value="cubicDM">Liter (L)</option>
                   <option value="cubicME">Cubic Meter (m3)</option>
@@ -76,7 +76,7 @@
             </div>
           </div>
           <div class="center">
-            <button id="convertButton" onclick="convertVolume();">
+            <button id="convertButton" onclick="convertUnits();">
               Convert
             </button>
           </div>

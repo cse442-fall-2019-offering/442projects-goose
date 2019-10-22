@@ -1,63 +1,72 @@
 // JavaScript file for volume portion of application
 // @author: Damon L
 
+//main function that calls sub functions below
+function convertUnits(){
+  var input = document.getElementById("primaryInput").value;
+  var primaryUnit = document.getElementById("primarySelect").value;
+  var secondaryUnit = document.getElementById("secondarySelect").value;
+  console.log(primaryUnit);
+  console.log(secondaryUnit);
+  ret = convertVolume(input, primaryUnit, secondaryUnit);
+  console.log("converUnits");
+  console.log(ret);
+  document.getElementById("secondaryInput").value = convertVolume(input, primaryUnit, secondaryUnit);
+
+}
+
 // This function determines which unit is being converted from and then calls
 // its related fuction to execute the proper conversion
-function convertVolume(){
-  //unit we are converting from
-  unit1 = document.getElementById("primarySelect").value;
+function convertVolume(input, primaryUnit, secondaryUnit){
 
-  switch(unit1){
+  switch(primaryUnit){
     case "cubicCM":
-      ret = convertCM();
+      ret = convertCM(input, secondaryUnit);
       break;
     case "cubicDM":
-      ret = convertDM();
+      ret = convertDM(input, secondaryUnit);
       break;
     case "cubicME":
-      ret = convertME();
+      ret = convertME(input, secondaryUnit);
       break;
     case "cubicIN":
-      ret = convertIN();
+      ret = convertIN(input, secondaryUnit);
       break;
     case "cubicFT":
-      ret = convertFT();
+      ret = convertFT(input, secondaryUnit);
       break;
     case "cubicYD":
-      ret = convertYD();
+      ret = convertYD(input, secondaryUnit);
       break;
     case "fluidOZ":
-      ret = convertFL();
+      ret = convertFL(input, secondaryUnit);
       break;
     case "pint":
-      ret = convertPT();
+      ret = convertPT(input, secondaryUnit);
       break;
     case "gallon":
-      ret = convertGAL();
+      ret = convertGAL(input, secondaryUnit);
       break;
     case "fluidOZUS":
-      ret = convertFLUS();
+      ret = convertFLUS(input, secondaryUnit);
       break;
     case "pintUS":
-      ret = convertPTUS();
+      ret = convertPTUS(input, secondaryUnit);
       break;
     case "gallonUS":
-      ret = convertGALUS();
+      ret = convertGALUS(input, secondaryUnit);
       break;
   }
-  //display conversion
-  document.getElementById("secondaryInput").value = ret;
+  console.log("convertVol here");
+  console.log(ret);
+  return ret;
 }
 
 
 //Cubic Centimeter (Milliliter) Conversions
-function convertCM(){
-  //input to be converted
-  input = document.getElementById("primaryInput").value;
-  //unit we are converting to
-  unit2 = document.getElementById("secondarySelect").value;
+function convertCM(input, secondaryUnit){
 
-  switch(unit2){
+  switch(secondaryUnit){
     case "cubicCM":
       ret = input;
       break;
@@ -101,13 +110,9 @@ function convertCM(){
 
 
 //Cubic Decimeter (Liter) Conversions
-function convertDM(){
-  //input to be converted
-  input = document.getElementById("primaryInput").value;
-  //unit we are converting to
-  unit2 = document.getElementById("secondarySelect").value;
+function convertDM(input, secondaryUnit){
 
-  switch(unit2){
+  switch(secondaryUnit){
     case "cubicCM":
       ret = input * 1000;
       break;
@@ -151,13 +156,9 @@ function convertDM(){
 
 
 //Cubic Meter Conversions
-function convertME(){
-  //input to be converted
-  input = document.getElementById("primaryInput").value;
-  //unit we are converting to
-  unit2 = document.getElementById("secondarySelect").value;
+function convertME(input, secondaryUnit){
 
-  switch(unit2){
+  switch(secondaryUnit){
     case "cubicCM":
       ret = input * 1e+6;
       break;
@@ -201,13 +202,9 @@ function convertME(){
 
 
 //Cubic Inch Conversions
-function convertIN(){
-  //input to be converted
-  input = document.getElementById("primaryInput").value;
-  //unit we are converting to
-  unit2 = document.getElementById("secondarySelect").value;
+function convertIN(input, secondaryUnit){
 
-  switch(unit2){
+  switch(secondaryUnit){
     case "cubicCM":
       ret = input * 16.387;
       break;
@@ -251,13 +248,9 @@ function convertIN(){
 
 
 //Cubic Feet Conversions
-function convertFT(){
-  //input to be converted
-  input = document.getElementById("primaryInput").value;
-  //unit we are converting to
-  unit2 = document.getElementById("secondarySelect").value;
+function convertFT(input, secondaryUnit){
 
-  switch(unit2){
+  switch(secondaryUnit){
     case "cubicCM":
       ret = input * 28316.847;
       break;
@@ -301,13 +294,9 @@ function convertFT(){
 
 
 //Cubic Yard Conversions
-function convertYD(){
-  //input to be converted
-  input = document.getElementById("primaryInput").value;
-  //unit we are converting to
-  unit2 = document.getElementById("secondarySelect").value;
+function convertYD(input, secondaryUnit){
 
-  switch(unit2){
+  switch(secondaryUnit){
     case "cubicCM":
       ret = input * 764554.858;
       break;
@@ -351,13 +340,9 @@ function convertYD(){
 
 
 // Fluid Ounce Conversions
-function convertFL(){
-  //input to be converted
-  input = document.getElementById("primaryInput").value;
-  //unit we are converting to
-  unit2 = document.getElementById("secondarySelect").value;
+function convertFL(input, secondaryUnit){
 
-  switch(unit2){
+  switch(secondaryUnit){
     case "cubicCM":
       ret = input * 28.413;
       break;
@@ -401,13 +386,9 @@ function convertFL(){
 
 
 // Pint Conversions
-function convertPT(){
-  //input to be converted
-  input = document.getElementById("primaryInput").value;
-  //unit we are converting to
-  unit2 = document.getElementById("secondarySelect").value;
+function convertPT(input, secondaryUnit){
 
-  switch(unit2){
+  switch(secondaryUnit){
     case "cubicCM":
       ret = input * 568.261;
       break;
@@ -451,13 +432,9 @@ function convertPT(){
 
 
 // Gallon Conversions
-function convertGAL(){
-  //input to be converted
-  input = document.getElementById("primaryInput").value;
-  //unit we are converting to
-  unit2 = document.getElementById("secondarySelect").value;
+function convertGAL(input, secondaryUnit){
 
-  switch(unit2){
+  switch(secondaryUnit){
     case "cubicCM":
       ret = input * 4546.09;
       break;
@@ -501,13 +478,9 @@ function convertGAL(){
 
 
 // Fluide Ounce US Conversions
-function convertFLUS(){
-  //input to be converted
-  input = document.getElementById("primaryInput").value;
-  //unit we are converting to
-  unit2 = document.getElementById("secondarySelect").value;
+function convertFLUS(input, secondaryUnit){
 
-  switch(unit2){
+  switch(secondaryUnit){
     case "cubicCM":
       ret = input * 28.413;
       break;
@@ -551,13 +524,9 @@ function convertFLUS(){
 
 
 // Pint US Conversions
-function convertPTUS(){
-  //input to be converted
-  input = document.getElementById("primaryInput").value;
-  //unit we are converting to
-  unit2 = document.getElementById("secondarySelect").value;
+function convertPTUS(input, secondaryUnit){
 
-  switch(unit2){
+  switch(secondaryUnit){
     case "cubicCM":
       ret = input * 568.261;
       break;
@@ -601,13 +570,9 @@ function convertPTUS(){
 
 
 // Gallon US Conversions
-function convertGALUS(){
-  //input to be converted
-  input = document.getElementById("primaryInput").value;
-  //unit we are converting to
-  unit2 = document.getElementById("secondarySelect").value;
+function convertGALUS(input, secondaryUnit){
 
-  switch(unit2){
+  switch(secondaryUnit){
     case "cubicCM":
       ret = input * 3785.412;
       break;
@@ -673,12 +638,8 @@ function generateVisual(){
   /*labelling axes*/
   ctx.font = "20px Overpass";
   ctx.fillStyle = "#000000";
-  var selPrimary = document.getElementById("primarySelect");
-  var textPrimary = selPrimary.options[selPrimary.selectedIndex].text;
-  var selSecondary = document.getElementById("secondarySelect");
-  var textSecondary = selSecondary.options[selSecondary.selectedIndex].text;
-  ctx.fillText(textPrimary, 10, 30);
-  ctx.fillText(textSecondary, 10, canvas.height-30);
+  ctx.fillText(document.getElementById("primarySelect").value, 10, 30);
+  ctx.fillText(document.getElementById("secondarySelect").value, 10, canvas.height-30);
   /* drawing the markings */
   ctx.beginPath();
   ctx.moveTo(canvas.width/2, canvas.height/3);
@@ -699,13 +660,12 @@ function generateVisual(){
       ctx.strokeStyle = String(getComputedStyle(document.documentElement).getPropertyValue('--primary-color'));
       ctx.stroke();
       ctx.font = "10px Overpass";
-      ctx.textAlign = "center";
-      // ctx.rotate(-Math.PI / 360);
       ctx.fillText(i, scaleFactor*(i-lowerBoundPrimary), canvas.height/2.8);
     }
   }
-  var lowerBoundSecondary = convertVolume();
-  var upperBoundSecondary = convertVolume();
+  var lowerBoundSecondary = convertVolume(lowerBoundPrimary, document.getElementById("primarySelect").value, document.getElementById("secondarySelect").value);
+  var upperBoundSecondary = convertVolume(upperBoundPrimary, document.getElementById("primarySelect").value, document.getElementById("secondarySelect").value);
+  var scaleFactor = canvas.width/(upperBoundSecondary - lowerBoundSecondary);
   var increment = 1;
   while ((upperBoundSecondary - lowerBoundSecondary)/increment < 2){
     increment /= 10;
@@ -743,9 +703,12 @@ function generateVisual(){
 
 //Swaps units
 function switchUnits(){
-  hold = document.getElementById("primarySelect").value;
-  document.getElementById("primarySelect").value = document.getElementById("secondarySelect").value;
-  document.getElementById("secondarySelect").value = hold;
+  var holdSelect = document.getElementById("primarySelect").options[document.getElementById("primarySelect").selectedIndex].value;
+  var holdInput = document.getElementById("primaryInput").value;
+  document.getElementById("primarySelect").value = document.getElementById("secondarySelect").options[document.getElementById("secondarySelect").selectedIndex].value;
+  document.getElementById("primaryInput").value = document.getElementById("secondaryInput").value;
+  document.getElementById("secondarySelect").value = holdSelect;
+  document.getElementById("secondaryInput").value = holdInput;
 }
 
 //File ends here
