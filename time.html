@@ -146,7 +146,7 @@
               ctx.fillStyle = "#000000";
               ctx.fillText(document.getElementById("primarySelect").value, 10, 30);
               ctx.fillText(document.getElementById("secondarySelect").value, 10, canvas.height-30);
-              /* drawing the markings */
+              /* labelling the converted unit */
               ctx.beginPath();
               ctx.moveTo(canvas.width/2, canvas.height/3);
               ctx.lineTo(canvas.width/2, canvas.height-(canvas.height/3));
@@ -155,6 +155,7 @@
               ctx.textAlign = "center";
               ctx.fillText(document.getElementById("primaryInput").value, canvas.width/2, 30);
               ctx.fillText(document.getElementById("secondaryInput").value, canvas.width/2, canvas.height-30);
+              /* drawing the markings in the primary axis */
               var lowerBoundPrimary = parseFloat(document.getElementById("primaryInput").value) - 30;
               var upperBoundPrimary = parseFloat(document.getElementById("primaryInput").value) + 30;
               var scaleFactor = canvas.width/(upperBoundPrimary - lowerBoundPrimary);
@@ -166,9 +167,16 @@
                   ctx.strokeStyle = String(getComputedStyle(document.documentElement).getPropertyValue('--primary-color'));
                   ctx.stroke();
                   ctx.font = "10px Overpass";
-                  ctx.fillText(i, scaleFactor*(i-lowerBoundPrimary), canvas.height/2.8);
+                  ctx.save();
+                  ctx.textAlign = "left";
+                  ctx.textBaseline = "middle";
+                  ctx.translate(scaleFactor*(i-lowerBoundPrimary), canvas.height/2.8);
+                  ctx.rotate(-60 * Math.PI / 180);
+                  ctx.fillText(i, 0, 0);
+                  ctx.restore();
                 }
               }
+              /* drawing the markings in the secondary axis */
               var lowerBoundSecondary = calculateConversion(lowerBoundPrimary, document.getElementById("primarySelect").value, document.getElementById("secondarySelect").value);
               var upperBoundSecondary = calculateConversion(upperBoundPrimary, document.getElementById("primarySelect").value, document.getElementById("secondarySelect").value);
               var scaleFactor = canvas.width/(upperBoundSecondary - lowerBoundSecondary);
@@ -188,7 +196,13 @@
                     ctx.strokeStyle = String(getComputedStyle(document.documentElement).getPropertyValue('--secondary-color'));
                     ctx.stroke();
                     ctx.font = "10px Overpass";
-                    ctx.fillText(i, scaleFactor*(i-lowerBoundSecondary), canvas.height - canvas.height/2.8);
+                    ctx.save();
+                    ctx.textAlign = "right";
+                    ctx.textBaseline = "middle";
+                    ctx.translate(scaleFactor*(i-lowerBoundSecondary), canvas.height - canvas.height/2.8);
+                    ctx.rotate(-60 * Math.PI / 180);
+                    ctx.fillText(i, 0, 0);
+                    ctx.restore();
                   }
                 }
               }
@@ -201,7 +215,13 @@
                     ctx.strokeStyle = String(getComputedStyle(document.documentElement).getPropertyValue('--secondary-color'));
                     ctx.stroke();
                     ctx.font = "10px Overpass";
-                    ctx.fillText(i, scaleFactor*(i-lowerBoundSecondary), canvas.height - canvas.height/2.8);
+                    ctx.save();
+                    ctx.textAlign = "right";
+                    ctx.textBaseline = "middle";
+                    ctx.translate(scaleFactor*(i-lowerBoundSecondary), canvas.height - canvas.height/2.8);
+                    ctx.rotate(-60 * Math.PI / 180);
+                    ctx.fillText(i, 0, 0);
+                    ctx.restore();
                   }
                 }
               }
