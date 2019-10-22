@@ -673,8 +673,12 @@ function generateVisual(){
   /*labelling axes*/
   ctx.font = "20px Overpass";
   ctx.fillStyle = "#000000";
-  ctx.fillText(document.getElementById("primarySelect").value, 10, 30);
-  ctx.fillText(document.getElementById("secondarySelect").value, 10, canvas.height-30);
+  var selPrimary = document.getElementById("primarySelect");
+  var textPrimary = selPrimary.options[selPrimary.selectedIndex].text;
+  var selSecondary = document.getElementById("secondarySelect");
+  var textSecondary = selSecondary.options[selSecondary.selectedIndex].text;
+  ctx.fillText(textPrimary, 10, 30);
+  ctx.fillText(textSecondary, 10, canvas.height-30);
   /* drawing the markings */
   ctx.beginPath();
   ctx.moveTo(canvas.width/2, canvas.height/3);
@@ -695,6 +699,8 @@ function generateVisual(){
       ctx.strokeStyle = String(getComputedStyle(document.documentElement).getPropertyValue('--primary-color'));
       ctx.stroke();
       ctx.font = "10px Overpass";
+      ctx.textAlign = "center";
+      // ctx.rotate(-Math.PI / 360);
       ctx.fillText(i, scaleFactor*(i-lowerBoundPrimary), canvas.height/2.8);
     }
   }
