@@ -73,25 +73,10 @@
           <div class="center" id="visualizer">
               <canvas id="visual">
           </div>
+          <script type="text/javascript" src="input_checker.js"></script>
+          <script type="text/javascript" src="input_checker.js"></script>
           <script type="text/javascript" src="area_conversion.js"></script>
           <script>
-            function switchUnits(){
-              hold = document.getElementById("unit1").value;
-              document.getElementById("unit1").value = document.getElementById("unit2").value;
-              document.getElementById("unit2").value = hold;
-
-            }
-
-            function checkInput(){
-              var input = document.getElementById('primaryInput').value;
-              if (input != '') {
-                  document.getElementById('convertButton').disabled = false;
-              }
-              else {
-                  document.getElementById('convertButton').disabled = true;
-              }
-            }
-
             function convert(){
             var convertable = document.getElementById("primaryInput").value;
             var unit1 = document.getElementById("primarySelect").value;
