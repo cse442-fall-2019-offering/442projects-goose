@@ -608,7 +608,6 @@ function convertGALUS(input, secondaryUnit){
   return ret;
 }
 
-
 function generateVisual(){
   /* creating the canvas */
   var canvas = document.getElementById("visual");
@@ -629,20 +628,7 @@ function generateVisual(){
   ctx.lineTo(canvas.width, canvas.height/2 + 3);
   ctx.strokeStyle = String(getComputedStyle(document.documentElement).getPropertyValue('--secondary-color'));
   ctx.stroke();
-  /*labelling axes*/
-  ctx.font = "20px Overpass";
-  ctx.fillStyle = "#000000";
-  ctx.fillText(document.getElementById("primarySelect").value, 10, 30);
-  ctx.fillText(document.getElementById("secondarySelect").value, 10, canvas.height-30);
-  /* drawing the markings */
-  ctx.beginPath();
-  ctx.moveTo(canvas.width/2, canvas.height/3);
-  ctx.lineTo(canvas.width/2, canvas.height-(canvas.height/3));
-  ctx.strokeStyle = "#000000";
-  ctx.stroke();
-  ctx.textAlign = "center";
-  ctx.fillText(document.getElementById("primaryInput").value, canvas.width/2, 30);
-  ctx.fillText(document.getElementById("secondaryInput").value, canvas.width/2, canvas.height-30);
+  /* drawing the markings in the primary axis */
   var lowerBoundPrimary = parseFloat(document.getElementById("primaryInput").value) - 30;
   var upperBoundPrimary = parseFloat(document.getElementById("primaryInput").value) + 30;
   var scaleFactor = canvas.width/(upperBoundPrimary - lowerBoundPrimary);
@@ -654,9 +640,17 @@ function generateVisual(){
       ctx.strokeStyle = String(getComputedStyle(document.documentElement).getPropertyValue('--primary-color'));
       ctx.stroke();
       ctx.font = "10px Overpass";
-      ctx.fillText(i, scaleFactor*(i-lowerBoundPrimary), canvas.height/2.8);
+      ctx.fillStyle = "#000000";
+      ctx.save();
+      ctx.textAlign = "left";
+      ctx.textBaseline = "middle";
+      ctx.translate(scaleFactor*(i-lowerBoundPrimary), canvas.height/2.8);
+      ctx.rotate(-60 * Math.PI / 180);
+      ctx.fillText(i, 0, 0);
+      ctx.restore();
     }
   }
+  /* drawing the markings in the secondary axis */
   var lowerBoundSecondary = convertVolume(lowerBoundPrimary, document.getElementById("primarySelect").value, document.getElementById("secondarySelect").value);
   var upperBoundSecondary = convertVolume(upperBoundPrimary, document.getElementById("primarySelect").value, document.getElementById("secondarySelect").value);
   var scaleFactor = canvas.width/(upperBoundSecondary - lowerBoundSecondary);
@@ -667,32 +661,46 @@ function generateVisual(){
   while ((upperBoundSecondary - lowerBoundSecondary)/increment > 60){
     increment *= 10;
   }
-  if (increment < 1){
-    for (var i = Math.ceil(lowerBoundSecondary)*increment; i <= upperBoundSecondary; i += increment){
-      if (i != document.getElementById("secondaryInput").value && i >= 0){
-        ctx.beginPath();
-        ctx.moveTo(scaleFactor*(i-lowerBoundSecondary), canvas.height/2 + 3);
-        ctx.lineTo(scaleFactor*(i-lowerBoundSecondary), canvas.height - canvas.height/2.6);
-        ctx.strokeStyle = String(getComputedStyle(document.documentElement).getPropertyValue('--secondary-color'));
-        ctx.stroke();
-        ctx.font = "10px Overpass";
-        ctx.fillText(i, scaleFactor*(i-lowerBoundSecondary), canvas.height - canvas.height/2.8);
+  for (var i = Math.ceil(lowerBoundSecondary/increment)*increment; i <= upperBoundSecondary; i += increment){
+    if (i != document.getElementById("secondaryInput").value && i >= 0){
+      ctx.beginPath();
+      ctx.moveTo(scaleFactor*(i-lowerBoundSecondary), canvas.height/2 + 3);
+      ctx.lineTo(scaleFactor*(i-lowerBoundSecondary), canvas.height - canvas.height/2.6);
+      ctx.strokeStyle = String(getComputedStyle(document.documentElement).getPropertyValue('--secondary-color'));
+      ctx.stroke();
+      ctx.font = "10px Overpass";
+      ctx.save();
+      ctx.textAlign = "right";
+      ctx.textBaseline = "middle";
+      ctx.translate(scaleFactor*(i-lowerBoundSecondary), canvas.height - canvas.height/2.8);
+      ctx.rotate(-60 * Math.PI / 180);
+      if (increment < 1){
+        ctx.fillText(i.toFixed(Math.abs(Math.floor(Math.log10(increment)))), 0, 0);
       }
+      else{
+        ctx.fillText(i, 0, 0);
+      }
+      ctx.restore();
     }
   }
-  else{
-    for (var i = Math.ceil(lowerBoundSecondary); i <= upperBoundSecondary; i += increment){
-      if (i != document.getElementById("secondaryInput").value && i >= 0){
-        ctx.beginPath();
-        ctx.moveTo(scaleFactor*(i-lowerBoundSecondary), canvas.height/2 + 3);
-        ctx.lineTo(scaleFactor*(i-lowerBoundSecondary), canvas.height - canvas.height/2.6);
-        ctx.strokeStyle = String(getComputedStyle(document.documentElement).getPropertyValue('--secondary-color'));
-        ctx.stroke();
-        ctx.font = "10px Overpass";
-        ctx.fillText(i, scaleFactor*(i-lowerBoundSecondary), canvas.height - canvas.height/2.8);
-      }
-    }
-  }
+  /*labelling axes*/
+  ctx.font = "20px Overpass";
+  ctx.fillStyle = "#000000";
+  ctx.textAlign = "left";
+  ctx.textBaseline = "middle";
+  ctx.fillText(document.getElementById("primarySelect").value, 10, 30);
+  ctx.fillText(document.getElementById("secondarySelect").value, 10, canvas.height-30);
+  /* labelling the converted unit */
+  ctx.beginPath();
+  ctx.moveTo(canvas.width/2, canvas.height/2.7);
+  ctx.lineTo(canvas.width/2, canvas.height-(canvas.height/2.7));
+  ctx.strokeStyle = "#000000";
+  ctx.lineWidth = 2;
+  ctx.stroke();
+  ctx.textAlign = "center";
+  ctx.textBaseline = "middle";
+  ctx.fillText(document.getElementById("primaryInput").value, canvas.width/2, 30);
+  ctx.fillText(document.getElementById("secondaryInput").value, canvas.width/2, canvas.height-30);
 }
 
 //Swaps units

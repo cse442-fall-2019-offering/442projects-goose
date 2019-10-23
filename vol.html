@@ -5,6 +5,7 @@
         <link href="style.css" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css?family=Overpass&display=swap" rel="stylesheet">
         <script src="JavaScript/volume.js" charset="utf-8"></script>
+        <script src="JavaScript/limitInput.js" charset="utf-8"></script>
     </head>
     <body>
         <!-- TODO: add tiles, text inputs, dropdowns, and swap box -->
@@ -18,7 +19,7 @@
           <div class="nav">
               <ul>
                 <a href="temp.html">Temperature</a>
-                <a href="conversion.html">Length</a>
+                <a href="index.html">Length</a>
                 <a href="area.html">Area</a>
                 <a class="active" href="vol.html">Volume</a>
                 <a href="time.html">Time</a>
@@ -32,7 +33,7 @@
             <!-- select one unit here -->
             <div id="primary">
               <form>
-                <input type="number" name="primary" id="primaryInput" placeholder="Enter a value here" onkeyup="convertUnits(); generateVisual();">
+                <input type="number" name="primary" id="primaryInput" placeholder="Enter a value here" onkeydown="limit(this);" onkeyup="convertUnits(); generateVisual(); limit(this);">
                 <select id="primarySelect" onchange="convertUnits(); generateVisual();">
                   <option value="cubicCM">Milliliter (mL)</option>
                   <option value="cubicDM">Liter (L)</option>

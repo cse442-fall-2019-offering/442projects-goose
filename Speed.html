@@ -4,20 +4,15 @@
         <title>Converter</title>
         <link href="style.css" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css?family=Overpass&display=swap" rel="stylesheet">
+        <script src="index.js"></script>
     </head>
     <body>
-        <!-- TODO: add tiles, text inputs, dropdowns, and swap box -->
-        <!-- TODO: change dropdown menu based on tile selection -->
-        <!-- TODO: create visual output based on entered values -->
-        <!-- TODO: create rest of website -->
-        <!-- random text for tet commit -->
-        <!-- more commit test -->
         <header>
           <!-- select measures here -->
           <div class="nav">
               <ul>
                 <a href="temp.html">Temperature</a>
-                <a href="conversion.html">Length</a>
+                <a href="index.html">Length</a>
                 <a href="area.html">Area</a>
                 <a href="vol.html">Volume</a>
                 <a href="time.html">Time</a>
@@ -31,22 +26,13 @@
             <!-- select one unit here -->
             <div id="primary">
               <form>
-<!-- HEAD
-                <input type="number" name="primary">
-                <select>
-                  <option value="inches">Inches</option>
-                  <option value="feet">Feet</option>
-                  <option value="yard">Yard</option>
-                  <option value="mile">Mile</option>
-======= -->
-                <input type="number" name="primary" id="first">
-                <select id="unit1">
-                  <option value="meter">Meters per Second</option>
-                  <option value="Kilo">Kilometers per Hour</option>
-                  <option value="mile">Miles per Hour</option>
+                <input type="number" id="primaryInput" placeholder="Enter a value here" onkeyup="checkInput()">
+                <select id="primarySelect">
+                  <option value="mps">Meters per Second</option>
+                  <option value="kph">Kilometers per Hour</option>
+                  <option value="fps">Feet per Second</option>
+                  <option value="mph">Miles per Hour</option>
                   <option value="knot">Knots</option>
-                  <option value="feet">Feet per Second</option>
-<!-->>>>>>> develop -->
                 </select>
               </form>
             </div>
@@ -58,157 +44,144 @@
             <!-- select the other unit here -->
             <div id="secondary">
               <form>
-<!--<<<<<<< HEAD
-                <input type="number" name="secondary">
-                <select>
-                  <option value="inches">Inches</option>
-                  <option value="feet">Feet</option>
-                  <option value="yard">Yard</option>
-                  <option value="mile">Mile</option>
-======= -->
-                <input type="number" name="secondary" id="second">
-                <select id="unit2">
-                  <option value="meter">Meters per Second</option>
-                  <option value="Kilo">Kilometers per Hour</option>
-                  <option value="mile">Miles per Hour</option>
+                <input type="number" id="secondaryInput" placeholder="Result shows up here" readonly="readonly">
+                <select id="secondarySelect">
+                  <option value="mps">Meters per Second</option>
+                  <option value="kph">Kilometers per Hour</option>
+                  <option value="fps">Feet per Second</option>
+                  <option value="mph">Miles per Hour</option>
                   <option value="knot">Knots</option>
-                  <option value="feet">Feet per Second</option>
-<!-->>>>>>> develop -->
                 </select>
               </form>
             </div>
           </div>
           <div class="center">
-            <button class="convertButton" onclick="convertDist(); visual_display();">
+            <button id="convertButton" disabled="disabled" onclick="convertSpeed(); generateVisual();">
               Convert
             </button>
           </div>
           <!-- visual output is displayed here -->
-          <div class="center" id="visual">
-            <!-- just a placeholder shape -->
-            <img id="comparison_image">
-          </img>
+          <div class="center" id="visualizer">
+              <canvas id="visual">
           </div>
+
+          <script type="text/javascript" src="speed_conversion.js"></script>
           <script>
-            function switchUnits(){
-              hold = document.getElementById("unit1").value;
-              document.getElementById("unit1").value = document.getElementById("unit2").value;
-              document.getElementById("unit2").value = hold;
+          function switchUnits(){
+            var holdSelect = document.getElementById("primarySelect").options[document.getElementById("primarySelect").selectedIndex].value;
+            var holdInput = document.getElementById("primaryInput").value;
+            document.getElementById("primarySelect").value = document.getElementById("secondarySelect").options[document.getElementById("secondarySelect").selectedIndex].value;
+            document.getElementById("primaryInput").value = document.getElementById("secondaryInput").value;
+            document.getElementById("secondarySelect").value = holdSelect;
+            document.getElementById("secondaryInput").value = holdInput;
+          }
 
+          function convertSpeed(){
+            var convertable = document.getElementById("primaryInput").value;
+            var unit1 = document.getElementById("primarySelect").value;
+            var unit2 = document.getElementById("secondarySelect").value;
+
+            var converted = speedConverter(convertable, unit1, unit2)
+            document.getElementById("secondaryInput").value = converted;
+          }
+
+          function checkInput(){
+            var input = document.getElementById('primaryInput').value;
+            if (input != '') {
+                document.getElementById('convertButton').disabled = false;
             }
-          /*
-          unimplimented unit conversion function for distance using general units
-          first parameter is the input in the primary div class, the second parameter
-          unit1 is the first unit to be converted to meters for ease of conversion
-          and reduce hard coding. than it will take the input already converted to meters
-          and convert it to the unit in unit2
-          */
-            function convertDist(){
-              input = document.getElementById("first").value;//this is the right value of the text
+            else {
+                document.getElementById('convertButton').disabled = true;
+            }
+          }
 
-              unit1 = document.getElementById("unit1").value;//
-              unit2 = document.getElementById("unit2").value;
-              switch(unit1){
-                case "meter":
-                  input = input *0.001;
-                  break;
-                case "kilo":
-                  input = input *0.01;
-                  break;
-                case "mile":
-                  break;
-                case "knot":
-                  input = input *1000;
-                  break;
-                case "feet":
-                  input = input *0.0254;
-                  break;
+
+          function generateVisual()
+          {
+            /* creating the canvas */
+            var canvas = document.getElementById("visual");
+            var visualizer = document.getElementById("visualizer");
+            canvas.width = visualizer.offsetWidth-50;
+            canvas.height = visualizer.offsetHeight-50;
+            var ctx = canvas.getContext("2d");
+            ctx.fillStyle = "#FFFFFF";
+            ctx.fillRect(0, 0, canvas.width, canvas.width);
+            /* drawing the axes */
+            ctx.beginPath();
+            ctx.moveTo(0, canvas.height/2 - 3);
+            ctx.lineTo(canvas.width, canvas.height/2 - 3);
+            ctx.strokeStyle = String(getComputedStyle(document.documentElement).getPropertyValue('--primary-color'));
+            ctx.stroke();
+            ctx.beginPath();
+            ctx.moveTo(0, canvas.height/2 + 3);
+            ctx.lineTo(canvas.width, canvas.height/2 + 3);
+            ctx.strokeStyle = String(getComputedStyle(document.documentElement).getPropertyValue('--secondary-color'));
+            ctx.stroke();
+            /*labelling axes*/
+            ctx.font = "20px Overpass";
+            ctx.fillStyle = "#000000";
+            ctx.fillText(document.getElementById("primarySelect").value, 10, 30);
+            ctx.fillText(document.getElementById("secondarySelect").value, 10, canvas.height-30);
+            /* drawing the markings */
+            ctx.beginPath();
+            ctx.moveTo(canvas.width/2, canvas.height/3);
+            ctx.lineTo(canvas.width/2, canvas.height-(canvas.height/3));
+            ctx.strokeStyle = "#000000";
+            ctx.stroke();
+            ctx.textAlign = "center";
+            ctx.fillText(document.getElementById("primaryInput").value, canvas.width/2, 30);
+            ctx.fillText(document.getElementById("secondaryInput").value, canvas.width/2, canvas.height-30);
+            var lowerBoundPrimary = parseFloat(document.getElementById("primaryInput").value) - 30;
+            var upperBoundPrimary = parseFloat(document.getElementById("primaryInput").value) + 30;
+            var scaleFactor = canvas.width/(upperBoundPrimary - lowerBoundPrimary);
+            for (var i = Math.ceil(lowerBoundPrimary); i <= upperBoundPrimary; i++){
+              if (i != document.getElementById("primaryInput").value && i >= 0){
+                ctx.beginPath();
+                ctx.moveTo(scaleFactor*(i-lowerBoundPrimary), canvas.height/2.6);
+                ctx.lineTo(scaleFactor*(i-lowerBoundPrimary), canvas.height/2 - 3);
+                ctx.strokeStyle = String(getComputedStyle(document.documentElement).getPropertyValue('--primary-color'));
+                ctx.stroke();
+                ctx.font = "10px Overpass";
+                ctx.fillText(i, scaleFactor*(i-lowerBoundPrimary), canvas.height/2.8);
               }
-              switch(unit2){
-                case "meter":
-                  input = input *1000;
-                  break;
-                case "kilo":
-                  input = input *100;
-                  break;
-                case "mile":
-                  break;
-                case "knot":
-                  input = input *0.001;
-                  break;
-                case "feet":
-                  input = input *39.370078740157;
-                  break;
-                }
-              document.getElementById("second").value = input;
-              //just returns the input for now, subject to change
             }
-            /*this takes in the two converted values and scales images based on the
-            *relative sizes
-            */
-            function visual_display()
-            {
-
-              unit1 = document.getElementById("unit1").value;
-              unit2 = document.getElementById("unit2").value;
-
-                first
-                second
-
-                switch(unit1){
-                    case "meter":
-                      first = 0;
-                      break;
-                    case "kilo":
-                      first = 1;
-                      break;
-                    case "mile":
-                      first = 2;
-                      break;
-                    case "knot":
-                      first = 3;
-                      break;
-                    case "feet":
-                      first = 4;
-                      break;
-                }
-
-                switch(unit2){
-                    case "meter":
-                      first = 0;
-                      break;
-                    case "kilo":
-                      first = 1;
-                      break;
-                    case "mile":
-                      first = 2;
-                      break;
-                    case "knot":
-                      first = 3;
-                      break;
-                    case "feet":
-                      first = 4;
-                      break;
-                  }
-
-                /*
-                * meps-meps, meps-kph, meps-mph, meps-knot, meps-fps,
-                * kph-meps, kph-kph, kph-mph, kph-knot, kph-fps,
-                * mps-meps, mps-kph, mps-mph, mps-knot, mps-fps,
-                * knot-meps, knot-kph, knot-mph, knot-knot, knot-fps,
-                * fps-meps, fps-kph, fps-mph, fps-knot, fps-fps,
-                */
-
-                /* TODO Billy: Change these png and make new ones */
-                images = [
-                    ["same.png", "inToFt.png", "inToYd.png"],
-                    ["inToFt.png", "same.png", "ftToYd.png"],
-                    ["inToYd.png", "ftToYd.png", "same.png"]
-                ]
-
-                document.getElementById("comparison_image").src = images[first][second];
-
+            var lowerBoundSecondary = speedConverter(lowerBoundPrimary, document.getElementById("primarySelect").value, document.getElementById("secondarySelect").value);
+            var upperBoundSecondary = speedConverter(upperBoundPrimary, document.getElementById("primarySelect").value, document.getElementById("secondarySelect").value);
+            var scaleFactor = canvas.width/(upperBoundSecondary - lowerBoundSecondary);
+            var increment = 1;
+            while ((upperBoundSecondary - lowerBoundSecondary)/increment < 2){
+              increment /= 10;
             }
+            while ((upperBoundSecondary - lowerBoundSecondary)/increment > 60){
+              increment *= 10;
+            }
+            if (increment < 1){
+              for (var i = Math.ceil(lowerBoundSecondary)*increment; i <= upperBoundSecondary; i += increment){
+                if (i != document.getElementById("secondaryInput").value && i >= 0){
+                  ctx.beginPath();
+                  ctx.moveTo(scaleFactor*(i-lowerBoundSecondary), canvas.height/2 + 3);
+                  ctx.lineTo(scaleFactor*(i-lowerBoundSecondary), canvas.height - canvas.height/2.6);
+                  ctx.strokeStyle = String(getComputedStyle(document.documentElement).getPropertyValue('--secondary-color'));
+                  ctx.stroke();
+                  ctx.font = "10px Overpass";
+                  ctx.fillText(i, scaleFactor*(i-lowerBoundSecondary), canvas.height - canvas.height/2.8);
+                }
+              }
+            }
+            else{
+              for (var i = Math.ceil(lowerBoundSecondary); i <= upperBoundSecondary; i += increment){
+                if (i != document.getElementById("secondaryInput").value && i >= 0){
+                  ctx.beginPath();
+                  ctx.moveTo(scaleFactor*(i-lowerBoundSecondary), canvas.height/2 + 3);
+                  ctx.lineTo(scaleFactor*(i-lowerBoundSecondary), canvas.height - canvas.height/2.6);
+                  ctx.strokeStyle = String(getComputedStyle(document.documentElement).getPropertyValue('--secondary-color'));
+                  ctx.stroke();
+                  ctx.font = "10px Overpass";
+                  ctx.fillText(i, scaleFactor*(i-lowerBoundSecondary), canvas.height - canvas.height/2.8);
+                }
+              }
+            }
+          }
           </script>
         </main>
     </body>
