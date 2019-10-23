@@ -4,7 +4,7 @@
         <title>Converter</title>
         <link href="style.css" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css?family=Overpass&display=swap" rel="stylesheet">
-        <script src="index.js"></script>
+        <script src="JavaScript/limitInput.js"></script>
     </head>
     <body>
         <header>
@@ -26,7 +26,7 @@
             <!-- select one unit here -->
             <div id="primary">
               <form>
-                <input type="number" id="primaryInput" placeholder="Enter a value here" onkeyup="checkInput()">
+                <input type="number" id="primaryInput" placeholder="Enter a value here" onkeyup="checkInput(); limit(this);" onkeydown="limit(this);">
                 <select id="primarySelect">
                   <option value="mps">Meters per Second</option>
                   <option value="kph">Kilometers per Hour</option>
@@ -69,7 +69,7 @@
           <script type="text/javascript" src="input_checker.js"></script>
           <script type="text/javascript" src="speed_conversion.js"></script>
           <script>
-          
+
 
           function convertSpeed(){
             var convertable = document.getElementById("primaryInput").value;
