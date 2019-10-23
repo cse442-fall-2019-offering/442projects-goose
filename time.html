@@ -5,6 +5,7 @@
         <link href="style.css" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css?family=Overpass&display=swap" rel="stylesheet">
         <script src="index.js"></script>
+        <script src="limitInput.js"></script>
     </head>
     <body>
         <!-- TODO: add tiles, text inputs, dropdowns, and swap box -->
@@ -32,7 +33,7 @@
             <!-- select one unit here -->
             <div id="primary">
               <form>
-                <input type="number" id="primaryInput" placeholder="Enter a value here" onkeyup="checkInput()">
+                <input type="number" id="primaryInput" placeholder="Enter a value here" onkeydown="limit(this)" onkeyup="checkInput()">
                 <select id="primarySelect">
                   <option value="millisecond">Millisecond</option>
                   <option value="second">Second</option>
