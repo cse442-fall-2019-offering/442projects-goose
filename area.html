@@ -41,7 +41,7 @@
             </form>
           </div>
           <div id="swap">
-            <button class="swapButton" onclick="switchUnits()">
+            <button class="swapButton" onclick="switchUnits(); generateVisual();">
               ⇌
             </button>
           </div>
@@ -65,7 +65,7 @@
           </div>
         </div>
         <div class="center">
-          <button id="convertButton" disabled="disabled" onclick="convert(); generateVisual();">
+          <button id="convertButton" disabled="disabled" onclick="convertArea(); generateVisual();">
             Convert
           </button>
         </div>
@@ -73,122 +73,30 @@
           <div class="center" id="visualizer">
               <canvas id="visual">
           </div>
+          <script type="text/javascript" src="input_checker.js"></script>
           <script type="text/javascript" src="area_conversion.js"></script>
+          <script type="text/javascript" src="visual_maker.js"></script>
+          <script type="text/javascript" src="unit_switcher.js"></script>
           <script>
-            function switchUnits(){
-              hold = document.getElementById("unit1").value;
-              document.getElementById("unit1").value = document.getElementById("unit2").value;
-              document.getElementById("unit2").value = hold;
-
-            }
-
-            function checkInput(){
-              var input = document.getElementById('primaryInput').value;
-              if (input != '') {
-                  document.getElementById('convertButton').disabled = false;
-              }
-              else {
-                  document.getElementById('convertButton').disabled = true;
-              }
-            }
-
-            function convert(){
+          
+          /*this takes in the two converted values and scales images based on the
+           *relative sizes
+           */
+          function convertArea(){
             var convertable = document.getElementById("primaryInput").value;
             var unit1 = document.getElementById("primarySelect").value;
             var unit2 = document.getElementById("secondarySelect").value;
 
             var converted = areaConverter(convertable, unit1, unit2)
             document.getElementById("secondaryInput").value = converted;
-            }
+          }
 
-            /*this takes in the two converted values and scales images based on the
-            *relative sizes
-            */
-          function generateVisual()
-          {
-            /* creating the canvas */
-            var canvas = document.getElementById("visual");
-            var visualizer = document.getElementById("visualizer");
-            canvas.width = visualizer.offsetWidth-50;
-            canvas.height = visualizer.offsetHeight-50;
-            var ctx = canvas.getContext("2d");
-            ctx.fillStyle = "#FFFFFF";
-            ctx.fillRect(0, 0, canvas.width, canvas.width);
-            /* drawing the axes */
-            ctx.beginPath();
-            ctx.moveTo(0, canvas.height/2 - 3);
-            ctx.lineTo(canvas.width, canvas.height/2 - 3);
-            ctx.strokeStyle = String(getComputedStyle(document.documentElement).getPropertyValue('--primary-color'));
-            ctx.stroke();
-            ctx.beginPath();
-            ctx.moveTo(0, canvas.height/2 + 3);
-            ctx.lineTo(canvas.width, canvas.height/2 + 3);
-            ctx.strokeStyle = String(getComputedStyle(document.documentElement).getPropertyValue('--secondary-color'));
-            ctx.stroke();
-            /*labelling axes*/
-            ctx.font = "20px Overpass";
-            ctx.fillStyle = "#000000";
-            ctx.fillText(document.getElementById("primarySelect").value, 10, 30);
-            ctx.fillText(document.getElementById("secondarySelect").value, 10, canvas.height-30);
-            /* drawing the markings */
-            ctx.beginPath();
-            ctx.moveTo(canvas.width/2, canvas.height/3);
-            ctx.lineTo(canvas.width/2, canvas.height-(canvas.height/3));
-            ctx.strokeStyle = "#000000";
-            ctx.stroke();
-            ctx.textAlign = "center";
-            ctx.fillText(document.getElementById("primaryInput").value, canvas.width/2, 30);
-            ctx.fillText(document.getElementById("secondaryInput").value, canvas.width/2, canvas.height-30);
+          function generateVisual(){
             var lowerBoundPrimary = parseFloat(document.getElementById("primaryInput").value) - 30;
             var upperBoundPrimary = parseFloat(document.getElementById("primaryInput").value) + 30;
-            var scaleFactor = canvas.width/(upperBoundPrimary - lowerBoundPrimary);
-            for (var i = Math.ceil(lowerBoundPrimary); i <= upperBoundPrimary; i++){
-              if (i != document.getElementById("primaryInput").value && i >= 0){
-                ctx.beginPath();
-                ctx.moveTo(scaleFactor*(i-lowerBoundPrimary), canvas.height/2.6);
-                ctx.lineTo(scaleFactor*(i-lowerBoundPrimary), canvas.height/2 - 3);
-                ctx.strokeStyle = String(getComputedStyle(document.documentElement).getPropertyValue('--primary-color'));
-                ctx.stroke();
-                ctx.font = "10px Overpass";
-                ctx.fillText(i, scaleFactor*(i-lowerBoundPrimary), canvas.height/2.8);
-              }
-            }
-            var lowerBoundSecondary = areaConverter(lowerBoundPrimary, document.getElementById("primarySelect").value, document.getElementById("secondarySelect").value);
-            var upperBoundSecondary = areaConverter(upperBoundPrimary, document.getElementById("primarySelect").value, document.getElementById("secondarySelect").value);
-            var scaleFactor = canvas.width/(upperBoundSecondary - lowerBoundSecondary);
-            var increment = 1;
-            while ((upperBoundSecondary - lowerBoundSecondary)/increment < 2){
-              increment /= 10;
-            }
-            while ((upperBoundSecondary - lowerBoundSecondary)/increment > 60){
-              increment *= 10;
-            }
-            if (increment < 1){
-              for (var i = Math.ceil(lowerBoundSecondary)*increment; i <= upperBoundSecondary; i += increment){
-                if (i != document.getElementById("secondaryInput").value && i >= 0){
-                  ctx.beginPath();
-                  ctx.moveTo(scaleFactor*(i-lowerBoundSecondary), canvas.height/2 + 3);
-                  ctx.lineTo(scaleFactor*(i-lowerBoundSecondary), canvas.height - canvas.height/2.6);
-                  ctx.strokeStyle = String(getComputedStyle(document.documentElement).getPropertyValue('--secondary-color'));
-                  ctx.stroke();
-                  ctx.font = "10px Overpass";
-                  ctx.fillText(i, scaleFactor*(i-lowerBoundSecondary), canvas.height - canvas.height/2.8);
-                }
-              }
-            }
-            else{
-              for (var i = Math.ceil(lowerBoundSecondary); i <= upperBoundSecondary; i += increment){
-                if (i != document.getElementById("secondaryInput").value && i >= 0){
-                  ctx.beginPath();
-                  ctx.moveTo(scaleFactor*(i-lowerBoundSecondary), canvas.height/2 + 3);
-                  ctx.lineTo(scaleFactor*(i-lowerBoundSecondary), canvas.height - canvas.height/2.6);
-                  ctx.strokeStyle = String(getComputedStyle(document.documentElement).getPropertyValue('--secondary-color'));
-                  ctx.stroke();
-                  ctx.font = "10px Overpass";
-                  ctx.fillText(i, scaleFactor*(i-lowerBoundSecondary), canvas.height - canvas.height/2.8);
-                }
-              }
-            }
+            var lowerBoundSecond = areaConverter(lowerBoundPrimary, document.getElementById("primarySelect").value, document.getElementById("secondarySelect").value);
+            var upperBoundSecond = areaConverter(upperBoundPrimary, document.getElementById("primarySelect").value, document.getElementById("secondarySelect").value);
+            makeVisual(lowerBoundSecond, upperBoundSecond)
           }
           </script>
         </main>
