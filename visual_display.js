@@ -1,4 +1,4 @@
-/*this takes in the two converted values and scales images based on the 
+/*this takes in the two converted values and scales images based on the
  *relative sizes
  */
 function visual_display(unit1, unit2)

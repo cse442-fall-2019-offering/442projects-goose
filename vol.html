@@ -1,0 +1,90 @@
+<!doctype html>
+<html>
+    <head>
+        <title>Converter</title>
+        <link href="style.css" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Overpass&display=swap" rel="stylesheet">
+        <script src="JavaScript/volume.js" charset="utf-8"></script>
+        <script src="JavaScript/limitInput.js" charset="utf-8"></script>
+    </head>
+    <body>
+        <!-- TODO: add tiles, text inputs, dropdowns, and swap box -->
+        <!-- TODO: change dropdown menu based on tile selection -->
+        <!-- TODO: create visual output based on entered values -->
+        <!-- TODO: create rest of website -->
+        <!-- random text for tet commit -->
+        <!-- more commit test -->
+        <header>
+          <!-- select measures here -->
+          <div class="nav">
+              <ul>
+                <a href="temp.html">Temperature</a>
+                <a href="index.html">Length</a>
+                <a href="area.html">Area</a>
+                <a class="active" href="vol.html">Volume</a>
+                <a href="time.html">Time</a>
+                <a href="speed.html">Speed</a>
+              </ul>
+          </div>
+        </header>
+        <main>
+          <!-- values are inputted here -->
+          <div id="converter">
+            <!-- select one unit here -->
+            <div id="primary">
+              <form>
+                <input type="number" name="primary" id="primaryInput" placeholder="Enter a value here" onkeydown="limit(this);" onkeyup="limit(this);">
+                <select id="primarySelect" onchange="convertUnits(); generateVisual();">
+                  <option value="cubicCM">Milliliter (mL)</option>
+                  <option value="cubicDM">Liter (L)</option>
+                  <option value="cubicME">Cubic Meter (m3)</option>
+                  <option value="cubicIN">Cubic Inch (in3)</option>
+                  <option value="cubicFT">Cubic Foot (ft3)</option>
+                  <option value="cubicYD">Cubic Yard (yd3)</option>
+                  <option value="fluidOZ">Fluid Ounce (fl oz)</option>
+                  <option value="pint">Pint (pt)</option>
+                  <option value="gallon">Gallon (gal)</option>
+                  <option value="fluidOZUS">US Fluid Ounce (US fl oz)</option>
+                  <option value="pintUS">US Pint (US pt)</option>
+                  <option value="gallonUS">US Gallon (US gal)</option>
+                </select>
+              </form>
+            </div>
+            <div id="swap">
+              <button class="swapButton" onclick="switchUnits(); convertUnits(); generateVisual();">
+                ⇌
+              </button>
+            </div>
+            <!-- select the other unit here -->
+            <div id="secondary">
+              <form>
+                <input type="number" id="secondaryInput" placeholder="Result shows up here" readonly>
+                <select id="secondarySelect" onchange="convertUnits(); generateVisual();">
+                  <option value="cubicCM">Milliliter (mL)</option>
+                  <option value="cubicDM">Liter (L)</option>
+                  <option value="cubicME">Cubic Meter (m3)</option>
+                  <option value="cubicIN">Cubic Inch (in3)</option>
+                  <option value="cubicFT">Cubic Foot (ft3)</option>
+                  <option value="cubicYD">Cubic Yard (yd3)</option>
+                  <option value="fluidOZ">Fluid Ounce (fl oz)</option>
+                  <option value="pint">Pint (pt)</option>
+                  <option value="gallon">Gallon (gal)</option>
+                  <option value="fluidOZUS">US Fluid Ounce (US fl oz)</option>
+                  <option value="pintUS">US Pint (US pt)</option>
+                  <option value="gallonUS">US Gallon (US gal)</option>
+                </select>
+              </form>
+            </div>
+          </div>
+          <div class="center">
+            <button id="convertButton" onclick="convertUnits(); generateVisual();">
+              Convert
+            </button>
+          </div>
+          <!-- visual output is displayed here -->
+          <div class="center" id="visualizer">
+            <canvas id="visual">
+          </div>
+        </main>
+    </body>
+</html>
