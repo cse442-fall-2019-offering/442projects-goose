@@ -6,6 +6,9 @@
         <link href="https://fonts.googleapis.com/css?family=Overpass&display=swap" rel="stylesheet">
         <script src="JavaScript/volume.js" charset="utf-8"></script>
         <script src="JavaScript/limit_input.js" charset="utf-8"></script>
+        <script src="JavaScript/visual_maker.js" charset="utf-8"></script>
+        <script src="JavaScript/unit_switcher.js" charset="utf-8"></script>
+        <script src="JavaScript/input_checker.js" charset="utf-8"></script>
     </head>
     <body>
         <!-- TODO: add tiles, text inputs, dropdowns, and swap box -->
@@ -33,7 +36,7 @@
             <!-- select one unit here -->
             <div id="primary">
               <form>
-                <input type="number" name="primary" id="primaryInput" placeholder="Enter a value here" onkeydown="limit(this);" onkeyup="limit(this);">
+                <input type="number" name="primary" id="primaryInput" placeholder="Enter a value here" onkeydown="limit(this);" onkeyup="limit(this);  checkInput();">
                 <select id="primarySelect" onchange="convertUnits(); generateVisual();">
                   <option value="cubicCM">Milliliter (mL)</option>
                   <option value="cubicDM">Liter (L)</option>
@@ -77,7 +80,7 @@
             </div>
           </div>
           <div class="center">
-            <button id="convertButton" onclick="convertUnits(); generateVisual();">
+            <button id="convertButton" onclick="convertUnits(); generateVisual();" disabled="disabled">
               Convert
             </button>
           </div>
