@@ -1,61 +1,6 @@
 // JavaScript file for volume portion of application
 // @author: Damon L
 
-//main function that calls sub functions below
-function convertUnits(){
-  var input = document.getElementById("primaryInput").value;
-  var primaryUnit = document.getElementById("primarySelect").value;
-  var secondaryUnit = document.getElementById("secondarySelect").value;
-  ret = convertVolume(input, primaryUnit, secondaryUnit);
-  document.getElementById("secondaryInput").value = convertVolume(input, primaryUnit, secondaryUnit);
-
-}
-
-// This function determines which unit is being converted from and then calls
-// its related fuction to execute the proper conversion
-function convertVolume(input, primaryUnit, secondaryUnit){
-
-  switch(primaryUnit){
-    case "cubicCM":
-      ret = convertCM(input, secondaryUnit);
-      break;
-    case "cubicDM":
-      ret = convertDM(input, secondaryUnit);
-      break;
-    case "cubicME":
-      ret = convertME(input, secondaryUnit);
-      break;
-    case "cubicIN":
-      ret = convertIN(input, secondaryUnit);
-      break;
-    case "cubicFT":
-      ret = convertFT(input, secondaryUnit);
-      break;
-    case "cubicYD":
-      ret = convertYD(input, secondaryUnit);
-      break;
-    case "fluidOZ":
-      ret = convertFL(input, secondaryUnit);
-      break;
-    case "pint":
-      ret = convertPT(input, secondaryUnit);
-      break;
-    case "gallon":
-      ret = convertGAL(input, secondaryUnit);
-      break;
-    case "fluidOZUS":
-      ret = convertFLUS(input, secondaryUnit);
-      break;
-    case "pintUS":
-      ret = convertPTUS(input, secondaryUnit);
-      break;
-    case "gallonUS":
-      ret = convertGALUS(input, secondaryUnit);
-      break;
-  }
-  return ret;
-}
-
 
 //Cubic Centimeter (Milliliter) Conversions
 function convertCM(input, secondaryUnit){
@@ -608,99 +553,59 @@ function convertGALUS(input, secondaryUnit){
   return ret;
 }
 
-function generateVisual(){
-  /* creating the canvas */
-  var canvas = document.getElementById("visual");
-  var visualizer = document.getElementById("visualizer");
-  canvas.width = visualizer.offsetWidth-50;
-  canvas.height = visualizer.offsetHeight-50;
-  var ctx = canvas.getContext("2d");
-  ctx.fillStyle = "#FFFFFF";
-  ctx.fillRect(0, 0, canvas.width, canvas.width);
-  /* drawing the axes */
-  ctx.beginPath();
-  ctx.moveTo(0, canvas.height/2 - 3);
-  ctx.lineTo(canvas.width, canvas.height/2 - 3);
-  ctx.strokeStyle = String(getComputedStyle(document.documentElement).getPropertyValue('--primary-color'));
-  ctx.stroke();
-  ctx.beginPath();
-  ctx.moveTo(0, canvas.height/2 + 3);
-  ctx.lineTo(canvas.width, canvas.height/2 + 3);
-  ctx.strokeStyle = String(getComputedStyle(document.documentElement).getPropertyValue('--secondary-color'));
-  ctx.stroke();
-  /* drawing the markings in the primary axis */
-  var lowerBoundPrimary = parseFloat(document.getElementById("primaryInput").value) - 30;
-  var upperBoundPrimary = parseFloat(document.getElementById("primaryInput").value) + 30;
-  var scaleFactor = canvas.width/(upperBoundPrimary - lowerBoundPrimary);
-  for (var i = Math.ceil(lowerBoundPrimary); i <= upperBoundPrimary; i++){
-    if (i != document.getElementById("primaryInput").value && i >= 0){
-      ctx.beginPath();
-      ctx.moveTo(scaleFactor*(i-lowerBoundPrimary), canvas.height/2.6);
-      ctx.lineTo(scaleFactor*(i-lowerBoundPrimary), canvas.height/2 - 3);
-      ctx.strokeStyle = String(getComputedStyle(document.documentElement).getPropertyValue('--primary-color'));
-      ctx.stroke();
-      ctx.font = "10px Overpass";
-      ctx.fillStyle = "#000000";
-      ctx.save();
-      ctx.textAlign = "left";
-      ctx.textBaseline = "middle";
-      ctx.translate(scaleFactor*(i-lowerBoundPrimary), canvas.height/2.8);
-      ctx.rotate(-60 * Math.PI / 180);
-      ctx.fillText(i, 0, 0);
-      ctx.restore();
-    }
+// This function determines which unit is being converted from and then calls
+// its related fuction to execute the proper conversion
+function calculateConversion(input, primaryUnit, secondaryUnit){
+
+  switch(primaryUnit){
+    case "cubicCM":
+      ret = convertCM(input, secondaryUnit);
+      break;
+    case "cubicDM":
+      ret = convertDM(input, secondaryUnit);
+      break;
+    case "cubicME":
+      ret = convertME(input, secondaryUnit);
+      break;
+    case "cubicIN":
+      ret = convertIN(input, secondaryUnit);
+      break;
+    case "cubicFT":
+      ret = convertFT(input, secondaryUnit);
+      break;
+    case "cubicYD":
+      ret = convertYD(input, secondaryUnit);
+      break;
+    case "fluidOZ":
+      ret = convertFL(input, secondaryUnit);
+      break;
+    case "pint":
+      ret = convertPT(input, secondaryUnit);
+      break;
+    case "gallon":
+      ret = convertGAL(input, secondaryUnit);
+      break;
+    case "fluidOZUS":
+      ret = convertFLUS(input, secondaryUnit);
+      break;
+    case "pintUS":
+      ret = convertPTUS(input, secondaryUnit);
+      break;
+    case "gallonUS":
+      ret = convertGALUS(input, secondaryUnit);
+      break;
   }
-  /* drawing the markings in the secondary axis */
-  var lowerBoundSecondary = convertVolume(lowerBoundPrimary, document.getElementById("primarySelect").value, document.getElementById("secondarySelect").value);
-  var upperBoundSecondary = convertVolume(upperBoundPrimary, document.getElementById("primarySelect").value, document.getElementById("secondarySelect").value);
-  var scaleFactor = canvas.width/(upperBoundSecondary - lowerBoundSecondary);
-  var increment = 1;
-  while ((upperBoundSecondary - lowerBoundSecondary)/increment < 2){
-    increment /= 10;
-  }
-  while ((upperBoundSecondary - lowerBoundSecondary)/increment > 60){
-    increment *= 10;
-  }
-  for (var i = Math.ceil(lowerBoundSecondary/increment)*increment; i <= upperBoundSecondary; i += increment){
-    if (i != document.getElementById("secondaryInput").value && i >= 0){
-      ctx.beginPath();
-      ctx.moveTo(scaleFactor*(i-lowerBoundSecondary), canvas.height/2 + 3);
-      ctx.lineTo(scaleFactor*(i-lowerBoundSecondary), canvas.height - canvas.height/2.6);
-      ctx.strokeStyle = String(getComputedStyle(document.documentElement).getPropertyValue('--secondary-color'));
-      ctx.stroke();
-      ctx.font = "10px Overpass";
-      ctx.save();
-      ctx.textAlign = "right";
-      ctx.textBaseline = "middle";
-      ctx.translate(scaleFactor*(i-lowerBoundSecondary), canvas.height - canvas.height/2.8);
-      ctx.rotate(-60 * Math.PI / 180);
-      if (increment < 1){
-        ctx.fillText(i.toFixed(Math.abs(Math.floor(Math.log10(increment)))), 0, 0);
-      }
-      else{
-        ctx.fillText(i, 0, 0);
-      }
-      ctx.restore();
-    }
-  }
-  /*labelling axes*/
-  ctx.font = "20px Overpass";
-  ctx.fillStyle = "#000000";
-  ctx.textAlign = "left";
-  ctx.textBaseline = "middle";
-  ctx.fillText(document.getElementById("primarySelect").value, 10, 30);
-  ctx.fillText(document.getElementById("secondarySelect").value, 10, canvas.height-30);
-  /* labelling the converted unit */
-  ctx.beginPath();
-  ctx.moveTo(canvas.width/2, canvas.height/2.7);
-  ctx.lineTo(canvas.width/2, canvas.height-(canvas.height/2.7));
-  ctx.strokeStyle = "#000000";
-  ctx.lineWidth = 2;
-  ctx.stroke();
-  ctx.textAlign = "center";
-  ctx.textBaseline = "middle";
-  ctx.fillText(document.getElementById("primaryInput").value, canvas.width/2, 30);
-  ctx.fillText(document.getElementById("secondaryInput").value, canvas.width/2, canvas.height-30);
+  return ret;
+}
+
+//main function
+function convertUnits(){
+  var input = document.getElementById("primaryInput").value;
+  var primaryUnit = document.getElementById("primarySelect").value;
+  var secondaryUnit = document.getElementById("secondarySelect").value;
+  ret = calculateConversion(input, primaryUnit, secondaryUnit);
+  document.getElementById("secondaryInput").value = calculateConversion(input, primaryUnit, secondaryUnit);
+
 }
 
 //File ends here

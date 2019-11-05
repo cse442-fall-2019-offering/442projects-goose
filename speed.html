@@ -11,6 +11,8 @@
         <script src="JavaScript/speed_conversion.js" charset="utf-8"></script>
     </head>
     <body>
+      <script type="text/javascript" src="JavaScript/speed_conversion.js"></script>
+      <script type="text/javascript" src="JavaScript/visual_maker.js"></script>
         <header>
           <!-- select measures here -->
           <div class="nav">
@@ -69,25 +71,6 @@
               <canvas id="visual">
           </div>
           <script>
-
-
-          function convertSpeed(){
-            var convertable = document.getElementById("primaryInput").value;
-            var unit1 = document.getElementById("primarySelect").value;
-            var unit2 = document.getElementById("secondarySelect").value;
-
-            var converted = speedConverter(convertable, unit1, unit2)
-            document.getElementById("secondaryInput").value = converted;
-          }
-
-          function generateVisual(){
-            var lowerBoundPrimary = parseFloat(document.getElementById("primaryInput").value) - 30;
-            var upperBoundPrimary = parseFloat(document.getElementById("primaryInput").value) + 30;
-            var lowerBoundSecond = speedConverter(lowerBoundPrimary, document.getElementById("primarySelect").value, document.getElementById("secondarySelect").value);
-            var upperBoundSecond = speedConverter(upperBoundPrimary, document.getElementById("primarySelect").value, document.getElementById("secondarySelect").value);
-            makeVisual(lowerBoundSecond, upperBoundSecond)
-          }
-
           </script>
         </main>
     </body>
