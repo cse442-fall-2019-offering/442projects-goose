@@ -45,7 +45,7 @@
               </form>
             </div>
             <div id="swap">
-              <button class="swapButton" onclick="switchUnits(); checkInput();">
+              <button class="swapButton" onclick="switchUnits(); checkInput(); generateVisual();">
                 ⇌
               </button>
             </div>
@@ -79,7 +79,6 @@
               document.getElementById("primaryInput").value = document.getElementById("secondaryInput").value;
               document.getElementById("secondarySelect").value = holdSelect;
               document.getElementById("secondaryInput").value = holdInput;
-              generateVisual();
             }
             function checkInput(){
               var input = document.getElementById('primaryInput').value;
