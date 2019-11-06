@@ -23,8 +23,8 @@ function generateVisual()
   ctx.strokeStyle = String(getComputedStyle(document.documentElement).getPropertyValue('--secondary-color'));
   ctx.stroke();
   /* drawing the markings in the primary axis */
-  var lowerBoundPrimary = parseFloat(document.getElementById("primaryInput").value) - 30;
-  var upperBoundPrimary = parseFloat(document.getElementById("primaryInput").value) + 30;
+  var lowerBoundPrimary = parseFloat(document.getElementById("primaryInput").value) - (canvas.width/2)/20;
+  var upperBoundPrimary = parseFloat(document.getElementById("primaryInput").value) + (canvas.width/2)/20;
   var scaleFactor = canvas.width/(upperBoundPrimary - lowerBoundPrimary);
   for (var i = Math.ceil(lowerBoundPrimary); i <= upperBoundPrimary; i++){
     if (i != document.getElementById("primaryInput").value && i >= 0){
