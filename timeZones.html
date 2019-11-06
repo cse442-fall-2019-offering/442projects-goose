@@ -4,13 +4,13 @@
         <title>Converter</title>
         <link href="style.css" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css?family=Overpass&display=swap" rel="stylesheet">
-        <script src="JavaScript/volume.js" charset="utf-8"></script>
+        <script src="JavaScript/time_zones.js" charset="utf-8"></script>
         <script src="JavaScript/limit_input.js" charset="utf-8"></script>
         <script src="JavaScript/visual_maker.js" charset="utf-8"></script>
         <script src="JavaScript/unit_switcher.js" charset="utf-8"></script>
         <script src="JavaScript/input_checker.js" charset="utf-8"></script>
     </head>
-    <body>
+    <body onload="generateOptions()">
         <!-- TODO: add tiles, text inputs, dropdowns, and swap box -->
         <!-- TODO: change dropdown menu based on tile selection -->
         <!-- TODO: create visual output based on entered values -->
@@ -24,10 +24,10 @@
                 <a href="temp.html">Temperature</a>
                 <a href="index.html">Length</a>
                 <a href="area.html">Area</a>
-                <a class="active" href="vol.html">Volume</a>
+                <a href="vol.html">Volume</a>
                 <a href="time.html">Time</a>
                 <a href="speed.html">Speed</a>
-                <a href="timeZones.html">Time Zones</a>
+                <a class="active" href="timeZones.html">Time Zones</a>
               </ul>
           </div>
         </header>
@@ -37,20 +37,9 @@
             <!-- select one unit here -->
             <div id="primary">
               <form>
-                <input type="number" name="primary" id="primaryInput" placeholder="Enter a value here" onkeydown="limit(this);" onkeyup="limit(this);  checkInput();">
+                <input type="time" name="primary" id="primaryInput" placeholder="Enter a value here" onkeydown="limit(this);" onkeyup="limit(this);  checkInput();">
                 <select id="primarySelect" onchange="convertUnits(); generateVisual();">
-                  <option value="cubicCM">Milliliter (mL)</option>
-                  <option value="cubicDM">Liter (L)</option>
-                  <option value="cubicME">Cubic Meter (m3)</option>
-                  <option value="cubicIN">Cubic Inch (in3)</option>
-                  <option value="cubicFT">Cubic Foot (ft3)</option>
-                  <option value="cubicYD">Cubic Yard (yd3)</option>
-                  <option value="fluidOZ">Fluid Ounce (fl oz)</option>
-                  <option value="pint">Pint (pt)</option>
-                  <option value="gallon">Gallon (gal)</option>
-                  <option value="fluidOZUS">US Fluid Ounce (US fl oz)</option>
-                  <option value="pintUS">US Pint (US pt)</option>
-                  <option value="gallonUS">US Gallon (US gal)</option>
+
                 </select>
               </form>
             </div>
@@ -62,20 +51,9 @@
             <!-- select the other unit here -->
             <div id="secondary">
               <form>
-                <input type="number" id="secondaryInput" placeholder="Result shows up here" readonly>
+                <input type="time" id="secondaryInput" placeholder="Result shows up here" readonly>
                 <select id="secondarySelect" onchange="convertUnits(); generateVisual();">
-                  <option value="cubicCM">Milliliter (mL)</option>
-                  <option value="cubicDM">Liter (L)</option>
-                  <option value="cubicME">Cubic Meter (m3)</option>
-                  <option value="cubicIN">Cubic Inch (in3)</option>
-                  <option value="cubicFT">Cubic Foot (ft3)</option>
-                  <option value="cubicYD">Cubic Yard (yd3)</option>
-                  <option value="fluidOZ">Fluid Ounce (fl oz)</option>
-                  <option value="pint">Pint (pt)</option>
-                  <option value="gallon">Gallon (gal)</option>
-                  <option value="fluidOZUS">US Fluid Ounce (US fl oz)</option>
-                  <option value="pintUS">US Pint (US pt)</option>
-                  <option value="gallonUS">US Gallon (US gal)</option>
+
                 </select>
               </form>
             </div>
