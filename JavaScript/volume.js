@@ -6,40 +6,40 @@
 function convertCM(input, secondaryUnit){
 
   switch(secondaryUnit){
-    case "cubicCM":
+    case "mL":
       ret = input;
       break;
-    case "cubicDM":
+    case "L":
       ret = input / 1000;
       break;
-    case "cubicME":
+    case "m³":
       ret = input / 1e+6;
       break;
-    case "cubicIN":
+    case "in³":
       ret = input / 16.387;
       break;
-    case "cubicFT":
+    case "ft³":
       ret = input / 28316.847;
       break;
-    case "cubicYD":
+    case "yd³":
       ret = input / 764554.858;
       break;
-    case "fluidOZ":
+    case "fl oz":
       ret = input / 28.413;
       break;
-    case "pint":
+    case "pt":
       ret = input / 568.261;
       break;
-    case "gallon":
+    case "gal":
       ret = input / 4546.09;
       break;
-    case "fluidOZUS":
+    case "fl oz (US)":
       ret = input / 29.574;
       break;
-    case "pintUS":
+    case "pt (US)":
       ret = input / 473.176;
       break;
-    case "gallonUS":
+    case "gal (US)":
       ret = input / 3785.412;
       break;
   }
@@ -52,40 +52,40 @@ function convertCM(input, secondaryUnit){
 function convertDM(input, secondaryUnit){
 
   switch(secondaryUnit){
-    case "cubicCM":
+    case "mL":
       ret = input * 1000;
       break;
-    case "cubicDM":
+    case "L":
       ret = input;
       break;
-    case "cubicME":
+    case "m³":
       ret = input / 1000;
       break;
-    case "cubicIN":
+    case "in³":
       ret = input * 61.024;
       break;
-    case "cubicFT":
+    case "ft³":
       ret = input / 28.317;
       break;
-    case "cubicYD":
+    case "yd³":
       ret = input / 764.555;
       break;
-    case "fluidOZ":
+    case "fl oz":
       ret = input * 35.195;
       break;
-    case "pint":
+    case "pt":
       ret = input * 1.76;
       break;
-    case "gallon":
+    case "gal":
       ret = input / 4.546;
       break;
-    case "fluidOZUS":
+    case "fl oz (US)":
       ret = input * 33.814;
       break;
-    case "pintUS":
+    case "pt (US)":
       ret = input * 2.113;
       break;
-    case "gallonUS":
+    case "gal (US)":
       ret = input / 3.785;
       break;
   }
@@ -98,40 +98,40 @@ function convertDM(input, secondaryUnit){
 function convertME(input, secondaryUnit){
 
   switch(secondaryUnit){
-    case "cubicCM":
+    case "mL":
       ret = input * 1e+6;
       break;
-    case "cubicDM":
+    case "L":
       ret = input * 1000;
       break;
-    case "cubicME":
+    case "m³":
       ret = input;
       break;
-    case "cubicIN":
+    case "in³":
       ret = input * 61023.744;
       break;
-    case "cubicFT":
+    case "ft³":
       ret = input * 35.315;
       break;
-    case "cubicYD":
+    case "yd³":
       ret = input * 1.308;
       break;
-    case "fluidOZ":
+    case "fl oz":
       ret = input * 35195.08;
       break;
-    case "pint":
+    case "pt":
       ret = input * 1759.754;
       break;
-    case "gallon":
+    case "gal":
       ret = input * 219.969;
       break;
-    case "fluidOZUS":
+    case "fl oz (US)":
       ret = input * 33814.023;
       break;
-    case "pintUS":
+    case "pt (US)":
       ret = input * 2113.376;
       break;
-    case "gallonUS":
+    case "gal (US)":
       ret = input * 264.172;
       break;
   }
@@ -144,40 +144,40 @@ function convertME(input, secondaryUnit){
 function convertIN(input, secondaryUnit){
 
   switch(secondaryUnit){
-    case "cubicCM":
+    case "mL":
       ret = input * 16.387;
       break;
-    case "cubicDM":
+    case "L":
       ret = input / 61.024;
       break;
-    case "cubicME":
+    case "m³":
       ret = input / 61023.744;
       break;
-    case "cubicIN":
+    case "in³":
       ret = input;
       break;
-    case "cubicFT":
+    case "ft³":
       ret = input / 1728;
       break;
-    case "cubicYD":
+    case "yd³":
       ret = input / 46656;
       break;
-    case "fluidOZ":
+    case "fl oz":
       ret = input / 1.734;
       break;
-    case "pint":
+    case "pt":
       ret = input / 34.677;
       break;
-    case "gallon":
+    case "gal":
       ret = input / 277.419;
       break;
-    case "fluidOZUS":
+    case "fl oz (US)":
       ret = input / 1.805;
       break;
-    case "pintUS":
+    case "pt (US)":
       ret = input / 28.875;
       break;
-    case "gallonUS":
+    case "gal (US)":
       ret = input / 231;
       break;
   }
@@ -190,40 +190,40 @@ function convertIN(input, secondaryUnit){
 function convertFT(input, secondaryUnit){
 
   switch(secondaryUnit){
-    case "cubicCM":
+    case "mL":
       ret = input * 28316.847;
       break;
-    case "cubicDM":
+    case "L":
       ret = input * 28.317;
       break;
-    case "cubicME":
+    case "m³":
       ret = input / 61023.744;
       break;
-    case "cubicIN":
+    case "in³":
       ret = input * 1728;
       break;
-    case "cubicFT":
+    case "ft³":
       ret = input;
       break;
-    case "cubicYD":
+    case "yd³":
       ret = input / 27;
       break;
-    case "fluidOZ":
+    case "fl oz":
       ret = input * 996.614;
       break;
-    case "pint":
+    case "pt":
       ret = input * 49.831;
       break;
-    case "gallon":
+    case "gal":
       ret = input * 6.229;
       break;
-    case "fluidOZUS":
+    case "fl oz (US)":
       ret = input * 957.506;
       break;
-    case "pintUS":
+    case "pt (US)":
       ret = input * 59.844;
       break;
-    case "gallonUS":
+    case "gal (US)":
       ret = input * 7.481;
       break;
   }
@@ -236,40 +236,40 @@ function convertFT(input, secondaryUnit){
 function convertYD(input, secondaryUnit){
 
   switch(secondaryUnit){
-    case "cubicCM":
+    case "mL":
       ret = input * 764554.858;
       break;
-    case "cubicDM":
+    case "L":
       ret = input * 764.555;
       break;
-    case "cubicME":
+    case "m³":
       ret = input / 1.308;
       break;
-    case "cubicIN":
+    case "in³":
       ret = input * 46656;
       break;
-    case "cubicFT":
+    case "ft³":
       ret = input * 27;
       break;
-    case "cubicYD":
+    case "yd³":
       ret = input;
       break;
-    case "fluidOZ":
+    case "fl oz":
       ret = input * 26908.569;
       break;
-    case "pint":
+    case "pt":
       ret = input * 1345.428;
       break;
-    case "gallon":
+    case "gal":
       ret = input * 168.179;
       break;
-    case "fluidOZUS":
+    case "fl oz (US)":
       ret = input * 25852.675;
       break;
-    case "pintUS":
+    case "pt (US)":
       ret = input * 1615.792;
       break;
-    case "gallonUS":
+    case "gal (US)":
       ret = input * 201.974;
       break;
   }
@@ -282,40 +282,40 @@ function convertYD(input, secondaryUnit){
 function convertFL(input, secondaryUnit){
 
   switch(secondaryUnit){
-    case "cubicCM":
+    case "mL":
       ret = input * 28.413;
       break;
-    case "cubicDM":
+    case "L":
       ret = input / 35.195;
       break;
-    case "cubicME":
+    case "m³":
       ret = input / 35195.08;
       break;
-    case "cubicIN":
+    case "in³":
       ret = input * 1.734;
       break;
-    case "cubicFT":
+    case "ft³":
       ret = input / 996.614;
       break;
-    case "cubicYD":
+    case "yd³":
       ret = input / 26908.569;
       break;
-    case "fluidOZ":
+    case "fl oz":
       ret = input;
       break;
-    case "pint":
+    case "pt":
       ret = input / 20;
       break;
-    case "gallon":
+    case "gal":
       ret = input / 160;
       break;
-    case "fluidOZUS":
+    case "fl oz (US)":
       ret = input / 1.041;
       break;
-    case "pintUS":
+    case "pt (US)":
       ret = input / 16.653;
       break;
-    case "gallonUS":
+    case "gal (US)":
       ret = input / 133.228;
       break;
   }
@@ -328,40 +328,40 @@ function convertFL(input, secondaryUnit){
 function convertPT(input, secondaryUnit){
 
   switch(secondaryUnit){
-    case "cubicCM":
+    case "mL":
       ret = input * 568.261;
       break;
-    case "cubicDM":
+    case "L":
       ret = input / 1.76;
       break;
-    case "cubicME":
+    case "m³":
       ret = input / 1759.754;
       break;
-    case "cubicIN":
+    case "in³":
       ret = input * 34.677;
       break;
-    case "cubicFT":
+    case "ft³":
       ret = input / 49.831;
       break;
-    case "cubicYD":
+    case "yd³":
       ret = input / 1345.428;
       break;
-    case "fluidOZ":
+    case "fl oz":
       ret = input * 20;
       break;
-    case "pint":
+    case "pt":
       ret = input;
       break;
-    case "gallon":
+    case "gal":
       ret = input / 8;
       break;
-    case "fluidOZUS":
+    case "fl oz (US)":
       ret = input * 19.125;
       break;
-    case "pintUS":
+    case "pt (US)":
       ret = input * 1.201;
       break;
-    case "gallonUS":
+    case "gal (US)":
       ret = input / 6.661;
       break;
   }
@@ -374,40 +374,40 @@ function convertPT(input, secondaryUnit){
 function convertGAL(input, secondaryUnit){
 
   switch(secondaryUnit){
-    case "cubicCM":
+    case "mL":
       ret = input * 4546.09;
       break;
-    case "cubicDM":
+    case "L":
       ret = input * 4.546;
       break;
-    case "cubicME":
+    case "m³":
       ret = input / 219.969;
       break;
-    case "cubicIN":
+    case "in³":
       ret = input * 277.419;
       break;
-    case "cubicFT":
+    case "ft³":
       ret = input / 6.229;
       break;
-    case "cubicYD":
+    case "yd³":
       ret = input / 168.179;
       break;
-    case "fluidOZ":
+    case "fl oz":
       ret = input * 160;
       break;
-    case "pint":
+    case "pt":
       ret = input * 8;
       break;
-    case "gallon":
+    case "gal":
       ret = input;
       break;
-    case "fluidOZUS":
+    case "fl oz (US)":
       ret = input * 153.722;
       break;
-    case "pintUS":
+    case "pt (US)":
       ret = input * 9.608;
       break;
-    case "gallonUS":
+    case "gal (US)":
       ret = input / 1.201;
       break;
   }
@@ -420,40 +420,40 @@ function convertGAL(input, secondaryUnit){
 function convertFLUS(input, secondaryUnit){
 
   switch(secondaryUnit){
-    case "cubicCM":
+    case "mL":
       ret = input * 28.413;
       break;
-    case "cubicDM":
+    case "L":
       ret = input / 33.814;
       break;
-    case "cubicME":
+    case "m³":
       ret = input / 33814.023;
       break;
-    case "cubicIN":
+    case "in³":
       ret = input * 1.805;
       break;
-    case "cubicFT":
+    case "ft³":
       ret = input / 957.506;
       break;
-    case "cubicYD":
+    case "yd³":
       ret = input / 25852.675;
       break;
-    case "fluidOZ":
+    case "fl oz":
       ret = input * 1.041;
       break;
-    case "pint":
+    case "pt":
       ret = input * 19.125;
       break;
-    case "gallon":
+    case "gal":
       ret = input / 153.722;
       break;
-    case "fluidOZUS":
+    case "fl oz (US)":
       ret = input;
       break;
-    case "pintUS":
+    case "pt (US)":
       ret = input / 16;
       break;
-    case "gallonUS":
+    case "gal (US)":
       ret = input / 128;
       break;
   }
@@ -466,40 +466,40 @@ function convertFLUS(input, secondaryUnit){
 function convertPTUS(input, secondaryUnit){
 
   switch(secondaryUnit){
-    case "cubicCM":
+    case "mL":
       ret = input * 568.261;
       break;
-    case "cubicDM":
+    case "L":
       ret = input / 1.76;
       break;
-    case "cubicME":
+    case "m³":
       ret = input / 1759.754;
       break;
-    case "cubicIN":
+    case "in³":
       ret = input * 34.677;
       break;
-    case "cubicFT":
+    case "ft³":
       ret = input / 49.831;
       break;
-    case "cubicYD":
+    case "yd³":
       ret = input / 1615.792;
       break;
-    case "fluidOZ":
+    case "fl oz":
       ret = input * 16.653;
       break;
-    case "pint":
+    case "pt":
       ret = input / 1.201;
       break;
-    case "gallon":
+    case "gal":
       ret = input / 9.608;
       break;
-    case "fluidOZUS":
+    case "fl oz (US)":
       ret = input * 16;
       break;
-    case "pintUS":
+    case "pt (US)":
       ret = input;
       break;
-    case "gallonUS":
+    case "gal (US)":
       ret = input / 8;
       break;
   }
@@ -512,40 +512,40 @@ function convertPTUS(input, secondaryUnit){
 function convertGALUS(input, secondaryUnit){
 
   switch(secondaryUnit){
-    case "cubicCM":
+    case "mL":
       ret = input * 3785.412;
       break;
-    case "cubicDM":
+    case "L":
       ret = input * 3.785;
       break;
-    case "cubicME":
+    case "m³":
       ret = input / 264.172;
       break;
-    case "cubicIN":
+    case "in³":
       ret = input * 231;
       break;
-    case "cubicFT":
+    case "ft³":
       ret = input / 7.481;
       break;
-    case "cubicYD":
+    case "yd³":
       ret = input / 201.974;
       break;
-    case "fluidOZ":
+    case "fl oz":
       ret = input * 133.228;
       break;
-    case "pint":
+    case "pt":
       ret = input * 6.661;
       break;
-    case "gallon":
+    case "gal":
       ret = input / 1.201;
       break;
-    case "fluidOZUS":
+    case "fl oz (US)":
       ret = input * 128;
       break;
-    case "pintUS":
+    case "pt (US)":
       ret = input * 8;
       break;
-    case "gallonUS":
+    case "gal (US)":
       ret = input;
       break;
   }
@@ -558,40 +558,40 @@ function convertGALUS(input, secondaryUnit){
 function calculateConversion(input, primaryUnit, secondaryUnit){
 
   switch(primaryUnit){
-    case "cubicCM":
+    case "mL":
       ret = convertCM(input, secondaryUnit);
       break;
-    case "cubicDM":
+    case "L":
       ret = convertDM(input, secondaryUnit);
       break;
-    case "cubicME":
+    case "m³":
       ret = convertME(input, secondaryUnit);
       break;
-    case "cubicIN":
+    case "in³":
       ret = convertIN(input, secondaryUnit);
       break;
-    case "cubicFT":
+    case "ft³":
       ret = convertFT(input, secondaryUnit);
       break;
-    case "cubicYD":
+    case "yd³":
       ret = convertYD(input, secondaryUnit);
       break;
-    case "fluidOZ":
+    case "fl oz":
       ret = convertFL(input, secondaryUnit);
       break;
-    case "pint":
+    case "pt":
       ret = convertPT(input, secondaryUnit);
       break;
-    case "gallon":
+    case "gal":
       ret = convertGAL(input, secondaryUnit);
       break;
-    case "fluidOZUS":
+    case "fl oz (US)":
       ret = convertFLUS(input, secondaryUnit);
       break;
-    case "pintUS":
+    case "pt (US)":
       ret = convertPTUS(input, secondaryUnit);
       break;
-    case "gallonUS":
+    case "gal (US)":
       ret = convertGALUS(input, secondaryUnit);
       break;
   }
