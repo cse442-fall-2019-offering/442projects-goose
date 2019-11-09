@@ -82,8 +82,6 @@ function generateVisual()
   ctx.fillStyle = "#000000";
   ctx.textAlign = "left";
   ctx.textBaseline = "middle";
-  ctx.fillText(document.getElementById("primarySelect").value, 10, 30);
-  ctx.fillText(document.getElementById("secondarySelect").value, 10, canvas.height-30);
   /* labelling the converted unit */
   ctx.beginPath();
   ctx.moveTo(canvas.width/2, canvas.height/2.7);
@@ -93,8 +91,8 @@ function generateVisual()
   ctx.stroke();
   ctx.textAlign = "center";
   ctx.textBaseline = "middle";
-  ctx.fillText(document.getElementById("primaryInput").value, canvas.width/2, 30);
-  ctx.fillText(document.getElementById("secondaryInput").value, canvas.width/2, canvas.height-30);
+  ctx.fillText(document.getElementById("primaryInput").value + " " + document.getElementById("primarySelect").value, canvas.width/2, 30);
+  ctx.fillText(document.getElementById("secondaryInput").value + " " + document.getElementById("secondarySelect").value, canvas.width/2, canvas.height-30);
 }
 
 function generateVisualTemp()
