@@ -49,10 +49,10 @@ function generateVisual()
   var upperBoundSecondary = calculateConversion(upperBoundPrimary, document.getElementById("primarySelect").value, document.getElementById("secondarySelect").value);
   var scaleFactor = canvas.width/(upperBoundSecondary - lowerBoundSecondary);
   var increment = 1;
-  while ((upperBoundSecondary - lowerBoundSecondary)/increment < 2){
+  while (canvas.width/((upperBoundSecondary - lowerBoundSecondary)/increment) > 60){
     increment /= 10;
   }
-  while ((upperBoundSecondary - lowerBoundSecondary)/increment > 60){
+  while (canvas.width/((upperBoundSecondary - lowerBoundSecondary)/increment) < 15){
     increment *= 10;
   }
   for (var i = Math.ceil(lowerBoundSecondary/increment)*increment; i <= upperBoundSecondary; i += increment){
@@ -119,8 +119,8 @@ function generateVisualTemp()
   ctx.strokeStyle = String(getComputedStyle(document.documentElement).getPropertyValue('--secondary-color'));
   ctx.stroke();
   /* drawing the markings in the primary axis */
-  var lowerBoundPrimary = parseFloat(document.getElementById("primaryInput").value) - 30;
-  var upperBoundPrimary = parseFloat(document.getElementById("primaryInput").value) + 30;
+  var lowerBoundPrimary = parseFloat(document.getElementById("primaryInput").value) - (canvas.width/2)/20;
+  var upperBoundPrimary = parseFloat(document.getElementById("primaryInput").value) + (canvas.width/2)/20;
   var scaleFactor = canvas.width/(upperBoundPrimary - lowerBoundPrimary);
   for (var i = Math.ceil(lowerBoundPrimary); i <= upperBoundPrimary; i++){
     if (i != document.getElementById("primaryInput").value && calculateConversion(i, document.getElementById("primarySelect").value, "Kelvin") >= 0){
@@ -145,10 +145,10 @@ function generateVisualTemp()
   var upperBoundSecondary = calculateConversion(upperBoundPrimary, document.getElementById("primarySelect").value, document.getElementById("secondarySelect").value);
   var scaleFactor = canvas.width/(upperBoundSecondary - lowerBoundSecondary);
   var increment = 1;
-  while ((upperBoundSecondary - lowerBoundSecondary)/increment < 2){
+  while (canvas.width/((upperBoundSecondary - lowerBoundSecondary)/increment) > 60){
     increment /= 10;
   }
-  while ((upperBoundSecondary - lowerBoundSecondary)/increment > 60){
+  while (canvas.width/((upperBoundSecondary - lowerBoundSecondary)/increment) < 15){
     increment *= 10;
   }
   for (var i = Math.ceil(lowerBoundSecondary/increment)*increment; i <= upperBoundSecondary; i += increment){
