@@ -37,10 +37,10 @@
               <form>
                 <input type="number" id="primaryInput" placeholder="Enter a value here" onkeyup="checkInput(); limit(this);" onkeydown="limit(this);">
                 <select id="primarySelect">
-                  <option value="millisecond">Millisecond</option>
-                  <option value="second">Second</option>
-                  <option value="minute">Minute</option>
-                  <option value="hour">Hour</option>
+                  <option value="ms">Millisecond</option>
+                  <option value="s">Second</option>
+                  <option value="min">Minute</option>
+                  <option value="hr">Hour</option>
                 </select>
               </form>
             </div>
@@ -54,10 +54,10 @@
               <form>
                 <input type="number" id="secondaryInput" placeholder="Result shows up here" readonly="readonly">
                 <select id="secondarySelect">
-                  <option value="millisecond">Millisecond</option>
-                  <option value="second">Second</option>
-                  <option value="minute">Minute</option>
-                  <option value="hour">Hour</option>
+                  <option value="ms">Millisecond</option>
+                  <option value="s">Second</option>
+                  <option value="min">Minute</option>
+                  <option value="hr">Hour</option>
                 </select>
               </form>
             </div>
@@ -92,27 +92,27 @@
             function calculateConversion(input, primaryUnit, secondaryUnit){
               var seconds; //this is the base unit
               switch(primaryUnit){
-                case "millisecond":
+                case "ms":
                   seconds = input*.001;
                   break;
-                case "second":
+                case "s":
                   seconds = input;
                   break;
-                case "minute":
+                case "min":
                   seconds = input*60;
                   break;
-                case "hour":
+                case "hr":
                   seconds = input*3600;
                   break;
               }
               switch(secondaryUnit){
-                case "millisecond":
+                case "ms":
                   return seconds*1000;
-                case "second":
+                case "s":
                   return seconds;
-                case "minute":
+                case "min":
                   return seconds/60;
-                case "hour":
+                case "hr":
                   return seconds/3600;
               }
               return seconds;
