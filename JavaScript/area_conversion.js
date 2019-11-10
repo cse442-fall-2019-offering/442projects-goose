@@ -13,7 +13,7 @@ function calculateConversion(input, primaryUnit, secondaryUnit){
       case "mm²":
         value = input * 0.000001
         break;
-      case "cm^2":
+      case "cm²":
         value = input * 0.0001;
         break;
       case "m²":
@@ -44,7 +44,7 @@ function calculateConversion(input, primaryUnit, secondaryUnit){
     switch(secondaryUnit){
       case "mm²":
         return value * 1000000;
-      case "cm^2":
+      case "cm²":
         return value * 10000;
       case "m²":
         return value;

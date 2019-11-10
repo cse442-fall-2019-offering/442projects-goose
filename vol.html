@@ -40,18 +40,26 @@
               <form>
                 <input type="number" name="primary" id="primaryInput" placeholder="Enter a value here" onkeyup="checkInput(); limit(this);" onkeydown="limit(this);">
                 <select id="primarySelect">
-                  <option value="mL">Milliliter</option>
-                  <option value="L">Liter</option>
-                  <option value="m³">Cubic Meter</option>
-                  <option value="in³">Cubic Inch</option>
-                  <option value="ft³">Cubic Foot</option>
-                  <option value="yd³">Cubic Yard</option>
-                  <option value="fl oz">Fluid Ounce</option>
-                  <option value="pt">Pint</option>
-                  <option value="gal">Gallon</option>
-                  <option value="fl oz (US)">US Fluid Ounce</option>
-                  <option value="pt (US)">US Pint</option>
-                  <option value="gal (US)">US Gallon</option>
+                  <optgroup label="US Customary">
+                    <option value="in³">Cubic Inch</option>
+                    <option value="ft³">Cubic Foot</option>
+                    <option value="yd³">Cubic Yard</option>
+                    <option value="fl oz (US)">US Fluid Ounce</option>
+                    <option value="pt (US)">US Pint</option>
+                    <option value="gal (US)">US Gallon</option>
+                  </optgroup>
+                  <optgroup label="Imperial">
+                    <option value="fl oz">Fluid Ounce</option>
+                    <option value="pt">Pint</option>
+                    <option value="gal">Gallon</option>
+                  </optgroup>
+                  <optgroup label="Metric">
+                    <option value="mL">Milliliter</option>
+                    <option value="L">Liter</option>
+                  </optgroup>
+                  <optgroup label="SI Unit">
+                    <option value="m³">Cubic Meter</option>
+                  </optgroup>
                 </select>
               </form>
             </div>
@@ -65,18 +73,26 @@
               <form>
                 <input type="number" id="secondaryInput" placeholder="Result shows up here" readonly>
                 <select id="secondarySelect">
-                  <option value="mL">Milliliter</option>
-                  <option value="L">Liter</option>
-                  <option value="m³">Cubic Meter</option>
-                  <option value="in³">Cubic Inch</option>
-                  <option value="ft³">Cubic Foot</option>
-                  <option value="yd³">Cubic Yard</option>
-                  <option value="fl oz">Fluid Ounce</option>
-                  <option value="pt">Pint</option>
-                  <option value="gal">Gallon</option>
-                  <option value="fl oz (US)">US Fluid Ounce</option>
-                  <option value="pt (US)">US Pint</option>
-                  <option value="gal (US)">US Gallon</option>
+                  <optgroup label="US Customary">
+                    <option value="in³">Cubic Inch</option>
+                    <option value="ft³">Cubic Foot</option>
+                    <option value="yd³">Cubic Yard</option>
+                    <option value="fl oz (US)">US Fluid Ounce</option>
+                    <option value="pt (US)">US Pint</option>
+                    <option value="gal (US)">US Gallon</option>
+                  </optgroup>
+                  <optgroup label="Imperial">
+                    <option value="fl oz">Fluid Ounce</option>
+                    <option value="pt">Pint</option>
+                    <option value="gal">Gallon</option>
+                  </optgroup>
+                  <optgroup label="Metric">
+                    <option value="mL">Milliliter</option>
+                    <option value="L">Liter</option>
+                  </optgroup>
+                  <optgroup label="SI Unit">
+                    <option value="m³">Cubic Meter</option>
+                  </optgroup>
                 </select>
               </form>
             </div>

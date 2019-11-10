@@ -16,7 +16,7 @@ function calculateConversion(input, primaryUnit, secondaryUnit){
       case "km/h":
         value = input * 0.27777778;
         break;
-      case "fps":
+      case "ft/s":
         value = input * 0.3048;
         break;
       case "mph":
@@ -31,7 +31,7 @@ function calculateConversion(input, primaryUnit, secondaryUnit){
         return value;
       case "km/h":
         return value * 3.6;
-      case "fps":
+      case "ft/s":
         return value * 3.28083990;
       case "mph":
         return value * 1.46666667;

@@ -35,16 +35,22 @@
             <form>
               <input type="number" id="primaryInput" placeholder="Enter a value here" onkeyup="checkInput(); limit(this);" onkeydown="limit(this);">
               <select id="primarySelect">
-                <option value="mm²">Square millimeters</option>
-                <option value="cm²">Square centimeters</option>
-                <option value="m²">Square meters</option>
-                <option value="km²">Square kilometers</option>
-                <option value="ha">Hectares</option>
-                <option value="in²">Square inches</option>
-                <option value="ft²">Square feet</option>
-                <option value="yd²">Square yards</option>
-                <option value="mi²">Square miles</option>
-                <option value="ac">Acres</option>
+                <optgroup label="US Customary">
+                  <option value="in²">Square inches</option>
+                  <option value="ft²">Square feet</option>
+                  <option value="yd²">Square yards</option>
+                  <option value="mi²">Square miles</option>
+                  <option value="ac">Acres</option>>
+                </optgroup>
+                <optgroup label="SI Units">
+                  <option value="mm²">Square millimeters</option>
+                  <option value="cm²">Square centimeters</option>
+                  <option value="m²">Square meters</option>
+                  <option value="km²">Square kilometers</option>
+                </optgroup>
+                <optgroup label="Metric">
+                  <option value="ha">Hectares</option>
+                </optgroup>
               </select>
             </form>
           </div>
@@ -58,16 +64,22 @@
             <form>
               <input type="number" id="secondaryInput" placeholder="Result shows up here" readonly="readonly">
               <select id="secondarySelect">
-                <option value="mm²">Square millimeters</option>
-                <option value="cm²">Square centimeters</option>
-                <option value="m²">Square meters</option>
-                <option value="km²">Square kilometers</option>
-                <option value="ha">Hectares</option>
-                <option value="in²">Square inches</option>
-                <option value="ft²">Square feet</option>
-                <option value="yd²">Square yards</option>
-                <option value="mi²">Square miles</option>
-                <option value="ac">Acres</option>
+                <optgroup label="US Customary">
+                  <option value="in²">Square inches</option>
+                  <option value="ft²">Square feet</option>
+                  <option value="yd²">Square yards</option>
+                  <option value="mi²">Square miles</option>
+                  <option value="ac">Acres</option>>
+                </optgroup>
+                <optgroup label="SI Units">
+                  <option value="mm²">Square millimeters</option>
+                  <option value="cm²">Square centimeters</option>
+                  <option value="m²">Square meters</option>
+                  <option value="km²">Square kilometers</option>
+                </optgroup>
+                <optgroup label="Metric">
+                  <option value="ha">Hectares</option>
+                </optgroup>
               </select>
             </form>
           </div>
