@@ -38,12 +38,12 @@
 
                 <input type="number" id="primaryInput" placeholder="Enter a value here" onkeyup="checkInput(); limit(this);" onkeydown="limit(this);">
                 <select id="primarySelect">
-                  <option value="inch">Inches</option>
-                  <option value="feet">Feet</option>
-                  <option value="yard">Yard</option>
-                  <option value="mile">Mile</option>
-                  <option value="kilometer">Kilometer</option>
-                  <option value="centimeter">Centimeter</option>
+                  <option value="in">Inches</option>
+                  <option value="ft">Feet</option>
+                  <option value="yd">Yard</option>
+                  <option value="mi">Mile</option>
+                  <option value="km">Kilometer</option>
+                  <option value="cm">Centimeter</option>
                 </select>
               </form>
             </div>
@@ -57,12 +57,12 @@
               <form>
                 <input type="number" id="secondaryInput" placeholder="Result shows up here" readonly="readonly">
                 <select id="secondarySelect">
-                  <option value="inch">Inches</option>
-                  <option value="feet">Feet</option>
-                  <option value="yard">Yard</option>
-                  <option value="mile">Mile</option>
-                  <option value="kilometer">Kilometer</option>
-                  <option value="centimeter">Centimeter</option>
+                  <option value="in">Inches</option>
+                  <option value="ft">Feet</option>
+                  <option value="yd">Yard</option>
+                  <option value="mi">Mile</option>
+                  <option value="km">Kilometer</option>
+                  <option value="cm">Centimeter</option>
                 </select>
               </form>
             </div>
@@ -107,47 +107,47 @@
               return input
             }
             switch(primaryUnit){
-              case "millimeter":
+              case "mm":
                 meter = input*.001;
                 break;
-              case "centimeter":
+              case "cm":
                 meter = input*0.01;
                 break;
-              case "meter":
+              case "m":
                 meter = input;
                 break;
-              case "kilometer":
+              case "km":
                 meter = input*1000;
                 break;
-              case "inch":
+              case "in":
                 meter = input *0.0254;
                 break;
-              case "feet":
+              case "ft":
                 meter = input *0.3048;
                 break;
-              case "yard":
+              case "yd":
                 meter = input *0.9144;
                 break;
-              case "mile":
+              case "mi":
                 meter = input *1609.34;
                 break;
             }
             switch(secondaryUnit){
-              case "millimeter":
+              case "mm":
                 return meter*1000;
-              case "centimeter":
+              case "cm":
                 return meter *100;
-              case "meter":
+              case "m":
                 return meter;
-              case "kilometer":
+              case "km":
                 return meter *0.001;
-              case "inch":
+              case "in":
                 return meter*39.370078740157;
-              case "feet":
+              case "ft":
                 return meter*3.2808398950131;
-              case "yard":
+              case "yd":
                 return meter*1.0936132983377;
-              case "mile":
+              case "mi":
                 return meter *0.00062137119223733;
             }
             return meter;
