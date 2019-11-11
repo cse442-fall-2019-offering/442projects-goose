@@ -86,7 +86,12 @@
           </div>
           <!-- visual output is displayed here -->
           <div class="center" id="visualizer">
-            <canvas id="visual">
+            <div class="center" id="display">
+              <canvas id="visual"></canvas>
+            </div>
+            <div class="center" id="zoom">
+              <input type="range" id="zoomlevel" min="0.01" max="1000" value="20">
+            </div>
           </div>
           <script>
           function switchUnits(){
@@ -106,13 +111,6 @@
                 document.getElementById('convertButton').disabled = true;
             }
           }
-          /*
-          unimplimented unit conversion function for distance using general units
-          first parameter is the input in the primary div class, the second parameter
-          unit1 is the first unit to be converted to meters for ease of conversion
-          and reduce hard coding. than it will take the input already converted to meters
-          and convert it to the unit in unit2
-          */
           function calculateConversion(input, primaryUnit, secondaryUnit){
             var meter; //this is the base unit
             if(primaryUnit == secondaryUnit){

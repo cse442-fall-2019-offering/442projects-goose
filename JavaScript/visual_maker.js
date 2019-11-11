@@ -5,9 +5,9 @@ function generateVisual()
 {
   /* creating the canvas */
   var canvas = document.getElementById("visual");
-  var visualizer = document.getElementById("visualizer");
-  canvas.width = visualizer.offsetWidth-50;
-  canvas.height = visualizer.offsetHeight-50;
+  var display = document.getElementById("display");
+  canvas.width = display.offsetWidth-50;
+  canvas.height = display.offsetHeight-50;
   var ctx = canvas.getContext("2d");
   ctx.fillStyle = "#FFFFFF";
   ctx.fillRect(0, 0, canvas.width, canvas.width);
@@ -23,10 +23,17 @@ function generateVisual()
   ctx.strokeStyle = String(getComputedStyle(document.documentElement).getPropertyValue('--secondary-color'));
   ctx.stroke();
   /* drawing the markings in the primary axis */
-  var lowerBoundPrimary = parseFloat(document.getElementById("primaryInput").value) - (canvas.width/2)/20;
-  var upperBoundPrimary = parseFloat(document.getElementById("primaryInput").value) + (canvas.width/2)/20;
+  var lowerBoundPrimary = parseFloat(document.getElementById("primaryInput").value) - (canvas.width/2)/2;
+  var upperBoundPrimary = parseFloat(document.getElementById("primaryInput").value) + (canvas.width/2)/2;
   var scaleFactor = canvas.width/(upperBoundPrimary - lowerBoundPrimary);
-  for (var i = Math.ceil(lowerBoundPrimary); i <= upperBoundPrimary; i++){
+  var increment = 1;
+  while (canvas.width/((upperBoundPrimary - lowerBoundPrimary)/increment) > 60){
+    increment /= 10;
+  }
+  while (canvas.width/((upperBoundPrimary - lowerBoundPrimary)/increment) < 15){
+    increment *= 10;
+  }
+  for (var i = Math.ceil(lowerBoundPrimary/increment)*increment; i <= upperBoundPrimary; i += increment){
     if (i != document.getElementById("primaryInput").value && i >= 0){
       ctx.beginPath();
       ctx.moveTo(scaleFactor*(i-lowerBoundPrimary), canvas.height/2.6);
@@ -99,9 +106,9 @@ function generateVisualTemp()
 {
   /* creating the canvas */
   var canvas = document.getElementById("visual");
-  var visualizer = document.getElementById("visualizer");
-  canvas.width = visualizer.offsetWidth-50;
-  canvas.height = visualizer.offsetHeight-50;
+  var display = document.getElementById("display");
+  canvas.width = display.offsetWidth-50;
+  canvas.height = display.offsetHeight-50;
   var ctx = canvas.getContext("2d");
   ctx.fillStyle = "#FFFFFF";
   ctx.fillRect(0, 0, canvas.width, canvas.width);
