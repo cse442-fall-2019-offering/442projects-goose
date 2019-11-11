@@ -71,7 +71,7 @@
               <canvas id="visual"></canvas>
             </div>
             <div class="center" id="zoom">
-              <input type="range" id="zoomlevel" min="0.01" max="1000" value="20">
+              <input type="range" id="zoomlevel" min="0.000001" max="4" value="1" step=".000001" oninput="generateVisualTemp()">
             </div>
           </div>
           <script>

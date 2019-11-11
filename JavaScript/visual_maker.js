@@ -23,8 +23,9 @@ function generateVisual()
   ctx.strokeStyle = String(getComputedStyle(document.documentElement).getPropertyValue('--secondary-color'));
   ctx.stroke();
   /* drawing the markings in the primary axis */
-  var lowerBoundPrimary = parseFloat(document.getElementById("primaryInput").value) - (canvas.width/2)/2;
-  var upperBoundPrimary = parseFloat(document.getElementById("primaryInput").value) + (canvas.width/2)/2;
+  var zoomlevel = document.getElementById("zoomlevel").value;
+  var lowerBoundPrimary = parseFloat(document.getElementById("primaryInput").value) - (canvas.width/2)/(20**zoomlevel);
+  var upperBoundPrimary = parseFloat(document.getElementById("primaryInput").value) + (canvas.width/2)/(20**zoomlevel);
   var scaleFactor = canvas.width/(upperBoundPrimary - lowerBoundPrimary);
   var increment = 1;
   while (canvas.width/((upperBoundPrimary - lowerBoundPrimary)/increment) > 60){
@@ -47,7 +48,12 @@ function generateVisual()
       ctx.textBaseline = "middle";
       ctx.translate(scaleFactor*(i-lowerBoundPrimary), canvas.height/2.8);
       ctx.rotate(-60 * Math.PI / 180);
-      ctx.fillText(i, 0, 0);
+      if (increment < 1){
+        ctx.fillText(i.toFixed(Math.abs(Math.floor(Math.log10(increment)))), 0, 0);
+      }
+      else{
+        ctx.fillText(i, 0, 0);
+      }
       ctx.restore();
     }
   }
@@ -124,11 +130,35 @@ function generateVisualTemp()
   ctx.strokeStyle = String(getComputedStyle(document.documentElement).getPropertyValue('--secondary-color'));
   ctx.stroke();
   /* drawing the markings in the primary axis */
-  var lowerBoundPrimary = parseFloat(document.getElementById("primaryInput").value) - (canvas.width/2)/20;
-  var upperBoundPrimary = parseFloat(document.getElementById("primaryInput").value) + (canvas.width/2)/20;
+  var zoomlevel = document.getElementById("zoomlevel").value;
+  var lowerBoundPrimary = parseFloat(document.getElementById("primaryInput").value) - (canvas.width/2)/(20**zoomlevel);
+  var upperBoundPrimary = parseFloat(document.getElementById("primaryInput").value) + (canvas.width/2)/(20**zoomlevel);
   var scaleFactor = canvas.width/(upperBoundPrimary - lowerBoundPrimary);
-  for (var i = Math.ceil(lowerBoundPrimary); i <= upperBoundPrimary; i++){
-    if (i != document.getElementById("primaryInput").value && calculateConversion(i, document.getElementById("primarySelect").value, "Kelvin") >= 0){
+  var increment = 1;
+  while (canvas.width/((upperBoundPrimary - lowerBoundPrimary)/increment) > 60){
+    increment /= 10;
+  }
+  while (canvas.width/((upperBoundPrimary - lowerBoundPrimary)/increment) < 15){
+    increment *= 10;
+  }
+  if (calculateConversion(lowerBoundPrimary, document.getElementById("primarySelect").value, "K") <= 0){
+    ctx.beginPath();
+    ctx.moveTo(scaleFactor*(calculateConversion(0, "K", document.getElementById("primarySelect").value)-lowerBoundPrimary), canvas.height/2.6);
+    ctx.lineTo(scaleFactor*(calculateConversion(0, "K", document.getElementById("primarySelect").value)-lowerBoundPrimary), canvas.height/2 - 3);
+    ctx.strokeStyle = String(getComputedStyle(document.documentElement).getPropertyValue('--primary-color'));
+    ctx.stroke();
+    ctx.font = "10px Overpass";
+    ctx.fillStyle = "#000000";
+    ctx.save();
+    ctx.textAlign = "left";
+    ctx.textBaseline = "middle";
+    ctx.translate(scaleFactor*(calculateConversion(0, "K", document.getElementById("primarySelect").value)-lowerBoundPrimary), canvas.height/2.8);
+    ctx.rotate(-60 * Math.PI / 180);
+    ctx.fillText(calculateConversion(0, "K", document.getElementById("primarySelect").value), 0, 0);
+    ctx.restore();
+  }
+  for (var i = Math.ceil(lowerBoundPrimary/increment)*increment; i <= upperBoundPrimary; i += increment){
+    if (i != document.getElementById("primaryInput").value && calculateConversion(i, document.getElementById("primarySelect").value, "K") > 0){
       ctx.beginPath();
       ctx.moveTo(scaleFactor*(i-lowerBoundPrimary), canvas.height/2.6);
       ctx.lineTo(scaleFactor*(i-lowerBoundPrimary), canvas.height/2 - 3);
@@ -141,7 +171,13 @@ function generateVisualTemp()
       ctx.textBaseline = "middle";
       ctx.translate(scaleFactor*(i-lowerBoundPrimary), canvas.height/2.8);
       ctx.rotate(-60 * Math.PI / 180);
-      ctx.fillText(i, 0, 0);
+      if (increment < 1){
+        ctx.fillText(i.toFixed(Math.abs(Math.floor(Math.log10(increment)))), 0, 0);
+      }
+      else{
+        ctx.fillText(i, 0, 0);
+      }
+
       ctx.restore();
     }
   }
@@ -156,8 +192,23 @@ function generateVisualTemp()
   while (canvas.width/((upperBoundSecondary - lowerBoundSecondary)/increment) < 15){
     increment *= 10;
   }
+  if (calculateConversion(lowerBoundSecondary, document.getElementById("secondarySelect").value, "K") <= 0){
+    ctx.beginPath();
+    ctx.moveTo(scaleFactor*(calculateConversion(0, "K", document.getElementById("secondarySelect").value)-lowerBoundSecondary), canvas.height/2 + 3);
+    ctx.lineTo(scaleFactor*(calculateConversion(0, "K", document.getElementById("secondarySelect").value)-lowerBoundSecondary), canvas.height - canvas.height/2.6);
+    ctx.strokeStyle = String(getComputedStyle(document.documentElement).getPropertyValue('--secondary-color'));
+    ctx.stroke();
+    ctx.font = "10px Overpass";
+    ctx.save();
+    ctx.textAlign = "right";
+    ctx.textBaseline = "middle";
+    ctx.translate(scaleFactor*(calculateConversion(0, "K", document.getElementById("secondarySelect").value)-lowerBoundSecondary), canvas.height - canvas.height/2.8);
+    ctx.rotate(-60 * Math.PI / 180);
+    ctx.fillText(calculateConversion(0, "K", document.getElementById("secondarySelect").value), 0, 0);
+    ctx.restore();
+  }
   for (var i = Math.ceil(lowerBoundSecondary/increment)*increment; i <= upperBoundSecondary; i += increment){
-    if (i != document.getElementById("secondaryInput").value && calculateConversion(i, document.getElementById("secondarySelect").value, "Kelvin") >= 0){
+    if (i != document.getElementById("secondaryInput").value && calculateConversion(i, document.getElementById("secondarySelect").value, "K") > 0){
       ctx.beginPath();
       ctx.moveTo(scaleFactor*(i-lowerBoundSecondary), canvas.height/2 + 3);
       ctx.lineTo(scaleFactor*(i-lowerBoundSecondary), canvas.height - canvas.height/2.6);
