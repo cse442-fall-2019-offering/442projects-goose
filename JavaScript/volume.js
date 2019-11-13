@@ -42,6 +42,15 @@ function convertCM(input, secondaryUnit){
     case "gal (US)":
       ret = input / 3785.412;
       break;
+    case "ac⋅ft":
+      ret = input * 8.1071319378991e-10;
+      break;
+    case "qt (US)":
+      ret = input / 946.352946;
+      break;
+    case "qt":
+      ret = input / 1136.5225;
+      break;
   }
   //return conversion
   return ret;
@@ -87,6 +96,15 @@ function convertDM(input, secondaryUnit){
       break;
     case "gal (US)":
       ret = input / 3.785;
+      break;
+    case "ac⋅ft":
+      ret = input * 8.1071319378991e-7;
+      break;
+    case "qt (US)":
+      ret = input / 0.946352946;
+      break;
+    case "qt":
+      ret = input / 1.1365225;
       break;
   }
   //return conversion
@@ -134,6 +152,15 @@ function convertME(input, secondaryUnit){
     case "gal (US)":
       ret = input * 264.172;
       break;
+    case "ac⋅ft":
+      ret = input * 0.00081071319378991;
+      break;
+    case "qt (US)":
+      ret = input / 0.000946352946;
+      break;
+    case "qt":
+      ret = input / 0.0011365225;
+      break;
   }
   //return conversion
   return ret;
@@ -179,6 +206,15 @@ function convertIN(input, secondaryUnit){
       break;
     case "gal (US)":
       ret = input / 231;
+      break;
+    case "ac⋅ft":
+      ret = input * 1.328520899228e-8;
+      break;
+    case "qt (US)":
+      ret = input / 57.75;
+      break;
+    case "qt":
+      ret = input / 69.354858197905;
       break;
   }
   //return conversion
@@ -226,6 +262,15 @@ function convertFT(input, secondaryUnit){
     case "gal (US)":
       ret = input * 7.481;
       break;
+    case "ac⋅ft":
+      ret = input * 2.2956841138659e-5;
+      break;
+    case "qt (US)":
+      ret = input / 0.033420138888889;
+      break;
+    case "qt":
+      ret = input / 0.040135913308973;
+      break;
   }
   //return conversion
   return ret;
@@ -271,6 +316,15 @@ function convertYD(input, secondaryUnit){
       break;
     case "gal (US)":
       ret = input * 201.974;
+      break;
+    case "ac⋅ft":
+      ret = input * 0.0006198347107438;
+      break;
+    case "qt (US)":
+      ret = input / 0.0012377829218107;
+      break;
+    case "qt":
+      ret = input / 0.0014865153077397;
       break;
   }
   //return conversion
@@ -318,6 +372,15 @@ function convertFL(input, secondaryUnit){
     case "gal (US)":
       ret = input / 133.228;
       break;
+    case "ac⋅ft":
+      ret = input * 2.3034844644727e-8;
+      break;
+    case "qt (US)":
+      ret = input / 33.306967385167;
+      break;
+    case "qt":
+      ret = input / 40;
+      break;
   }
   //return conversion
   return ret;
@@ -363,6 +426,15 @@ function convertPT(input, secondaryUnit){
       break;
     case "gal (US)":
       ret = input / 6.661;
+      break;
+    case "ac⋅ft":
+      ret = input * 4.6069689289455e-7;
+      break;
+    case "qt (US)":
+      ret = input / 1.665348369258;
+      break;
+    case "qt":
+      ret = input / 40;
       break;
   }
   //return conversion
@@ -410,6 +482,15 @@ function convertGAL(input, secondaryUnit){
     case "gal (US)":
       ret = input / 1.201;
       break;
+    case "ac⋅ft":
+      ret = input * 3.6855751431564e-6;
+      break;
+    case "qt (US)":
+      ret = input / 0.20816854615725;
+      break;
+    case "qt":
+      ret = input * 4;
+      break;
   }
   //return conversion
   return ret;
@@ -455,6 +536,15 @@ function convertFLUS(input, secondaryUnit){
       break;
     case "gal (US)":
       ret = input / 128;
+      break;
+    case "ac⋅ft":
+      ret = input * 2.3975650603255e-8;
+      break;
+    case "qt (US)":
+      ret = input / 32;
+      break;
+    case "qt":
+      ret = input * 38.430397616155;
       break;
   }
   //return conversion
@@ -502,6 +592,15 @@ function convertPTUS(input, secondaryUnit){
     case "gal (US)":
       ret = input / 8;
       break;
+    case "ac⋅ft":
+      ret = input * 3.8361040965208e-7;
+      break;
+    case "qt (US)":
+      ret = input / 2;
+      break;
+    case "qt":
+      ret = input / 2.4018998510097;
+      break;
   }
   //return conversion
   return ret;
@@ -546,6 +645,176 @@ function convertGALUS(input, secondaryUnit){
       ret = input * 8;
       break;
     case "gal (US)":
+      ret = input;
+      break;
+    case "ac⋅ft":
+      ret = input * 3.0688832772166e-6;
+      break;
+    case "qt (US)":
+      ret = input * 4;
+      break;
+    case "qt":
+      ret = input / 0.30023748137621;
+      break;
+  }
+  //return conversion
+  return ret;
+}
+
+function convertACFT(input, secondaryUnit){
+
+  switch(secondaryUnit){
+    case "mL":
+      ret = input * 1233481837.5475;
+      break;
+    case "L":
+      ret = input * 1233481.8375475;
+      break;
+    case "m³":
+      ret = input * 1233.4818375475;
+      break;
+    case "in³":
+      ret = input * 75271680;
+      break;
+    case "ft³":
+      ret = input * 43560;
+      break;
+    case "yd³":
+      ret = input * 1613.3333333333;
+      break;
+    case "fl oz":
+      ret = input * 43412491.615345;
+      break;
+    case "pt":
+      ret = input * 2170624.5807672;
+      break;
+    case "gal":
+      ret = input * 271328.07259591;
+      break;
+    case "fl oz (US)":
+      ret = input * 41708982.857143;
+      break;
+    case "pt (US)":
+      ret = input * 2606811.4285714;
+      break;
+    case "gal (US)":
+      ret = input * 325851.42857143;
+      break;
+    case "ac⋅ft":
+      ret = input;
+      break;
+    case "qt (US)":
+      ret = input / 7.6722081930415e-7;
+      break;
+    case "qt":
+      ret = input / 9.213937857891e-7;
+      break;
+  }
+  //return conversion
+  return ret;
+}
+
+
+function convertQTUS(input, secondaryUnit){
+
+  switch(secondaryUnit){
+    case "mL":
+      ret = input * 946.352946;
+      break;
+    case "L":
+      ret = input * 0.946352946;
+      break;
+    case "m³":
+      ret = input * 0.000946352946;
+      break;
+    case "in³":
+      ret = input * 57.75;
+      break;
+    case "ft³":
+      ret = input * 0.033420138888889;
+      break;
+    case "yd³":
+      ret = input * 0.0012377829218107;
+      break;
+    case "fl oz":
+      ret = input * 33.30696738516;
+      break;
+    case "pt":
+      ret = input * 1.665348369258;
+      break;
+    case "gal":
+      ret = input * 0.20816854615725;
+      break;
+    case "fl oz (US)":
+      ret = input * 32;
+      break;
+    case "pt (US)":
+      ret = input * 2;
+      break;
+    case "gal (US)":
+      ret = input / 4;
+      break;
+    case "ac⋅ft":
+      ret = input * 7.6722081930415e-7;
+      break;
+    case "qt (US)":
+      ret = input;
+      break;
+    case "qt":
+      ret = input * 0.83267418462899;
+      break;
+  }
+  //return conversion
+  return ret;
+}
+
+
+function convertQT(input, secondaryUnit){
+
+  switch(secondaryUnit){
+    case "mL":
+      ret = input * 1136.5225;
+      break;
+    case "L":
+      ret = input * 1.1365225;
+      break;
+    case "m³":
+      ret = input * 0.0011365225;
+      break;
+    case "in³":
+      ret = input * 69.354858197905;
+      break;
+    case "ft³":
+      ret = input * 0.040135913308973;
+      break;
+    case "yd³":
+      ret = input * 0.0014865153077397;
+      break;
+    case "fl oz":
+      ret = input * 40;
+      break;
+    case "pt":
+      ret = input * 2;
+      break;
+    case "gal":
+      ret = input / 4;
+      break;
+    case "fl oz (US)":
+      ret = input * 38.430397616155;
+      break;
+    case "pt (US)":
+      ret = input * 2.4018998510097;
+      break;
+    case "gal (US)":
+      ret = input * 0.30023748137621;
+      break;
+    case "ac⋅ft":
+      ret = input * 9.213937857891e-7;
+      break;
+    case "qt (US)":
+      ret = input * 1.2009499255049;
+      break;
+    case "qt":
       ret = input;
       break;
   }
@@ -593,6 +862,15 @@ function calculateConversion(input, primaryUnit, secondaryUnit){
       break;
     case "gal (US)":
       ret = convertGALUS(input, secondaryUnit);
+      break;
+    case "ac⋅ft":
+      ret = convertACFT(input, secondaryUnit);
+      break;
+    case "qt (US)":
+      ret = convertQTUS(input, secondaryUnit);
+      break;
+    case "qt":
+      ret = convertQT(input, secondaryUnit);
       break;
   }
   return ret;
