@@ -4,7 +4,7 @@
  *  quantity is being converted to. A number is returned equal to the converted
  *  quantity
  */
-function areaConverter(input, primaryUnit, secondaryUnit){
+function calculateConversion(input, primaryUnit, secondaryUnit){
     var value; //this is the base unit
     if(primaryUnit == secondaryUnit){
       return input
@@ -63,4 +63,11 @@ function areaConverter(input, primaryUnit, secondaryUnit){
       case "ac":
         return value * 0.00024710538146717;
     }
+  }
+
+  function convertUnits(){
+    var input = document.getElementById("primaryInput").value;
+    var primaryUnit = document.getElementById("primarySelect").value;
+    var secondaryUnit = document.getElementById("secondarySelect").value;
+    document.getElementById("secondaryInput").value = calculateConversion(input, primaryUnit, secondaryUnit);
   }

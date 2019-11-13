@@ -15,7 +15,7 @@
 body {
   background-color: var(--background-color);
 }
-.nav {
+nav {
   background-color: #ffffff;
   position: -webkit-sticky;
   position: sticky;
@@ -23,14 +23,13 @@ body {
   width: 100%;
   height: 60px;
   margin: 0px auto 30px;
-
 }
-.nav ul{
+nav ul{
   margin: 0px auto;
   padding: 10px auto;
   width: 90%;
 }
-.nav ul a {
+nav ul a {
   background-color: var(--accent-color);
   display: inline-flex;
   border: none;
@@ -40,15 +39,15 @@ body {
   font-family: 'Overpass', sans-serif;
   color: black;
 }
-.nav ul a.current-menu-item,
-.nav ul a.current-page-ancestor,
-.nav ul a.current-menu-ancestor {
+nav ul a.current-menu-item,
+nav ul a.current-page-ancestor,
+nav ul a.current-menu-ancestor {
   background-color: var(--emphasis-color);
 }
-.nav ul a:hover {
+nav ul a:hover {
   background-color: var(--emphasis-color);
 }
-.nav ul a.active {
+nav ul a.active {
   background-color: var(--emphasis-color);
 }
 main {
@@ -133,7 +132,7 @@ main form input, select, option, button{
 .center{
   text-align: center;
 }
-@media screen and (max-width: 678px) {
+@media screen and (max-width: 745px) {
   #primary{
     height:65px;
     width: 42%;

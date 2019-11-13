@@ -4,7 +4,7 @@
  *  quantity is being converted to. A number is returned equal to the converted
  *  quantity
  */
-function speedConverter(input, primaryUnit, secondaryUnit){
+function calculateConversion(input, primaryUnit, secondaryUnit){
     var value; //this is the base unit
     if(primaryUnit == secondaryUnit){
       return input
@@ -38,4 +38,13 @@ function speedConverter(input, primaryUnit, secondaryUnit){
       case "knot":
         return value * 1.68780986;
     }
+  }
+
+  function convertSpeed(){
+    var input = document.getElementById("primaryInput").value;
+    var primaryUnit = document.getElementById("primarySelect").value;
+    var secondaryUnit = document.getElementById("secondarySelect").value;
+    ret = calculateConversion(input, primaryUnit, secondaryUnit);
+    document.getElementById("secondaryInput").value = calculateConversion(input, primaryUnit, secondaryUnit);
+
   }

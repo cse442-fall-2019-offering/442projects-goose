@@ -8,9 +8,13 @@
         <script src="JavaScript/unit_switcher.js" charset="utf-8"></script>
         <script src="JavaScript/visual_maker.js" charset="utf-8"></script>
         <script src="JavaScript/input_checker.js" charset="utf-8"></script>
+<<<<<<< HEAD
         <script src="JavaScript/speed_conversion.js" charset="utf-8"></script>
+=======
+        <script src="JavaScript/visual_maker.js" charset="utf-8"></script>
+>>>>>>> develop
     </head>
-    <body>
+    <body onresize="generateVisualTemp()">
         <!-- TODO: add tiles, text inputs, dropdowns, and swap box -->
         <!-- TODO: change dropdown menu based on tile selection -->
         <!-- TODO: create visual output based on entered values -->
@@ -19,7 +23,7 @@
         <!-- more commit test -->
         <header>
           <!-- select measures here -->
-          <div class="nav">
+          <nav>
               <ul>
                 <a class="active" href="temp.html">Temperature</a>
                 <a href="index.html">Length</a>
@@ -28,7 +32,7 @@
                 <a href="time.html">Time</a>
                 <a href="speed.html">Speed</a>
               </ul>
-          </div>
+          </nav>
         </header>
         <main>
           <!-- values are inputted here -->
@@ -45,7 +49,7 @@
               </form>
             </div>
             <div id="swap">
-              <button class="swapButton" onclick="switchUnits(); checkInput();">
+              <button class="swapButton" onclick="switchUnits(); checkInput(); generateVisualTemp();">
                 ⇌
               </button>
             </div>
@@ -62,7 +66,7 @@
             </div>
           </div>
           <div class="center">
-            <button id="convertButton" disabled="disabled" onclick="convertUnits(); generateVisual();">
+            <button id="convertButton" disabled="disabled" onclick="convertUnits(); generateVisualTemp();">
               Convert
             </button>
           </div>
@@ -120,6 +124,7 @@
               var secondaryUnit = document.getElementById("secondarySelect").value;
               document.getElementById("secondaryInput").value = calculateConversion(input, primaryUnit, secondaryUnit);
             }
+<<<<<<< HEAD
             function generateVisual(){
               var lowerBoundPrimary = parseFloat(document.getElementById("primaryInput").value) - 30;
               var upperBoundPrimary = parseFloat(document.getElementById("primaryInput").value) + 30;
@@ -128,6 +133,8 @@
               makeVisual(lowerBoundSecond, upperBoundSecond)
             }
 
+=======
+>>>>>>> develop
             //Swaps units
             function switchUnits(){
               var holdSelect = document.getElementById("primarySelect").options[document.getElementById("primarySelect").selectedIndex].value;
