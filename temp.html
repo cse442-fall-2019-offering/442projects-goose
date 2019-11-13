@@ -83,15 +83,6 @@
               document.getElementById("secondarySelect").value = holdSelect;
               document.getElementById("secondaryInput").value = holdInput;
             }
-            function checkInput(){
-              var input = document.getElementById('primaryInput').value;
-              if (input != '') {
-                  document.getElementById('convertButton').disabled = false;
-              }
-              else {
-                  document.getElementById('convertButton').disabled = true;
-              }
-            }
             function calculateConversion(input, primaryUnit, secondaryUnit){
               var temp; //this is the base unit
               switch(primaryUnit){
