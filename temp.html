@@ -36,7 +36,7 @@
             <div id="primary">
               <form>
                 <input type="number" id="primaryInput" placeholder="Enter a value here" onkeyup="checkInput(); limit(this);" onkeydown="limit(this);">
-                <select id="primarySelect">
+                <select id="primarySelect" onchange="checkInput();">
                   <option value="°F">Fahrenheit</option>
                   <option value="°C">Celsius</option>
                   <option value="K">Kelvin</option>
@@ -52,7 +52,7 @@
             <div id="secondary">
               <form>
                 <input type="number" id="secondaryInput" placeholder="Result shows up here" readonly="readonly">
-                <select id="secondarySelect">
+                <select id="secondarySelect" onchange="checkInput();">
                   <option value="°F">Fahrenheit</option>
                   <option value="°C">Celsius</option>
                   <option value="K">Kelvin</option>
