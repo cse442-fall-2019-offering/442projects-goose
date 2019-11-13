@@ -5,7 +5,6 @@
         <link href="style.css" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css?family=Overpass&display=swap" rel="stylesheet">
         <script src="JavaScript/time_zones.js" charset="utf-8"></script>
-        <script src="JavaScript/limit_input.js" charset="utf-8"></script>
         <script src="JavaScript/visual_maker.js" charset="utf-8"></script>
         <script src="JavaScript/unit_switcher.js" charset="utf-8"></script>
         <script src="JavaScript/input_checker.js" charset="utf-8"></script>
@@ -37,29 +36,29 @@
             <!-- select one unit here -->
             <div id="primary">
               <form>
-                <input type="time" name="primary" id="primaryInput" placeholder="Enter a value here" onkeydown="limit(this);" onkeyup="limit(this);  checkInput();">
-                <select id="primarySelect" onchange="convertUnits(); generateVisual();">
+                <input type="datetime-local" name="primary" id="primaryInput" placeholder="Enter a value here" onkeyup="checkInput();">
+                <select id="primarySelect">
 
                 </select>
               </form>
             </div>
             <div id="swap">
-              <button class="swapButton" onclick="switchUnits(); convertUnits(); generateVisual();">
+              <button class="swapButton" onclick="switchUnits();">
                 ⇌
               </button>
             </div>
             <!-- select the other unit here -->
             <div id="secondary">
               <form>
-                <input type="time" id="secondaryInput" placeholder="Result shows up here" readonly>
-                <select id="secondarySelect" onchange="convertUnits(); generateVisual();">
+                <input type="text" id="secondaryInput" placeholder="Result shows up here" readonly>
+                <select id="secondarySelect">
 
                 </select>
               </form>
             </div>
           </div>
           <div class="center">
-            <button id="convertButton" onclick="convertUnits(); generateVisual();" disabled="disabled">
+            <button id="convertButton" onclick="convertTimeZones();" disabled="disabled">
               Convert
             </button>
           </div>
