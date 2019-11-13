@@ -124,17 +124,6 @@
               var secondaryUnit = document.getElementById("secondarySelect").value;
               document.getElementById("secondaryInput").value = calculateConversion(input, primaryUnit, secondaryUnit);
             }
-<<<<<<< HEAD
-            function generateVisual(){
-              var lowerBoundPrimary = parseFloat(document.getElementById("primaryInput").value) - 30;
-              var upperBoundPrimary = parseFloat(document.getElementById("primaryInput").value) + 30;
-              var lowerBoundSecond = speedConverter(lowerBoundPrimary, document.getElementById("primarySelect").value, document.getElementById("secondarySelect").value);
-              var upperBoundSecond = speedConverter(upperBoundPrimary, document.getElementById("primarySelect").value, document.getElementById("secondarySelect").value);
-              makeVisual(lowerBoundSecond, upperBoundSecond)
-            }
-
-=======
->>>>>>> develop
             //Swaps units
             function switchUnits(){
               var holdSelect = document.getElementById("primarySelect").options[document.getElementById("primarySelect").selectedIndex].value;
