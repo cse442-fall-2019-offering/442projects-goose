@@ -96,6 +96,16 @@ main form input, select, option, button{
 #visual{
   margin: 25px auto;
 }
+#EquationVisClass{
+  background-color: var(--accent-color);
+  width: 50%;
+  height: 100px;
+  margin: 20px auto;
+  overflow: hidden;
+}
+#EquationVis{
+  margin: 25px auto;
+}
 #convertButton {
   background-color: #f0f0f0;
   border: none;
