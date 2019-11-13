@@ -34,8 +34,41 @@ function generateVisual()
   while (canvas.width/((upperBoundPrimary - lowerBoundPrimary)/increment) < 15){
     increment *= 10;
   }
+  if (lowerBoundPrimary <= 0){
+    ctx.save();
+    ctx.globalAlpha = 1.0;
+    ctx.lineWidth = 5;
+    ctx.beginPath();
+    ctx.moveTo(0, canvas.height/2 - 3);
+    ctx.lineTo(scaleFactor*(0-lowerBoundPrimary), canvas.height/2 - 3);
+    ctx.strokeStyle = "#FFFFFF";
+    ctx.stroke();
+    ctx.beginPath();
+    ctx.moveTo(0, canvas.height/2 + 3);
+    ctx.lineTo(scaleFactor*(0-lowerBoundPrimary), canvas.height/2 + 3);
+    ctx.strokeStyle = "#FFFFFF";
+    ctx.stroke();
+    ctx.restore();
+
+    ctx.beginPath();
+    ctx.moveTo(scaleFactor*(0-lowerBoundPrimary), canvas.height/2.6);
+    ctx.lineTo(scaleFactor*(0-lowerBoundPrimary), canvas.height - canvas.height/2.6);
+    ctx.strokeStyle = "#FF0000";
+    ctx.stroke();
+    ctx.font = "10px Overpass";
+    ctx.fillStyle = "#000000";
+    ctx.save();
+    ctx.textAlign = "left";
+    ctx.textBaseline = "middle";
+    ctx.translate(scaleFactor*(0-lowerBoundPrimary), canvas.height/2.8);
+    ctx.rotate(-60 * Math.PI / 180);
+    ctx.fillText(0, 0, 0);
+    ctx.restore();
+  }
   for (var i = Math.ceil(lowerBoundPrimary/increment)*increment; i <= upperBoundPrimary; i += increment){
-    if (i != document.getElementById("primaryInput").value && i >= 0){
+    if (i != document.getElementById("primaryInput").value && i > 0){
+      ctx.font = "10px Overpass";
+      ctx.fillStyle = "#000000";
       ctx.beginPath();
       ctx.moveTo(scaleFactor*(i-lowerBoundPrimary), canvas.height/2.6);
       ctx.lineTo(scaleFactor*(i-lowerBoundPrimary), canvas.height/2 - 3);
@@ -68,8 +101,18 @@ function generateVisual()
   while (canvas.width/((upperBoundSecondary - lowerBoundSecondary)/increment) < 15){
     increment *= 10;
   }
+  if (lowerBoundSecondary <= 0){
+    ctx.font = "10px Overpass";
+    ctx.save();
+    ctx.textAlign = "right";
+    ctx.textBaseline = "middle";
+    ctx.translate(scaleFactor*(0-lowerBoundSecondary), canvas.height - canvas.height/2.8);
+    ctx.rotate(-60 * Math.PI / 180);
+    ctx.fillText(0, 0, 0);
+    ctx.restore();
+  }
   for (var i = Math.ceil(lowerBoundSecondary/increment)*increment; i <= upperBoundSecondary; i += increment){
-    if (i != document.getElementById("secondaryInput").value && i >= 0){
+    if (i != document.getElementById("secondaryInput").value && i > 0){
       ctx.beginPath();
       ctx.moveTo(scaleFactor*(i-lowerBoundSecondary), canvas.height/2 + 3);
       ctx.lineTo(scaleFactor*(i-lowerBoundSecondary), canvas.height - canvas.height/2.6);
@@ -142,10 +185,25 @@ function generateVisualTemp()
     increment *= 10;
   }
   if (calculateConversion(lowerBoundPrimary, document.getElementById("primarySelect").value, "K") <= 0){
+    ctx.save();
+    ctx.globalAlpha = 1.0;
+    ctx.lineWidth = 5;
+    ctx.beginPath();
+    ctx.moveTo(0, canvas.height/2 - 3);
+    ctx.lineTo(scaleFactor*(calculateConversion(0, "K", document.getElementById("primarySelect").value)-lowerBoundPrimary), canvas.height/2 - 3);
+    ctx.strokeStyle = "#FFFFFF";
+    ctx.stroke();
+    ctx.beginPath();
+    ctx.moveTo(0, canvas.height/2 + 3);
+    ctx.lineTo(scaleFactor*(calculateConversion(0, "K", document.getElementById("primarySelect").value)-lowerBoundPrimary), canvas.height/2 + 3);
+    ctx.strokeStyle = "#FFFFFF";
+    ctx.stroke();
+    ctx.restore();
+
     ctx.beginPath();
     ctx.moveTo(scaleFactor*(calculateConversion(0, "K", document.getElementById("primarySelect").value)-lowerBoundPrimary), canvas.height/2.6);
-    ctx.lineTo(scaleFactor*(calculateConversion(0, "K", document.getElementById("primarySelect").value)-lowerBoundPrimary), canvas.height/2 - 3);
-    ctx.strokeStyle = String(getComputedStyle(document.documentElement).getPropertyValue('--primary-color'));
+    ctx.lineTo(scaleFactor*(calculateConversion(0, "K", document.getElementById("primarySelect").value)-lowerBoundPrimary), canvas.height - canvas.height/2.6);
+    ctx.strokeStyle = "#FF0000";
     ctx.stroke();
     ctx.font = "10px Overpass";
     ctx.fillStyle = "#000000";
@@ -154,7 +212,7 @@ function generateVisualTemp()
     ctx.textBaseline = "middle";
     ctx.translate(scaleFactor*(calculateConversion(0, "K", document.getElementById("primarySelect").value)-lowerBoundPrimary), canvas.height/2.8);
     ctx.rotate(-60 * Math.PI / 180);
-    ctx.fillText(calculateConversion(0, "K", document.getElementById("primarySelect").value), 0, 0);
+    ctx.fillText(calculateConversion(0, "K", document.getElementById("primarySelect").value).toFixed(2), 0, 0);
     ctx.restore();
   }
   for (var i = Math.ceil(lowerBoundPrimary/increment)*increment; i <= upperBoundPrimary; i += increment){
@@ -177,7 +235,6 @@ function generateVisualTemp()
       else{
         ctx.fillText(i, 0, 0);
       }
-
       ctx.restore();
     }
   }
@@ -193,18 +250,13 @@ function generateVisualTemp()
     increment *= 10;
   }
   if (calculateConversion(lowerBoundSecondary, document.getElementById("secondarySelect").value, "K") <= 0){
-    ctx.beginPath();
-    ctx.moveTo(scaleFactor*(calculateConversion(0, "K", document.getElementById("secondarySelect").value)-lowerBoundSecondary), canvas.height/2 + 3);
-    ctx.lineTo(scaleFactor*(calculateConversion(0, "K", document.getElementById("secondarySelect").value)-lowerBoundSecondary), canvas.height - canvas.height/2.6);
-    ctx.strokeStyle = String(getComputedStyle(document.documentElement).getPropertyValue('--secondary-color'));
-    ctx.stroke();
     ctx.font = "10px Overpass";
     ctx.save();
     ctx.textAlign = "right";
     ctx.textBaseline = "middle";
     ctx.translate(scaleFactor*(calculateConversion(0, "K", document.getElementById("secondarySelect").value)-lowerBoundSecondary), canvas.height - canvas.height/2.8);
     ctx.rotate(-60 * Math.PI / 180);
-    ctx.fillText(calculateConversion(0, "K", document.getElementById("secondarySelect").value), 0, 0);
+    ctx.fillText(calculateConversion(0, "K", document.getElementById("secondarySelect").value).toFixed(2), 0, 0);
     ctx.restore();
   }
   for (var i = Math.ceil(lowerBoundSecondary/increment)*increment; i <= upperBoundSecondary; i += increment){
