@@ -54,6 +54,9 @@ function convertTimeZones(){
       var hours = date.getHours();
       var minutes = "0" + date.getMinutes();
       var ampm = hours >= 12 ? 'PM' : 'AM';
+      if (hours > 12) {
+        hours = hours - 12;
+      }
       var convDate = month + "/" + day + "/" + year + ", " + hours + ":" + minutes.substr(-2) + " " + ampm;
 
       document.getElementById("secondaryInput").value = convDate;
