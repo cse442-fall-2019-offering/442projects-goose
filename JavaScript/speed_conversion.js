@@ -10,32 +10,32 @@ function calculateConversion(input, primaryUnit, secondaryUnit){
       return input
     }
     switch(primaryUnit){
-      case "mps":
+      case "m/s":
         value = input;
         break;
-      case "kph":
+      case "km/h":
         value = input * 0.27777778;
         break;
-      case "fps":
+      case "ft/s":
         value = input * 0.3048;
         break;
       case "mph":
         value = input * 0.44704;
         break;
-      case "knot":
+      case "knots":
         value = input * 0.51444444;
         break;
     }
     switch(secondaryUnit){
-      case "mps":
+      case "m/s":
         return value;
-      case "kph":
+      case "km/h":
         return value * 3.6;
-      case "fps":
+      case "ft/s":
         return value * 3.28083990;
       case "mph":
         return value * 1.46666667;
-      case "knot":
+      case "knots":
         return value * 1.68780986;
     }
   }

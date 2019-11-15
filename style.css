@@ -89,8 +89,12 @@ main form input, select, option, button{
 #visualizer{
   background-color: var(--accent-color);
   width: 100%;
-  height: 300px;
+  height: 400px;
   margin: 20px auto;
+}
+#display{
+  width: 100%;
+  height: 350px;
   overflow: hidden;
 }
 #visual{
@@ -105,6 +109,12 @@ main form input, select, option, button{
 }
 #EquationVis{
   margin: 25px auto;
+}
+#zoom{
+
+}
+#zoomlevel{
+  width: 50%;
 }
 #convertButton {
   background-color: #f0f0f0;

@@ -40,23 +40,34 @@
               <form>
                 <input type="number" name="primary" id="primaryInput" placeholder="Enter a value here" onkeyup="checkInput(); limit(this);" onkeydown="limit(this);">
                 <select id="primarySelect">
-                  <option value="cubicCM">Milliliter (mL)</option>
-                  <option value="cubicDM">Liter (L)</option>
-                  <option value="cubicME">Cubic Meter (m3)</option>
-                  <option value="cubicIN">Cubic Inch (in3)</option>
-                  <option value="cubicFT">Cubic Foot (ft3)</option>
-                  <option value="cubicYD">Cubic Yard (yd3)</option>
-                  <option value="fluidOZ">Fluid Ounce (fl oz)</option>
-                  <option value="pint">Pint (pt)</option>
-                  <option value="gallon">Gallon (gal)</option>
-                  <option value="fluidOZUS">US Fluid Ounce (US fl oz)</option>
-                  <option value="pintUS">US Pint (US pt)</option>
-                  <option value="gallonUS">US Gallon (US gal)</option>
+                  <optgroup label="US Customary">
+                    <option value="in³">Cubic Inch</option>
+                    <option value="ft³">Cubic Foot</option>
+                    <option value="yd³">Cubic Yard</option>
+                    <option value="ac⋅ft">Acre-Foot</option>
+                    <option value="fl oz (US)">US Fluid Ounce</option>
+                    <option value="pt (US)">US Pint</option>
+                    <option value="qt (US)">US Quart</option>
+                    <option value="gal (US)">US Gallon</option>
+                  </optgroup>
+                  <optgroup label="Imperial">
+                    <option value="fl oz">Fluid Ounce</option>
+                    <option value="pt">Pint</option>
+                    <option value="qt">Quart</option>
+                    <option value="gal">Gallon</option>
+                  </optgroup>
+                  <optgroup label="Metric">
+                    <option value="mL">Milliliter</option>
+                    <option value="L">Liter</option>
+                  </optgroup>
+                  <optgroup label="SI Unit">
+                    <option value="m³">Cubic Meter</option>
+                  </optgroup>
                 </select>
               </form>
             </div>
             <div id="swap">
-              <button class="swapButton" onclick="switchUnits(); checkInputs(); generateVisual();">
+              <button class="swapButton" onclick="switchUnits(); checkInput(); generateVisual();">
                 ⇌
               </button>
             </div>
@@ -65,18 +76,29 @@
               <form>
                 <input type="number" id="secondaryInput" placeholder="Result shows up here" readonly>
                 <select id="secondarySelect">
-                  <option value="cubicCM">Milliliter (mL)</option>
-                  <option value="cubicDM">Liter (L)</option>
-                  <option value="cubicME">Cubic Meter (m3)</option>
-                  <option value="cubicIN">Cubic Inch (in3)</option>
-                  <option value="cubicFT">Cubic Foot (ft3)</option>
-                  <option value="cubicYD">Cubic Yard (yd3)</option>
-                  <option value="fluidOZ">Fluid Ounce (fl oz)</option>
-                  <option value="pint">Pint (pt)</option>
-                  <option value="gallon">Gallon (gal)</option>
-                  <option value="fluidOZUS">US Fluid Ounce (US fl oz)</option>
-                  <option value="pintUS">US Pint (US pt)</option>
-                  <option value="gallonUS">US Gallon (US gal)</option>
+                  <optgroup label="US Customary">
+                    <option value="in³">Cubic Inch</option>
+                    <option value="ft³">Cubic Foot</option>
+                    <option value="yd³">Cubic Yard</option>
+                    <option value="ac⋅ft">Acre-Foot</option>
+                    <option value="fl oz (US)">US Fluid Ounce</option>
+                    <option value="pt (US)">US Pint</option>
+                    <option value="qt (US)">US Quart</option>
+                    <option value="gal (US)">US Gallon</option>
+                  </optgroup>
+                  <optgroup label="Imperial">
+                    <option value="fl oz">Fluid Ounce</option>
+                    <option value="pt">Pint</option>
+                    <option value="qt">Quart</option>
+                    <option value="gal">Gallon</option>
+                  </optgroup>
+                  <optgroup label="Metric">
+                    <option value="mL">Milliliter</option>
+                    <option value="L">Liter</option>
+                  </optgroup>
+                  <optgroup label="SI Unit">
+                    <option value="m³">Cubic Meter</option>
+                  </optgroup>
                 </select>
               </form>
             </div>
@@ -88,7 +110,12 @@
           </div>
           <!-- visual output is displayed here -->
           <div class="center" id="visualizer">
-            <canvas id="visual">
+            <div class="center" id="display">
+              <canvas id="visual"></canvas>
+            </div>
+            <div class="center" id="zoom">
+              <input type="range" id="zoomlevel" min="0.000001" max="4" value="1" step=".000001" oninput="generateVisual()">
+            </div>
           </div>
         </main>
     </body>

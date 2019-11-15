@@ -38,12 +38,18 @@
 
                 <input type="number" id="primaryInput" placeholder="Enter a value here" onkeyup="checkInput(); limit(this);" onkeydown="limit(this);">
                 <select id="primarySelect">
-                  <option value="inch">Inches</option>
-                  <option value="feet">Feet</option>
-                  <option value="yard">Yard</option>
-                  <option value="mile">Mile</option>
-                  <option value="kilometer">Kilometer</option>
-                  <option value="centimeter">Centimeter</option>
+                  <optgroup label="US Customary">
+                    <option value="in">Inches</option>
+                    <option value="ft">Feet</option>
+                    <option value="yd">Yard</option>
+                    <option value="mi">Mile</option>
+                  </optgroup>
+                  <optgroup label="SI Units">
+                    <option value="mm">Millimeter</option>
+                    <option value="cm">Centimeter</option>
+                    <option value="m">Meter</option>
+                    <option value="km">Kilometer</option>
+                  </optgroup>
                 </select>
               </form>
             </div>
@@ -57,12 +63,18 @@
               <form>
                 <input type="number" id="secondaryInput" placeholder="Result shows up here" readonly="readonly">
                 <select id="secondarySelect">
-                  <option value="inch">Inches</option>
-                  <option value="feet">Feet</option>
-                  <option value="yard">Yard</option>
-                  <option value="mile">Mile</option>
-                  <option value="kilometer">Kilometer</option>
-                  <option value="centimeter">Centimeter</option>
+                  <optgroup label="US Customary">
+                    <option value="in">Inches</option>
+                    <option value="ft">Feet</option>
+                    <option value="yd">Yard</option>
+                    <option value="mi">Mile</option>
+                  </optgroup>
+                  <optgroup label="SI Units">
+                    <option value="mm">Millimeter</option>
+                    <option value="cm">Centimeter</option>
+                    <option value="m">Meter</option>
+                    <option value="km">Kilometer</option>
+                  </optgroup>
                 </select>
               </form>
             </div>
@@ -74,7 +86,12 @@
           </div>
           <!-- visual output is displayed here -->
           <div class="center" id="visualizer">
-            <canvas id="visual">
+            <div class="center" id="display">
+              <canvas id="visual"></canvas>
+            </div>
+            <div class="center" id="zoom">
+              <input type="range" id="zoomlevel" min="0.000001" max="4" value="1" step=".000001" oninput="generateVisual()">
+            </div>
           </div>
           <script>
           function switchUnits(){
@@ -85,69 +102,53 @@
             document.getElementById("secondarySelect").value = holdSelect;
             document.getElementById("secondaryInput").value = holdInput;
           }
-          function checkInput(){
-            var input = document.getElementById('primaryInput').value;
-            if (input != '') {
-                document.getElementById('convertButton').disabled = false;
-            }
-            else {
-                document.getElementById('convertButton').disabled = true;
-            }
-          }
-          /*
-          unimplimented unit conversion function for distance using general units
-          first parameter is the input in the primary div class, the second parameter
-          unit1 is the first unit to be converted to meters for ease of conversion
-          and reduce hard coding. than it will take the input already converted to meters
-          and convert it to the unit in unit2
-          */
           function calculateConversion(input, primaryUnit, secondaryUnit){
             var meter; //this is the base unit
             if(primaryUnit == secondaryUnit){
               return input
             }
             switch(primaryUnit){
-              case "millimeter":
+              case "mm":
                 meter = input*.001;
                 break;
-              case "centimeter":
+              case "cm":
                 meter = input*0.01;
                 break;
-              case "meter":
+              case "m":
                 meter = input;
                 break;
-              case "kilometer":
+              case "km":
                 meter = input*1000;
                 break;
-              case "inch":
+              case "in":
                 meter = input *0.0254;
                 break;
-              case "feet":
+              case "ft":
                 meter = input *0.3048;
                 break;
-              case "yard":
+              case "yd":
                 meter = input *0.9144;
                 break;
-              case "mile":
+              case "mi":
                 meter = input *1609.34;
                 break;
             }
             switch(secondaryUnit){
-              case "millimeter":
+              case "mm":
                 return meter*1000;
-              case "centimeter":
+              case "cm":
                 return meter *100;
-              case "meter":
+              case "m":
                 return meter;
-              case "kilometer":
+              case "km":
                 return meter *0.001;
-              case "inch":
+              case "in":
                 return meter*39.370078740157;
-              case "feet":
+              case "ft":
                 return meter*3.2808398950131;
-              case "yard":
+              case "yd":
                 return meter*1.0936132983377;
-              case "mile":
+              case "mi":
                 return meter *0.00062137119223733;
             }
             return meter;

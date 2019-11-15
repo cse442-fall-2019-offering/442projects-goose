@@ -36,11 +36,17 @@
               <form>
                 <input type="number" id="primaryInput" placeholder="Enter a value here" onkeyup="checkInput(); limit(this);" onkeydown="limit(this);">
                 <select id="primarySelect">
-                  <option value="mps">Meters per Second</option>
-                  <option value="kph">Kilometers per Hour</option>
-                  <option value="fps">Feet per Second</option>
-                  <option value="mph">Miles per Hour</option>
-                  <option value="knot">Knots</option>
+                  <optgroup label="SI Units">
+                    <option value="m/s">Meters per Second</option>
+                    <option value="km/h">Kilometers per Hour</option>
+                  </optgroup>
+                  <optgroup label="US Customary">
+                    <option value="ft/s">Feet per Second</option>
+                    <option value="mph">Miles per Hour</option>
+                  </optgroup>
+                  <optgroup label="Other">
+                    <option value="kn">Knots</option>
+                  </optgroup>
                 </select>
               </form>
             </div>
@@ -54,11 +60,17 @@
               <form>
                 <input type="number" id="secondaryInput" placeholder="Result shows up here" readonly="readonly">
                 <select id="secondarySelect">
-                  <option value="mps">Meters per Second</option>
-                  <option value="kph">Kilometers per Hour</option>
-                  <option value="fps">Feet per Second</option>
-                  <option value="mph">Miles per Hour</option>
-                  <option value="knot">Knots</option>
+                  <optgroup label="SI Units">
+                    <option value="m/s">Meters per Second</option>
+                    <option value="km/h">Kilometers per Hour</option>
+                  </optgroup>
+                  <optgroup label="US Customary">
+                    <option value="ft/s">Feet per Second</option>
+                    <option value="mph">Miles per Hour</option>
+                  </optgroup>
+                  <optgroup label="Other">
+                    <option value="kn">Knots</option>
+                  </optgroup>
                 </select>
               </form>
             </div>
@@ -70,7 +82,12 @@
           </div>
           <!-- visual output is displayed here -->
           <div class="center" id="visualizer">
-              <canvas id="visual">
+            <div class="center" id="display">
+              <canvas id="visual"></canvas>
+            </div>
+            <div class="center" id="zoom">
+              <input type="range" id="zoomlevel" min="0.000001" max="4" value="1" step=".000001" oninput="generateVisual()">
+            </div>
           </div>
           <div class="center" id="EquationVisClass">
             <canvas id="EquationVis">

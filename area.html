@@ -35,21 +35,27 @@
             <form>
               <input type="number" id="primaryInput" placeholder="Enter a value here" onkeyup="checkInput(); limit(this);" onkeydown="limit(this);">
               <select id="primarySelect">
-                <option value="mm^2">Square millimeters</option>
-                <option value="cm^2">Square centimeters</option>
-                <option value="m^2">Square meters</option>
-                <option value="km^2">Square kilometers</option>
-                <option value="ha">Hectares</option>
-                <option value="in^2">Square inches</option>
-                <option value="ft^2">Square feet</option>
-                <option value="yd^2">Square yards</option>
-                <option value="mi^2">Square miles</option>
-                <option value="ac">Acres</option>
+                <optgroup label="US Customary">
+                  <option value="in²">Square inches</option>
+                  <option value="ft²">Square feet</option>
+                  <option value="yd²">Square yards</option>
+                  <option value="mi²">Square miles</option>
+                  <option value="ac">Acres</option>>
+                </optgroup>
+                <optgroup label="SI Units">
+                  <option value="mm²">Square millimeters</option>
+                  <option value="cm²">Square centimeters</option>
+                  <option value="m²">Square meters</option>
+                  <option value="km²">Square kilometers</option>
+                </optgroup>
+                <optgroup label="Metric">
+                  <option value="ha">Hectares</option>
+                </optgroup>
               </select>
             </form>
           </div>
           <div id="swap">
-            <button class="swapButton" onclick="switchUnits(); generateVisual();">
+            <button class="swapButton" onclick="switchUnits(); checkInput(); generateVisual();">
               ⇌
             </button>
           </div>
@@ -58,16 +64,22 @@
             <form>
               <input type="number" id="secondaryInput" placeholder="Result shows up here" readonly="readonly">
               <select id="secondarySelect">
-                <option value="mm^2">Square millimeters</option>
-                <option value="cm^2">Square centimeters</option>
-                <option value="m^2">Square meters</option>
-                <option value="km^2">Square kilometers</option>
-                <option value="ha">Hectares</option>
-                <option value="in^2">Square inches</option>
-                <option value="ft^2">Square feet</option>
-                <option value="yd^2">Square yards</option>
-                <option value="mi^2">Square miles</option>
-                <option value="ac">Acres</option>
+                <optgroup label="US Customary">
+                  <option value="in²">Square inches</option>
+                  <option value="ft²">Square feet</option>
+                  <option value="yd²">Square yards</option>
+                  <option value="mi²">Square miles</option>
+                  <option value="ac">Acres</option>>
+                </optgroup>
+                <optgroup label="SI Units">
+                  <option value="mm²">Square millimeters</option>
+                  <option value="cm²">Square centimeters</option>
+                  <option value="m²">Square meters</option>
+                  <option value="km²">Square kilometers</option>
+                </optgroup>
+                <optgroup label="Metric">
+                  <option value="ha">Hectares</option>
+                </optgroup>
               </select>
             </form>
           </div>
@@ -79,7 +91,12 @@
         </div>
           <!-- visual output is displayed here -->
           <div class="center" id="visualizer">
-              <canvas id="visual">
+            <div class="center" id="display">
+              <canvas id="visual"></canvas>
+            </div>
+            <div class="center" id="zoom">
+              <input type="range" id="zoomlevel" min="0.000001" max="4" value="1" step=".000001" oninput="generateVisual()">
+            </div>
           </div>
         </main>
     </body>

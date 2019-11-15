@@ -36,10 +36,10 @@
             <div id="primary">
               <form>
                 <input type="number" id="primaryInput" placeholder="Enter a value here" onkeyup="checkInput(); limit(this);" onkeydown="limit(this);">
-                <select id="primarySelect">
-                  <option value="Celsius">Celsius</option>
-                  <option value="Kelvin">Kelvin</option>
-                  <option value="Fahrenheit">Fahrenheit</option>
+                <select id="primarySelect" onchange="checkInput();">
+                  <option value="°F">Fahrenheit</option>
+                  <option value="°C">Celsius</option>
+                  <option value="K">Kelvin</option>
                 </select>
               </form>
             </div>
@@ -52,10 +52,10 @@
             <div id="secondary">
               <form>
                 <input type="number" id="secondaryInput" placeholder="Result shows up here" readonly="readonly">
-                <select id="secondarySelect">
-                  <option value="Celsius">Celsius</option>
-                  <option value="Kelvin">Kelvin</option>
-                  <option value="Fahrenheit">Fahrenheit</option>
+                <select id="secondarySelect" onchange="checkInput();">
+                  <option value="°F">Fahrenheit</option>
+                  <option value="°C">Celsius</option>
+                  <option value="K">Kelvin</option>
                 </select>
               </form>
             </div>
@@ -67,7 +67,12 @@
           </div>
           <!-- visual output is displayed here -->
           <div class="center" id="visualizer">
-            <canvas id="visual">
+            <div class="center" id="display">
+              <canvas id="visual"></canvas>
+            </div>
+            <div class="center" id="zoom">
+              <input type="range" id="zoomlevel" min="0.000001" max="4" value="1" step=".000001" oninput="generateVisualTemp()">
+            </div>
           </div>
           <div class="center" id="EquationVisClass">
             <canvas id="EquationVis">
@@ -81,34 +86,25 @@
               document.getElementById("secondarySelect").value = holdSelect;
               document.getElementById("secondaryInput").value = holdInput;
             }
-            function checkInput(){
-              var input = document.getElementById('primaryInput').value;
-              if (input != '') {
-                  document.getElementById('convertButton').disabled = false;
-              }
-              else {
-                  document.getElementById('convertButton').disabled = true;
-              }
-            }
             function calculateConversion(input, primaryUnit, secondaryUnit){
               var temp; //this is the base unit
               switch(primaryUnit){
-                case "Kelvin":
+                case "K":
                   temp = input - 273.15;
                   break;
-                case "Celsius":
+                case "°C":
                   temp = input;
                   break;
-                case "Fahrenheit":
+                case "°F":
                   temp = (input - 32) / 1.8;
                   break;
               }
               switch(secondaryUnit){
-                case "Kelvin":
+                case "K":
                   return (temp * 1) + 273.15;
-                case "Celsius":
+                case "°C":
                   return temp;
-                case "Fahrenheit":
+                case "°F":
                   return (temp * 1.8) + 32;
               }
               return temp;

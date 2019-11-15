@@ -25,9 +25,9 @@ function generateVisual()
 {
   /* creating the canvas */
   var canvas = document.getElementById("visual");
-  var visualizer = document.getElementById("visualizer");
-  canvas.width = visualizer.offsetWidth-50;
-  canvas.height = visualizer.offsetHeight-50;
+  var display = document.getElementById("display");
+  canvas.width = display.offsetWidth-50;
+  canvas.height = display.offsetHeight-50;
   var ctx = canvas.getContext("2d");
   ctx.fillStyle = "#FFFFFF";
   ctx.fillRect(0, 0, canvas.width, canvas.width);
@@ -43,11 +43,52 @@ function generateVisual()
   ctx.strokeStyle = String(getComputedStyle(document.documentElement).getPropertyValue('--secondary-color'));
   ctx.stroke();
   /* drawing the markings in the primary axis */
-  var lowerBoundPrimary = parseFloat(document.getElementById("primaryInput").value) - (canvas.width/2)/20;
-  var upperBoundPrimary = parseFloat(document.getElementById("primaryInput").value) + (canvas.width/2)/20;
+  var zoomlevel = document.getElementById("zoomlevel").value;
+  var lowerBoundPrimary = parseFloat(document.getElementById("primaryInput").value) - (canvas.width/2)/(20**zoomlevel);
+  var upperBoundPrimary = parseFloat(document.getElementById("primaryInput").value) + (canvas.width/2)/(20**zoomlevel);
   var scaleFactor = canvas.width/(upperBoundPrimary - lowerBoundPrimary);
-  for (var i = Math.ceil(lowerBoundPrimary); i <= upperBoundPrimary; i++){
-    if (i != document.getElementById("primaryInput").value && i >= 0){
+  var increment = 1;
+  while (canvas.width/((upperBoundPrimary - lowerBoundPrimary)/increment) > 60){
+    increment /= 10;
+  }
+  while (canvas.width/((upperBoundPrimary - lowerBoundPrimary)/increment) < 15){
+    increment *= 10;
+  }
+  if (lowerBoundPrimary <= 0){
+    ctx.save();
+    ctx.globalAlpha = 1.0;
+    ctx.lineWidth = 5;
+    ctx.beginPath();
+    ctx.moveTo(0, canvas.height/2 - 3);
+    ctx.lineTo(scaleFactor*(0-lowerBoundPrimary), canvas.height/2 - 3);
+    ctx.strokeStyle = "#FFFFFF";
+    ctx.stroke();
+    ctx.beginPath();
+    ctx.moveTo(0, canvas.height/2 + 3);
+    ctx.lineTo(scaleFactor*(0-lowerBoundPrimary), canvas.height/2 + 3);
+    ctx.strokeStyle = "#FFFFFF";
+    ctx.stroke();
+    ctx.restore();
+
+    ctx.beginPath();
+    ctx.moveTo(scaleFactor*(0-lowerBoundPrimary), canvas.height/2.6);
+    ctx.lineTo(scaleFactor*(0-lowerBoundPrimary), canvas.height - canvas.height/2.6);
+    ctx.strokeStyle = "#FF0000";
+    ctx.stroke();
+    ctx.font = "10px Overpass";
+    ctx.fillStyle = "#000000";
+    ctx.save();
+    ctx.textAlign = "left";
+    ctx.textBaseline = "middle";
+    ctx.translate(scaleFactor*(0-lowerBoundPrimary), canvas.height/2.8);
+    ctx.rotate(-60 * Math.PI / 180);
+    ctx.fillText(0, 0, 0);
+    ctx.restore();
+  }
+  for (var i = Math.ceil(lowerBoundPrimary/increment)*increment; i <= upperBoundPrimary; i += increment){
+    if (i != document.getElementById("primaryInput").value && i > 0){
+      ctx.font = "10px Overpass";
+      ctx.fillStyle = "#000000";
       ctx.beginPath();
       ctx.moveTo(scaleFactor*(i-lowerBoundPrimary), canvas.height/2.6);
       ctx.lineTo(scaleFactor*(i-lowerBoundPrimary), canvas.height/2 - 3);
@@ -60,7 +101,12 @@ function generateVisual()
       ctx.textBaseline = "middle";
       ctx.translate(scaleFactor*(i-lowerBoundPrimary), canvas.height/2.8);
       ctx.rotate(-60 * Math.PI / 180);
-      ctx.fillText(i, 0, 0);
+      if (increment < 1){
+        ctx.fillText(i.toFixed(Math.abs(Math.floor(Math.log10(increment)))), 0, 0);
+      }
+      else{
+        ctx.fillText(i, 0, 0);
+      }
       ctx.restore();
     }
   }
@@ -75,8 +121,18 @@ function generateVisual()
   while (canvas.width/((upperBoundSecondary - lowerBoundSecondary)/increment) < 15){
     increment *= 10;
   }
+  if (lowerBoundSecondary <= 0){
+    ctx.font = "10px Overpass";
+    ctx.save();
+    ctx.textAlign = "right";
+    ctx.textBaseline = "middle";
+    ctx.translate(scaleFactor*(0-lowerBoundSecondary), canvas.height - canvas.height/2.8);
+    ctx.rotate(-60 * Math.PI / 180);
+    ctx.fillText(0, 0, 0);
+    ctx.restore();
+  }
   for (var i = Math.ceil(lowerBoundSecondary/increment)*increment; i <= upperBoundSecondary; i += increment){
-    if (i != document.getElementById("secondaryInput").value && i >= 0){
+    if (i != document.getElementById("secondaryInput").value && i > 0){
       ctx.beginPath();
       ctx.moveTo(scaleFactor*(i-lowerBoundSecondary), canvas.height/2 + 3);
       ctx.lineTo(scaleFactor*(i-lowerBoundSecondary), canvas.height - canvas.height/2.6);
@@ -102,8 +158,6 @@ function generateVisual()
   ctx.fillStyle = "#000000";
   ctx.textAlign = "left";
   ctx.textBaseline = "middle";
-  ctx.fillText(document.getElementById("primarySelect").value, 10, 30);
-  ctx.fillText(document.getElementById("secondarySelect").value, 10, canvas.height-30);
   /* labelling the converted unit */
   ctx.beginPath();
   ctx.moveTo(canvas.width/2, canvas.height/2.7);
@@ -113,17 +167,17 @@ function generateVisual()
   ctx.stroke();
   ctx.textAlign = "center";
   ctx.textBaseline = "middle";
-  ctx.fillText(document.getElementById("primaryInput").value, canvas.width/2, 30);
-  ctx.fillText(document.getElementById("secondaryInput").value, canvas.width/2, canvas.height-30);
+  ctx.fillText(document.getElementById("primaryInput").value + " " + document.getElementById("primarySelect").value, canvas.width/2, 30);
+  ctx.fillText(document.getElementById("secondaryInput").value + " " + document.getElementById("secondarySelect").value, canvas.width/2, canvas.height-30);
 }
 
 function generateVisualTemp()
 {
   /* creating the canvas */
   var canvas = document.getElementById("visual");
-  var visualizer = document.getElementById("visualizer");
-  canvas.width = visualizer.offsetWidth-50;
-  canvas.height = visualizer.offsetHeight-50;
+  var display = document.getElementById("display");
+  canvas.width = display.offsetWidth-50;
+  canvas.height = display.offsetHeight-50;
   var ctx = canvas.getContext("2d");
   ctx.fillStyle = "#FFFFFF";
   ctx.fillRect(0, 0, canvas.width, canvas.width);
@@ -139,11 +193,50 @@ function generateVisualTemp()
   ctx.strokeStyle = String(getComputedStyle(document.documentElement).getPropertyValue('--secondary-color'));
   ctx.stroke();
   /* drawing the markings in the primary axis */
-  var lowerBoundPrimary = parseFloat(document.getElementById("primaryInput").value) - (canvas.width/2)/20;
-  var upperBoundPrimary = parseFloat(document.getElementById("primaryInput").value) + (canvas.width/2)/20;
+  var zoomlevel = document.getElementById("zoomlevel").value;
+  var lowerBoundPrimary = parseFloat(document.getElementById("primaryInput").value) - (canvas.width/2)/(20**zoomlevel);
+  var upperBoundPrimary = parseFloat(document.getElementById("primaryInput").value) + (canvas.width/2)/(20**zoomlevel);
   var scaleFactor = canvas.width/(upperBoundPrimary - lowerBoundPrimary);
-  for (var i = Math.ceil(lowerBoundPrimary); i <= upperBoundPrimary; i++){
-    if (i != document.getElementById("primaryInput").value && calculateConversion(i, document.getElementById("primarySelect").value, "Kelvin") >= 0){
+  var increment = 1;
+  while (canvas.width/((upperBoundPrimary - lowerBoundPrimary)/increment) > 60){
+    increment /= 10;
+  }
+  while (canvas.width/((upperBoundPrimary - lowerBoundPrimary)/increment) < 15){
+    increment *= 10;
+  }
+  if (calculateConversion(lowerBoundPrimary, document.getElementById("primarySelect").value, "K") <= 0){
+    ctx.save();
+    ctx.globalAlpha = 1.0;
+    ctx.lineWidth = 5;
+    ctx.beginPath();
+    ctx.moveTo(0, canvas.height/2 - 3);
+    ctx.lineTo(scaleFactor*(calculateConversion(0, "K", document.getElementById("primarySelect").value)-lowerBoundPrimary), canvas.height/2 - 3);
+    ctx.strokeStyle = "#FFFFFF";
+    ctx.stroke();
+    ctx.beginPath();
+    ctx.moveTo(0, canvas.height/2 + 3);
+    ctx.lineTo(scaleFactor*(calculateConversion(0, "K", document.getElementById("primarySelect").value)-lowerBoundPrimary), canvas.height/2 + 3);
+    ctx.strokeStyle = "#FFFFFF";
+    ctx.stroke();
+    ctx.restore();
+
+    ctx.beginPath();
+    ctx.moveTo(scaleFactor*(calculateConversion(0, "K", document.getElementById("primarySelect").value)-lowerBoundPrimary), canvas.height/2.6);
+    ctx.lineTo(scaleFactor*(calculateConversion(0, "K", document.getElementById("primarySelect").value)-lowerBoundPrimary), canvas.height - canvas.height/2.6);
+    ctx.strokeStyle = "#FF0000";
+    ctx.stroke();
+    ctx.font = "10px Overpass";
+    ctx.fillStyle = "#000000";
+    ctx.save();
+    ctx.textAlign = "left";
+    ctx.textBaseline = "middle";
+    ctx.translate(scaleFactor*(calculateConversion(0, "K", document.getElementById("primarySelect").value)-lowerBoundPrimary), canvas.height/2.8);
+    ctx.rotate(-60 * Math.PI / 180);
+    ctx.fillText(calculateConversion(0, "K", document.getElementById("primarySelect").value).toFixed(2), 0, 0);
+    ctx.restore();
+  }
+  for (var i = Math.ceil(lowerBoundPrimary/increment)*increment; i <= upperBoundPrimary; i += increment){
+    if (i != document.getElementById("primaryInput").value && calculateConversion(i, document.getElementById("primarySelect").value, "K") > 0){
       ctx.beginPath();
       ctx.moveTo(scaleFactor*(i-lowerBoundPrimary), canvas.height/2.6);
       ctx.lineTo(scaleFactor*(i-lowerBoundPrimary), canvas.height/2 - 3);
@@ -156,7 +249,12 @@ function generateVisualTemp()
       ctx.textBaseline = "middle";
       ctx.translate(scaleFactor*(i-lowerBoundPrimary), canvas.height/2.8);
       ctx.rotate(-60 * Math.PI / 180);
-      ctx.fillText(i, 0, 0);
+      if (increment < 1){
+        ctx.fillText(i.toFixed(Math.abs(Math.floor(Math.log10(increment)))), 0, 0);
+      }
+      else{
+        ctx.fillText(i, 0, 0);
+      }
       ctx.restore();
     }
   }
@@ -171,8 +269,18 @@ function generateVisualTemp()
   while (canvas.width/((upperBoundSecondary - lowerBoundSecondary)/increment) < 15){
     increment *= 10;
   }
+  if (calculateConversion(lowerBoundSecondary, document.getElementById("secondarySelect").value, "K") <= 0){
+    ctx.font = "10px Overpass";
+    ctx.save();
+    ctx.textAlign = "right";
+    ctx.textBaseline = "middle";
+    ctx.translate(scaleFactor*(calculateConversion(0, "K", document.getElementById("secondarySelect").value)-lowerBoundSecondary), canvas.height - canvas.height/2.8);
+    ctx.rotate(-60 * Math.PI / 180);
+    ctx.fillText(calculateConversion(0, "K", document.getElementById("secondarySelect").value).toFixed(2), 0, 0);
+    ctx.restore();
+  }
   for (var i = Math.ceil(lowerBoundSecondary/increment)*increment; i <= upperBoundSecondary; i += increment){
-    if (i != document.getElementById("secondaryInput").value && calculateConversion(i, document.getElementById("secondarySelect").value, "Kelvin") >= 0){
+    if (i != document.getElementById("secondaryInput").value && calculateConversion(i, document.getElementById("secondarySelect").value, "K") > 0){
       ctx.beginPath();
       ctx.moveTo(scaleFactor*(i-lowerBoundSecondary), canvas.height/2 + 3);
       ctx.lineTo(scaleFactor*(i-lowerBoundSecondary), canvas.height - canvas.height/2.6);
@@ -198,8 +306,6 @@ function generateVisualTemp()
   ctx.fillStyle = "#000000";
   ctx.textAlign = "left";
   ctx.textBaseline = "middle";
-  ctx.fillText(document.getElementById("primarySelect").value, 10, 30);
-  ctx.fillText(document.getElementById("secondarySelect").value, 10, canvas.height-30);
   /* labelling the converted unit */
   ctx.beginPath();
   ctx.moveTo(canvas.width/2, canvas.height/2.7);
@@ -209,6 +315,6 @@ function generateVisualTemp()
   ctx.stroke();
   ctx.textAlign = "center";
   ctx.textBaseline = "middle";
-  ctx.fillText(document.getElementById("primaryInput").value, canvas.width/2, 30);
-  ctx.fillText(document.getElementById("secondaryInput").value, canvas.width/2, canvas.height-30);
+  ctx.fillText(document.getElementById("primaryInput").value + " " + document.getElementById("primarySelect").value, canvas.width/2, 30);
+  ctx.fillText(document.getElementById("secondaryInput").value + " " + document.getElementById("secondarySelect").value, canvas.width/2, canvas.height-30);
 }
