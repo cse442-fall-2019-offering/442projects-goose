@@ -74,6 +74,12 @@ main form input, select, option, button{
   height: 50px;
   width: 45%;
 }
+#primaryTZ {
+  background-color: var(--accent-color);
+  float: left;
+  height: 65px;
+  width: 45%;
+}
 #swap{
   text-align: center;
   float: left;
@@ -84,6 +90,12 @@ main form input, select, option, button{
   background-color: var(--accent-color);
   float: right;
   height: 50px;
+  width: 45%;
+}
+#secondaryTZ {
+  background-color: var(--accent-color);
+  float: right;
+  height: 65px;
   width: 45%;
 }
 #visualizer{
