@@ -35,9 +35,9 @@ function generateVisual()
   while (canvas.width/((upperBoundPrimary - lowerBoundPrimary)/increment) < 15){
     increment *= 10;
   }
-  document.getElementById("upTo").value = Math.floor(upperBoundPrimary/increment)*increment;
+  document.getElementById("upTo").value = (Math.floor(upperBoundPrimary/increment)*increment).toFixed(Math.abs(Math.floor(Math.log10(increment))));
   if (lowerBoundPrimary > 0){
-    document.getElementById("downTo").value = Math.ceil(lowerBoundPrimary/increment)*increment;
+    document.getElementById("downTo").value = (Math.ceil(lowerBoundPrimary/increment)*increment).toFixed(Math.abs(Math.floor(Math.log10(increment))));
     document.getElementById("downTo").disabled = false;
     document.getElementById("scrollDown").disabled = false;
   }
