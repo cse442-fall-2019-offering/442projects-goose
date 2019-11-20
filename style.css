@@ -166,7 +166,7 @@ main form input, select, option, button{
 
 }
 
-@media screen and (max-width: 633px) {
+@media screen and (max-width: 1080px) {
   nav{
     height: 120px;
   }
@@ -177,5 +177,30 @@ main form input, select, option, button{
     padding: 10px 10px;
     margin: 10px 10px;
   }
+}
 
+@media screen and (max-width: 557px) {
+  nav{
+    height: 180px;
+  }
+  nav ul li{
+    background-color: var(--accent-color);
+    display: inline-flex;
+    border: none;
+    padding: 10px 10px;
+    margin: 10px 10px;
+  }
+}
+
+@media screen and (max-width: 447px) {
+  nav{
+    height: 240px;
+  }
+  nav ul li{
+    background-color: var(--accent-color);
+    display: inline-flex;
+    border: none;
+    padding: 10px 10px;
+    margin: 10px 10px;
+  }
 }
