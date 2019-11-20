@@ -1,5 +1,5 @@
 /*
- *  speedConverter takes in a number correspnding to a quantity to be converted
+ *  areaConversion takes in a number correspnding to a quantity to be converted
  *  and two strings correspondin to the orriginal units and the units the
  *  quantity is being converted to. A number is returned equal to the converted
  *  quantity
