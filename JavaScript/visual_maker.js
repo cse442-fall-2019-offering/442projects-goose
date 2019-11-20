@@ -8,7 +8,7 @@ function generateVisual()
   var canvas = document.getElementById("visual");
   var display = document.getElementById("display");
   canvas.width = display.offsetWidth-50;
-  canvas.height = display.offsetHeight-50;
+  canvas.height = display.offsetHeight-30;
   var ctx = canvas.getContext("2d");
   ctx.fillStyle = "#FFFFFF";
   ctx.fillRect(0, 0, canvas.width, canvas.width);
@@ -35,7 +35,16 @@ function generateVisual()
   while (canvas.width/((upperBoundPrimary - lowerBoundPrimary)/increment) < 15){
     increment *= 10;
   }
+  document.getElementById("upTo").value = Math.floor(upperBoundPrimary/increment)*increment;
+  if (lowerBoundPrimary > 0){
+    document.getElementById("downTo").value = Math.ceil(lowerBoundPrimary/increment)*increment;
+    document.getElementById("downTo").disabled = false;
+    document.getElementById("scrollDown").disabled = false;
+  }
   if (lowerBoundPrimary <= 0){
+    document.getElementById("downTo").value = "";
+    document.getElementById("downTo").disabled = true;
+    document.getElementById("scrollDown").disabled = true;
     ctx.save();
     ctx.globalAlpha = 1.0;
     ctx.lineWidth = 5;
