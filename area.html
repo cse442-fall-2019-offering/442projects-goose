@@ -8,6 +8,7 @@
         <script src="JavaScript/unit_switcher.js" charset="utf-8"></script>
         <script src="JavaScript/input_checker.js" charset="utf-8"></script>
         <script src="JavaScript/area_conversion.js" charset="utf-8"></script>
+        <script src="JavaScript/area_equation_display.js" charset="utf-8"></script>
     </head>
     <body onresize="generateVisual()">
       <script type="text/javascript" src="Javascript/input_checker.js"></script>
@@ -51,7 +52,7 @@
             </form>
           </div>
           <div id="swap">
-            <button class="swapButton" onclick="switchUnits(); generateVisual();">
+            <button class="swapButton" onclick="switchUnits(); generateVisual(); generateEquation();">
               ⇌
             </button>
           </div>
@@ -75,13 +76,16 @@
           </div>
         </div>
         <div class="center">
-          <button id="convertButton" disabled="disabled" onclick="convertUnits(); generateVisual();">
+          <button id="convertButton" disabled="disabled" onclick="convertUnits(); generateVisual(); generateEquation();">
             Convert
           </button>
         </div>
           <!-- visual output is displayed here -->
           <div class="center" id="visualizer">
               <canvas id="visual">
+          </div>
+          <div class="center" id="EquationVisClass">
+            <canvas id="EquationVis">
           </div>
         </main>
     </body>
