@@ -4,12 +4,13 @@
         <title>Converter</title>
         <link href="style.css" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css?family=Overpass&display=swap" rel="stylesheet">
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
         <script src="JavaScript/time_zones.js" charset="utf-8"></script>
         <script src="JavaScript/visual_maker.js" charset="utf-8"></script>
         <script src="JavaScript/unit_switcher.js" charset="utf-8"></script>
         <script src="JavaScript/input_checker.js" charset="utf-8"></script>
     </head>
-    <body onload="generateOptions()">
+    <body onload="generateOptions();">
         <!-- TODO: add tiles, text inputs, dropdowns, and swap box -->
         <!-- TODO: change dropdown menu based on tile selection -->
         <!-- TODO: create visual output based on entered values -->
@@ -32,9 +33,11 @@
         </header>
         <main>
           <!-- values are inputted here -->
+          <div data-ng-app="">
+            <p>This is a test: {{ 5 + 5 }}</p>
           <div id="converter">
             <!-- select one unit here -->
-            <div id="primary">
+            <div id="primaryTZ">
               <form>
                 <input type="datetime-local" name="primary" id="primaryInput" placeholder="Enter a value here" onkeyup="checkInput();">
                 <select id="primarySelect">
@@ -48,9 +51,9 @@
               </button>
             </div>
             <!-- select the other unit here -->
-            <div id="secondary">
+            <div id="secondaryTZ">
               <form>
-                <input type="text" id="secondaryInput" placeholder="Result shows up here" readonly>
+                <input type="text" id="secondaryInput" placeholder="Result shows up here" ng-model="modelSecondary" readonly>
                 <select id="secondarySelect">
 
                 </select>
@@ -64,8 +67,11 @@
           </div>
           <!-- visual output is displayed here -->
           <div class="center" id="visualizer">
-            <canvas id="visual">
+            <canvas id="clockFrom" width="300" height="300" text-align="left;" style="background-color:#333"></canvas>
+            <canvas width="400" height="300" text-align="center;" style="background-color:#FFF"></canvas>
+            <canvas id="clockTo" width="300" height="300" text-align="right;" style="background-color:#333"></canvas>
           </div>
+        </div>
         </main>
     </body>
 </html>
