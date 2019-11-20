@@ -7,12 +7,11 @@
         <script src="JavaScript/limit_input.js"></script>
         <script src="JavaScript/unit_switcher.js" charset="utf-8"></script>
         <script src="JavaScript/input_checker.js" charset="utf-8"></script>
-        <script src="JavaScript/area_conversion.js" charset="utf-8"></script>
-        <script src="JavaScript/area_equation_display.js" charset="utf-8"></script>
+        <script src="JavaScript/mass_weight.js" charset="utf-8"></script>
     </head>
     <body onresize="generateVisual()">
       <script type="text/javascript" src="Javascript/input_checker.js"></script>
-      <script type="text/javascript" src="Javascript/area_conversion.js"></script>
+      <script type="text/javascript" src="Javascript/mass_weight.js"></script>
       <script type="text/javascript" src="Javascript/visual_maker.js"></script>
       <script type="text/javascript" src="Javascript/unit_switcher.js"></script>
       <header>
@@ -21,13 +20,13 @@
             <ul>
               <a href="temp.html">Temperature</a>
               <a href="index.html">Length</a>
-              <a class="active" href="area.html">Area</a>
+              <a href="area.html">Area</a>
               <a href="vol.html">Volume</a>
               <a href="time.html">Time</a>
               <a href="speed.html">Speed</a>
               <a href="timeZones.html">Time Zones</a>
               <a href="currency.html">Currency</a>
-              <a href="mass_weight.html">Mass and Weight</a>
+              <a class="active" href="mass_weight.html">Mass and Weight</a>
             </ul>
         </nav>
       </header>
@@ -39,21 +38,18 @@
             <form>
               <input type="number" id="primaryInput" placeholder="Enter a value here" onkeyup="checkInput(); limit(this);" onkeydown="limit(this);">
               <select id="primarySelect">
-                <option value="mm^2">Square millimeters</option>
-                <option value="cm^2">Square centimeters</option>
-                <option value="m^2">Square meters</option>
-                <option value="km^2">Square kilometers</option>
-                <option value="ha">Hectares</option>
-                <option value="in^2">Square inches</option>
-                <option value="ft^2">Square feet</option>
-                <option value="yd^2">Square yards</option>
-                <option value="mi^2">Square miles</option>
-                <option value="ac">Acres</option>
+                <option value="mg">Milligrams</option>
+                <option value="g">Grams</option>
+                <option value="kg">Kilograms</option>
+                <option value="t">Metric Tonnes</option>
+                <option value="oz">Ounces</option>
+                <option value="lb">Pounds</option>
+                <option value="tons">US Tons</option>
               </select>
             </form>
           </div>
           <div id="swap">
-            <button class="swapButton" onclick="switchUnits(); generateVisual(); generateEquation();">
+            <button class="swapButton" onclick="switchUnits(); generateVisual();">
               ⇌
             </button>
           </div>
@@ -62,31 +58,25 @@
             <form>
               <input type="number" id="secondaryInput" placeholder="Result shows up here" readonly="readonly">
               <select id="secondarySelect">
-                <option value="mm^2">Square millimeters</option>
-                <option value="cm^2">Square centimeters</option>
-                <option value="m^2">Square meters</option>
-                <option value="km^2">Square kilometers</option>
-                <option value="ha">Hectares</option>
-                <option value="in^2">Square inches</option>
-                <option value="ft^2">Square feet</option>
-                <option value="yd^2">Square yards</option>
-                <option value="mi^2">Square miles</option>
-                <option value="ac">Acres</option>
+                    <option value="mg">Milligrams</option>
+                    <option value="g">Grams</option>
+                    <option value="kg">Kilograms</option>
+                    <option value="t">Metric Tonnes</option>
+                    <option value="oz">Ounces</option>
+                    <option value="lb">Pounds</option>
+                    <option value="tons">US Tons</option>
               </select>
             </form>
           </div>
         </div>
         <div class="center">
-          <button id="convertButton" disabled="disabled" onclick="convertUnits(); generateVisual(); generateEquation();">
+          <button id="convertButton" disabled="disabled" onclick="convertUnits(); generateVisual();">
             Convert
           </button>
         </div>
           <!-- visual output is displayed here -->
           <div class="center" id="visualizer">
               <canvas id="visual">
-          </div>
-          <div class="center" id="EquationVisClass">
-            <canvas id="EquationVis">
           </div>
         </main>
     </body>
