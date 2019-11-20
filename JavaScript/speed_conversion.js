@@ -48,3 +48,4 @@ function calculateConversion(input, primaryUnit, secondaryUnit){
     document.getElementById("secondaryInput").value = calculateConversion(input, primaryUnit, secondaryUnit);
 
   }
+  
