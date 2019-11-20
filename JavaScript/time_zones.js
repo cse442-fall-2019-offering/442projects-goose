@@ -47,6 +47,7 @@ function convertTimeZones(){
       if(this.readyState == 4 && this.status == 200){
       var obj = JSON.parse(Http.responseText);
       var retTime = obj["toTimestamp"];
+      generateClocks(retTime);
       var date = new Date(retTime * 1000);
       var year = date.getFullYear();
       var month = date.getMonth() + 1;
@@ -65,23 +66,24 @@ function convertTimeZones(){
 }
 
   //Fuction to generate visual clocks for display on conversion
-  function generateClocks(){
+  function generateClocks(timeTo){
 
     var clocks = ['clockFrom', 'clockTo'];
 
     for (var i = 0; i < clocks.length; i++) {
       var canvas = document.getElementById(clocks[i]);
       var ctx = canvas.getContext("2d");
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
       var radius = canvas.height / 2;
       ctx.translate(radius, radius);
       radius = radius * 0.90
-      drawClock();
+      drawClock(i);
     }
 
-    function drawClock() {
+    function drawClock(count) {
       drawFace(ctx, radius);
       drawNumbers(ctx, radius);
-      drawTime(ctx, radius);
+      drawTime(ctx, radius, timeTo, count);
     }
 
     function drawFace(ctx, radius){
@@ -124,24 +126,30 @@ function convertTimeZones(){
       }
     }
 
-    function drawTime(ctx, radius){
+    function drawTime(ctx, radius, timeTo, count){
       var timeFromRaw = document.getElementById("primaryInput").value;
       var timeFrom = Math.floor(new Date(timeFromRaw).getTime() / 1000);
-      var now = new Date(timeFrom * 1000);
-      var hour = now.getHours();
-      var minute = now.getMinutes();
-      var second = now.getSeconds();
-      //hour
-      hour = hour%12;
-      hour = (hour*Math.PI/6)+(minute*Math.PI/(6*60))+(second*Math.PI/(360*60));
-      drawHand(ctx, hour, radius*0.5, radius*0.07);
-      //minute
-      minute = (minute*Math.PI/30)+(second*Math.PI/(30*60));
-      drawHand(ctx, minute, radius*0.8, radius*0.07);
-      // second
-      second = (second*Math.PI/30);
-      drawHand(ctx, second, radius*0.9, radius*0.02);
-    }
+      var time;
+      if (count == 0){
+        time = timeFrom;
+      } else {
+        time = timeTo
+      }
+        var now = new Date(time * 1000);
+        var hour = now.getHours();
+        var minute = now.getMinutes();
+        var second = now.getSeconds();
+        //hour
+        hour = hour%12;
+        hour = (hour*Math.PI/6)+(minute*Math.PI/(6*60))+(second*Math.PI/(360*60));
+        drawHand(ctx, hour, radius*0.5, radius*0.07);
+        //minute
+        minute = (minute*Math.PI/30)+(second*Math.PI/(30*60));
+        drawHand(ctx, minute, radius*0.8, radius*0.07);
+        // second
+        second = (second*Math.PI/30);
+        drawHand(ctx, second, radius*0.9, radius*0.02);
+      }
 
     function drawHand(ctx, pos, length, width) {
       ctx.beginPath();
