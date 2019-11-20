@@ -40,7 +40,7 @@ function calculateConversion(input, primaryUnit, secondaryUnit){
     }
   }
 
-  function convertSpeed(){
+  function convertUnits(){
     var input = document.getElementById("primaryInput").value;
     var primaryUnit = document.getElementById("primarySelect").value;
     var secondaryUnit = document.getElementById("secondarySelect").value;
@@ -48,4 +48,3 @@ function calculateConversion(input, primaryUnit, secondaryUnit){
     document.getElementById("secondaryInput").value = calculateConversion(input, primaryUnit, secondaryUnit);
 
   }
-  

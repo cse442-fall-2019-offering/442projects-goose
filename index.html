@@ -8,8 +8,14 @@
         <script src="JavaScript/unit_switcher.js" charset="utf-8"></script>
         <script src="JavaScript/input_checker.js" charset="utf-8"></script>
         <script src="JavaScript/visual_maker.js" charset="utf-8"></script>
+        <script src="JavaScript/scrollable.js" charset="utf-8"></script>
     </head>
     <body onresize="generateVisual(); generateEquation();">
+      <script type="text/javascript" src="Javascript/input_checker.js"></script>
+      <script type="text/javascript" src="Javascript/area_conversion.js"></script>
+      <script type="text/javascript" src="Javascript/visual_maker.js"></script>
+      <script type="text/javascript" src="Javascript/unit_switcher.js"></script>
+      <script type="text/javascript" src="Javascript/scrollable.js"></script>
         <header>
           <!-- select measures here -->
           <nav>
@@ -178,16 +184,6 @@
             document.getElementById("primaryInput").value = document.getElementById("secondaryInput").value;
             document.getElementById("secondarySelect").value = holdSelect;
             document.getElementById("secondaryInput").value = holdInput;
-          }
-          function scrollDown(){
-            document.getElementById("primaryInput").value = document.getElementById("downTo").value;
-            convertUnits();
-            generateVisual();
-          }
-          function scrollUp(){
-            document.getElementById("primaryInput").value = document.getElementById("upTo").value;
-            convertUnits();
-            generateVisual();
           }
           </script>
         </main>

@@ -10,6 +10,7 @@
         <script src="JavaScript/visual_maker.js" charset="utf-8"></script>
     </head>
     <body>
+      <script type="text/javascript" src="Javascript/scrollable.js"></script>
         <header>
           <!-- select measures here -->
           <nav>
@@ -66,6 +67,20 @@
           </div>
           <!-- visual output is displayed here -->
           <div class="center" id="visualizer">
+            <div class="center" id="scroll">
+              <button id="scrollDown" onclick="scrollDown()">
+                ⟨⟨
+              </button>
+              <form>
+                <input type="text" id="downTo" size="16" readonly="readonly">
+              </form>
+              <button id="scrollUp" onclick="scrollUp()">
+                ⟩⟩
+              </button>
+              <form>
+                <input type="text" id="upTo" size="16" readonly="readonly">
+              </form>
+            </div>
             <div class="center" id="display">
               <canvas id="visual"></canvas>
             </div>
