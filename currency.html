@@ -117,7 +117,7 @@
             </div>
           </div>
           <div class="center">
-            <button id="convertButton" disabled="disabled" onclick="convertCurrency(); generateVisual();">
+            <button id="convertButton" disabled="disabled" onclick="convertCurrency()"><!-- ; generateVisual();">-->
               Convert
             </button>
           </div>
@@ -126,6 +126,8 @@
               <canvas id="visual">
           </div>
           <script>
+
+            var conversionRatio;
 
             function convertCurrency(){
               var convertable = document.getElementById("primaryInput").value;
@@ -139,16 +141,19 @@
                   conversionRatio = data['rates'][unit2] / data['rates'][unit1]
                   var converted = Math.round(100 * convertable * conversionRatio) / 100.0;
                   document.getElementById("secondaryInput").value = converted;
-                  return converted;
+                  generateVisual()
                 });
             }
 
             function generateVisual(){
-              // var lowerBoundPrimary = parseFloat(document.getElementById("primaryInput").value) - 30;
-              // var upperBoundPrimary = parseFloat(document.getElementById("primaryInput").value) + 30;
-              // var lowerBoundSecond = convertCurrency(lowerBoundPrimary, document.getElementById("primarySelect").value, document.getElementById("secondarySelect").value);
-              // var upperBoundSecond = convertCurrency(upperBoundPrimary, document.getElementById("primarySelect").value, document.getElementById("secondarySelect").value);
-              // makeVisual(lowerBoundSecond, upperBoundSecond)
+              var convertable = parseFloat(document.getElementById("primaryInput").value);
+              var lowerBoundPrimary = convertable - 30;
+              var upperBoundPrimary = convertable + 30;
+              var converted = parseFloat(document.getElementById("secondaryInput").value);
+              var ratio = converted / convertable;
+              var lowerBoundSecond = lowerBoundPrimary * ratio;
+              var upperBoundSecond = upperBoundPrimary * ratio;
+              makeVisual(lowerBoundSecond, upperBoundSecond)
             }
 
           </script>
