@@ -125,7 +125,26 @@
           </div>
           <!-- visual output is displayed here -->
           <div class="center" id="visualizer">
-              <canvas id="visual">
+            <div class="center" id="scroll">
+              <button id="scrollDown" onclick="scrollDown()">
+                ⟨⟨
+              </button>
+              <form>
+                <input type="text" id="downTo" size="16" readonly="readonly">
+              </form>
+              <button id="scrollUp" onclick="scrollUp()">
+                ⟩⟩
+              </button>
+              <form>
+                <input type="text" id="upTo" size="16" readonly="readonly">
+              </form>
+            </div>
+            <div class="center" id="display">
+              <canvas id="visual"></canvas>
+            </div>
+            <div class="center" id="zoom">
+              <input type="range" id="zoomlevel" min="0.000001" max="4" value="1" step=".000001" oninput="generateVisual()">
+            </div>
           </div>
           <script>
 
@@ -147,16 +166,16 @@
                 });
             }
 
-            function generateVisual(){
-              var convertable = parseFloat(document.getElementById("primaryInput").value);
-              var lowerBoundPrimary = convertable - 30;
-              var upperBoundPrimary = convertable + 30;
-              var converted = parseFloat(document.getElementById("secondaryInput").value);
-              var ratio = converted / convertable;
-              var lowerBoundSecond = lowerBoundPrimary * ratio;
-              var upperBoundSecond = upperBoundPrimary * ratio;
-              makeVisual(lowerBoundSecond, upperBoundSecond)
-            }
+            // function generateVisual(){
+            //   var convertable = parseFloat(document.getElementById("primaryInput").value);
+            //   var lowerBoundPrimary = convertable - 30;
+            //   var upperBoundPrimary = convertable + 30;
+            //   var converted = parseFloat(document.getElementById("secondaryInput").value);
+            //   var ratio = converted / convertable;
+            //   var lowerBoundSecond = lowerBoundPrimary * ratio;
+            //   var upperBoundSecond = upperBoundPrimary * ratio;
+            //   makeVisual(lowerBoundSecond, upperBoundSecond)
+            // }
 
           </script>
         </main>
