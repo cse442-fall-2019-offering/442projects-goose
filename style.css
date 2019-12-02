@@ -68,10 +68,14 @@ input, select, option, button{
 #converter form {
   padding: 15px 25px;
 }
+#primarySelect, #secondarySelect{
+  width: 156.5px;
+  height: 21px;
+}
 #primary {
   background-color: var(--accent-color);
   float: left;
-  height: 50px;
+  height: 100%;
   width: 45%;
 }
 #swap{
@@ -83,7 +87,7 @@ input, select, option, button{
 #secondary {
   background-color: var(--accent-color);
   float: right;
-  height: 50px;
+  height: 100%;
   width: 45%;
 }
 #visualizer{
@@ -208,18 +212,12 @@ input, select, option, button{
 .center{
   text-align: center;
 }
-@media screen and (max-width: 745px) {
-  #primary{
-    height:65px;
-    width: 42%;
-    margin-right: 3%;
+@media screen and (max-width: 922px) {
+  #converter {
+    width: 100%;
+    height: 71px;
+    margin: 20px auto;
   }
-  #secondary{
-    height:65px;
-    width: 42%;
-    margin-left: 3%;
-  }
-
 }
 
 @media screen and (max-width: 1080px) {
