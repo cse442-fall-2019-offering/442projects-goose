@@ -24,10 +24,10 @@ function calculateConversion(input, primaryUnit, secondaryUnit){
         value = input * 0.3048;
         break;
       case "mph":
-        value = input * 0.44704;
+        value = input * 2.2369362920544;
         break;
       case "knots":
-        value = input * 0.51444444;
+        value = input * 1.9438444924406 ;
         break;
     }
     switch(secondaryUnit){
@@ -38,9 +38,9 @@ function calculateConversion(input, primaryUnit, secondaryUnit){
       case "ft/s":
         return value * 3.28083990;
       case "mph":
-        return value * 1.46666667;
+        return value * 0.44704;
       case "knots":
-        return value * 1.68780986;
+        return value * 0.51444444444444;
     }
   }
 
