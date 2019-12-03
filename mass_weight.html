@@ -39,13 +39,33 @@
         <form>
           <input type="number" id="primaryInput" placeholder="Enter a value here" onkeyup="checkInput(); limit(this);" onkeydown="limit(this);">
           <select id="primarySelect">
-            <option value="mg">Milligrams</option>
-            <option value="g">Grams</option>
-            <option value="kg">Kilograms</option>
-            <option value="t">Metric Tonnes</option>
-            <option value="oz">Ounces</option>
-            <option value="lb">Pounds</option>
-            <option value="tons">US Tons</option>
+            <optgroup label="SI Units">
+              <option value="mg">Milligram</option>
+              <option value="g">Gram</option>
+              <option value="kg">Kilogram</option>
+            </optgroup>
+            <optgroup label="Metric">
+              <option value="t">Metric Tonne</option>
+              <option value="ct">Carat</option>
+            <optgroup label="Avoirdupois (US Customary)">
+              <option value="gr">Grain</option>
+              <option value="dr">Dram</option>
+              <option value="oz">Ounce</option>
+              <option value="lb">Pound</option>
+              <option value="cwt">Hundredweight</option>
+              <option value="tons">Ton</option>
+            </optgroup>
+            <optgroup label="Avoirdupois (Imperial)">
+              <option value="st.">Stone</option>
+              <option value="slug">Slug</option>
+              <option value="long cwt">Long Hundredweight</option>
+              <option value="long tons">Long Ton</option>
+            </optgroup>
+            <optgroup label="Troy">
+              <option value="dwt">Pennyweight</option>
+              <option value="oz t">Troy Ounce</option>
+              <option value="lb t">Troy Pound</option>
+            </optgroup>
           </select>
         </form>
       </div>
@@ -59,13 +79,34 @@
         <form>
           <input type="number" id="secondaryInput" placeholder="Result shows up here" readonly="readonly">
           <select id="secondarySelect">
-            <option value="mg">Milligrams</option>
-            <option value="g">Grams</option>
-            <option value="kg">Kilograms</option>
-            <option value="t">Metric Tonnes</option>
-            <option value="oz">Ounces</option>
-            <option value="lb">Pounds</option>
-            <option value="tons">US Tons</option>
+            <optgroup label="SI Units">
+              <option value="mg">Milligram</option>
+              <option value="g">Gram</option>
+              <option value="kg">Kilogram</option>
+            </optgroup>
+            <optgroup label="Metric">
+              <option value="t">Metric Tonne</option>
+              <option value="ct">Carat</option>
+            <optgroup label="Avoirdupois (US Customary)">
+              <option value="gr">Grain</option>
+              <option value="dr">Dram</option>
+              <option value="oz">Ounce</option>
+              <option value="lb">Pound</option>
+              <option value="cwt">Hundredweight</option>
+              <option value="tons">Ton</option>
+            </optgroup>
+            <optgroup label="Avoirdupois (Imperial)">
+              <option value="st.">Stone</option>
+              <option value="slug">Slug</option>
+              <option value="long cwt">Long Hundredweight</option>
+              <option value="long tons">Long Ton</option>
+            </optgroup>
+            <optgroup label="Troy">
+              <option value="dwt">Pennyweight</option>
+              <option value="oz t">Troy Ounce</option>
+              <option value="lb t">Troy Pound</option>
+            </optgroup>
+            </optgroup>
           </select>
         </form>
       </div>
