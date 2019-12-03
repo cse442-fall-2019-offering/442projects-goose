@@ -73,11 +73,15 @@ function convertTimeZones(){
     for (var i = 0; i < clocks.length; i++) {
       var canvas = document.getElementById(clocks[i]);
       var ctx = canvas.getContext("2d");
+      ctx.save();
       ctx.clearRect(0, 0, canvas.width, canvas.height);
+      ctx.fillStyle = "#333"
+      ctx.fillRect(0, 0, canvas.width, canvas.width);
       var radius = canvas.height / 2;
       ctx.translate(radius, radius);
       radius = radius * 0.90
       drawClock(i);
+      ctx.restore();
     }
 
     function drawClock(count) {
