@@ -2,7 +2,7 @@
  *Takes in the converted bounds and displays the visual comparison on the the webpage
  */
 
-function generateVisual()
+async function generateVisual()
 {
   /* creating the canvas */
   var canvas = document.getElementById("visual");
@@ -101,8 +101,8 @@ function generateVisual()
     }
   }
   /* drawing the markings in the secondary axis */
-  var lowerBoundSecondary = calculateConversion(lowerBoundPrimary, document.getElementById("primarySelect").value, document.getElementById("secondarySelect").value);
-  var upperBoundSecondary = calculateConversion(upperBoundPrimary, document.getElementById("primarySelect").value, document.getElementById("secondarySelect").value);
+  var lowerBoundSecondary = await calculateConversion(lowerBoundPrimary, document.getElementById("primarySelect").value, document.getElementById("secondarySelect").value);
+  var upperBoundSecondary = await calculateConversion(upperBoundPrimary, document.getElementById("primarySelect").value, document.getElementById("secondarySelect").value);
   var scaleFactor = canvas.width/(upperBoundSecondary - lowerBoundSecondary);
   var increment = 1;
   while (canvas.width/((upperBoundSecondary - lowerBoundSecondary)/increment) > 60){
