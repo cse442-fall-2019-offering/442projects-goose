@@ -5,7 +5,6 @@
         <link rel="icon" href="./png/icon.png">
         <link href="style.css" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css?family=Overpass&display=swap" rel="stylesheet">
-        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
         <script src="JavaScript/time_zones.js" charset="utf-8"></script>
         <script src="JavaScript/visual_maker.js" charset="utf-8"></script>
         <script src="JavaScript/unit_switcher.js" charset="utf-8"></script>
@@ -41,7 +40,7 @@
             <!-- select one unit here -->
             <div id="primaryTZ">
               <form>
-                <input type="datetime-local" name="primary" id="primaryInput" placeholder="Enter a value here" onkeyup="checkInput();">
+                <input type="text" name="primary" id="primaryInput">
                 <select id="primarySelect">
 
                 </select>
@@ -55,7 +54,7 @@
             <!-- select the other unit here -->
             <div id="secondaryTZ">
               <form>
-                <input type="text" id="secondaryInput" placeholder="Result shows up here" ng-model="modelSecondary" readonly>
+                <input type="datetime-local" id="secondaryInput" placeholder="Result shows up here" ng-model="modelSecondary" readonly>
                 <select id="secondarySelect">
 
                 </select>

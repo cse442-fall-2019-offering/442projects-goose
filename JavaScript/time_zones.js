@@ -1,6 +1,7 @@
 // JavaScript file for timeZones portion of application
 // @author: Damon L
 
+
 //Function to generate the location options
 function generateOptions(){
 
