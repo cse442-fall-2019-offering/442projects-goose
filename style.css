@@ -14,6 +14,7 @@
 }
 body {
   background-color: var(--background-color);
+  min-width: 573px;
 }
 nav {
   background-color: #ffffff;
@@ -130,6 +131,7 @@ input, select, option, button{
   display: inline-block;
   font-size: 16px;
   border-radius: 12px;
+  width: 40%;
 }
 #convertButton:hover {
   background-color: var(--emphasis-color);
@@ -142,13 +144,14 @@ input, select, option, button{
   background-color: #f0f0f0;
   border: none;
   color: black;
-  padding: 10px 20px;
+  padding: 10px 10px;
   margin-top: 5px;
   text-align: center;
   text-decoration: none;
   display: inline-block;
   font-size: 16px;
   border-radius: 12px;
+  width: 80%;
 }
 .swapButton:hover {
   background-color: var(--emphasis-color);
@@ -223,32 +226,6 @@ input, select, option, button{
 @media screen and (max-width: 1080px) {
   nav{
     height: 120px;
-  }
-  nav ul li{
-    background-color: var(--accent-color);
-    display: inline-flex;
-    border: none;
-    padding: 10px 10px;
-    margin: 10px 10px;
-  }
-}
-
-@media screen and (max-width: 557px) {
-  nav{
-    height: 180px;
-  }
-  nav ul li{
-    background-color: var(--accent-color);
-    display: inline-flex;
-    border: none;
-    padding: 10px 10px;
-    margin: 10px 10px;
-  }
-}
-
-@media screen and (max-width: 447px) {
-  nav{
-    height: 240px;
   }
   nav ul li{
     background-color: var(--accent-color);
