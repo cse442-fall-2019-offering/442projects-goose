@@ -194,25 +194,34 @@ function generateVisualTemp()
   while (canvas.width/((upperBoundPrimary - lowerBoundPrimary)/increment) < 15){
     increment *= 10;
   }
+  document.getElementById("upTo").value = (Math.floor(upperBoundPrimary/increment)*increment).toFixed(Math.abs(Math.floor(Math.log10(increment))));
+  if (calculateConversion(lowerBoundPrimary, document.getElementById("primarySelect").value, "K") > 0){
+    document.getElementById("downTo").value = (Math.ceil(lowerBoundPrimary/increment)*increment).toFixed(Math.abs(Math.floor(Math.log10(increment))));
+    document.getElementById("downTo").disabled = false;
+    document.getElementById("scrollDown").disabled = false;
+  }
   if (calculateConversion(lowerBoundPrimary, document.getElementById("primarySelect").value, "K") <= 0){
+    document.getElementById("downTo").value = "";
+    document.getElementById("downTo").disabled = true;
+    document.getElementById("scrollDown").disabled = true;
     ctx.save();
     ctx.globalAlpha = 1.0;
     ctx.lineWidth = 5;
     ctx.beginPath();
     ctx.moveTo(0, canvas.height/2 - 3);
-    ctx.lineTo(scaleFactor*(calculateConversion(0, "K", document.getElementById("primarySelect").value)-lowerBoundPrimary), canvas.height/2 - 3);
+    ctx.lineTo(scaleFactor*(0-lowerBoundPrimary), canvas.height/2 - 3);
     ctx.strokeStyle = "#FFFFFF";
     ctx.stroke();
     ctx.beginPath();
     ctx.moveTo(0, canvas.height/2 + 3);
-    ctx.lineTo(scaleFactor*(calculateConversion(0, "K", document.getElementById("primarySelect").value)-lowerBoundPrimary), canvas.height/2 + 3);
+    ctx.lineTo(scaleFactor*(0-lowerBoundPrimary), canvas.height/2 + 3);
     ctx.strokeStyle = "#FFFFFF";
     ctx.stroke();
     ctx.restore();
 
     ctx.beginPath();
-    ctx.moveTo(scaleFactor*(calculateConversion(0, "K", document.getElementById("primarySelect").value)-lowerBoundPrimary), canvas.height/2.6);
-    ctx.lineTo(scaleFactor*(calculateConversion(0, "K", document.getElementById("primarySelect").value)-lowerBoundPrimary), canvas.height - canvas.height/2.6);
+    ctx.moveTo(scaleFactor*(0-lowerBoundPrimary), canvas.height/2.6);
+    ctx.lineTo(scaleFactor*(0-lowerBoundPrimary), canvas.height - canvas.height/2.6);
     ctx.strokeStyle = "#FF0000";
     ctx.stroke();
     ctx.font = "10px Overpass";
@@ -220,9 +229,9 @@ function generateVisualTemp()
     ctx.save();
     ctx.textAlign = "left";
     ctx.textBaseline = "middle";
-    ctx.translate(scaleFactor*(calculateConversion(0, "K", document.getElementById("primarySelect").value)-lowerBoundPrimary), canvas.height/2.8);
+    ctx.translate(scaleFactor*(0-lowerBoundPrimary), canvas.height/2.8);
     ctx.rotate(-60 * Math.PI / 180);
-    ctx.fillText(calculateConversion(0, "K", document.getElementById("primarySelect").value).toFixed(2), 0, 0);
+    ctx.fillText(0, 0, 0);
     ctx.restore();
   }
   for (var i = Math.ceil(lowerBoundPrimary/increment)*increment; i <= upperBoundPrimary; i += increment){
