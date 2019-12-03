@@ -2,6 +2,7 @@
 <html>
     <head>
         <title>Converter</title>
+        <link rel="icon" href="./png/icon.png">
         <link href="style.css" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css?family=Overpass&display=swap" rel="stylesheet">
         <script src="JavaScript/limit_input.js"></script>
@@ -181,7 +182,7 @@
             </div>
           </div>
           <div class="center">
-            <button id="convertButton" disabled="disabled" onclick="convertCurrency()">
+            <button id="convertButton" disabled="disabled" onclick="convertCurrency(); generateVisual();">
               Convert
             </button>
           </div>
@@ -191,33 +192,23 @@
           </div>
           <script>
 
-            var conversionRatio;
+            async function calculateConversion(convertable, unit1, unit2){
+              var requestURL = "https://api.exchangeratesapi.io/latest?symbols=" + unit1 + "," + unit2;
 
-            function convertCurrency(){
+              var response = await fetch(requestURL);
+              var data = await response.json();
+              
+              conversionRatio = data['rates'][unit2] / data['rates'][unit1];
+              var converted = Math.round(100 * convertable * conversionRatio) / 100.0;
+              return converted;
+            }
+
+            async function convertCurrency(){
               var convertable = document.getElementById("primaryInput").value;
               var unit1 = document.getElementById("primarySelect").value;
               var unit2 = document.getElementById("secondarySelect").value;
-              var requestURL = "https://api.exchangeratesapi.io/latest?symbols=" + unit1 + "," + unit2;
-
-              fetch(requestURL)
-                .then(response => response.json())
-                .then(data => {
-                  conversionRatio = data['rates'][unit2] / data['rates'][unit1]
-                  var converted = Math.round(100 * convertable * conversionRatio) / 100.0;
-                  document.getElementById("secondaryInput").value = converted;
-                  generateVisual()
-                });
-            }
-
-            function generateVisual(){
-              var convertable = parseFloat(document.getElementById("primaryInput").value);
-              var lowerBoundPrimary = convertable - 30;
-              var upperBoundPrimary = convertable + 30;
-              var converted = parseFloat(document.getElementById("secondaryInput").value);
-              var ratio = converted / convertable;
-              var lowerBoundSecond = lowerBoundPrimary * ratio;
-              var upperBoundSecond = upperBoundPrimary * ratio;
-              makeVisual(lowerBoundSecond, upperBoundSecond)
+              var converted = await calculateConversion(convertable, unit1, unit2);
+              document.getElementById("secondaryInput").value = converted;
             }
 
           </script>
