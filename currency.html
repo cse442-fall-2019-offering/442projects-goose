@@ -158,6 +158,7 @@
               .then(response => response.json())
               .then(data => {
                 exchangeRates = data;
+                generateVisual();
               });
           }
           function calculateConversion(input, primaryUnit, secondaryUnit){

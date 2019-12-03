@@ -113,6 +113,6 @@ function convertUnits(){
   input = document.getElementById("primaryInput").value;
   var primaryUnit = document.getElementById("primarySelect").value;
   var secondaryUnit = document.getElementById("secondarySelect").value;
-  output = calculateConversion(input, primaryUnit, secondaryUnit);
+  output = Math.round(100000000 * calculateConversion(input, primaryUnit, secondaryUnit)) / 100000000.0;
   document.getElementById("secondaryInput").value = output;
 }
