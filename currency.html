@@ -36,7 +36,7 @@
                 <input type="number" id="primaryInput" placeholder="Enter a value here" onkeyup="checkInput(); limit(this);" onkeydown="limit(this);">
                 <select id="primarySelect">
                   <option value="USD">US dollar</option>
-                  <!--<option value="EUR">Euro</option>-->
+                  <option value="EUR">Euro</option>
                   <option value="JPY">Japanese yen</option>
                   <option value="BGN">Bulgarian lev</option>
                   <option value="CZK">Czech koruna</option>
@@ -82,7 +82,7 @@
                 <input type="number" id="secondaryInput" placeholder="Result shows up here" readonly="readonly">
                 <select id="secondarySelect">
                     <option value="USD">US dollar</option>
-                    <!--<option value="EUR">Euro</option>-->
+                    <option value="EUR">Euro</option>
                     <option value="JPY">Japanese yen</option>
                     <option value="BGN">Bulgarian lev</option>
                     <option value="CZK">Czech koruna</option>
@@ -151,19 +151,71 @@
             var conversionRatio;
 
             function convertCurrency(){
+              // var convertable = document.getElementById("primaryInput").value;
+              // var unit1 = document.getElementById("primarySelect").value;
+              // var unit2 = document.getElementById("secondarySelect").value;
+              // var requestURL = "https://api.exchangeratesapi.io/latest?symbols=" + unit1 + "," + unit2;
+              //
+              // fetch(requestURL)
+              //   .then(response => response.json())
+              //   .then(data => {
+              //     conversionRatio = data['rates'][unit2] / data['rates'][unit1]
+              //     var converted = Math.round(100 * convertable * conversionRatio) / 100.0;
+              //     document.getElementById("secondaryInput").value = converted;
+              //   });
               var convertable = document.getElementById("primaryInput").value;
-              var unit1 = document.getElementById("primarySelect").value;
-              var unit2 = document.getElementById("secondarySelect").value;
-              var requestURL = "https://api.exchangeratesapi.io/latest?symbols=" + unit1 + "," + unit2;
 
-              fetch(requestURL)
-                .then(response => response.json())
-                .then(data => {
-                  conversionRatio = data['rates'][unit2] / data['rates'][unit1]
+              var unit1 = document.getElementById("primarySelect").value;
+              var unit1Rate;
+              if (unit1 != "EUR"){
+                var requestURL = "https://api.exchangeratesapi.io/latest?symbols=" + unit1;
+                fetch(requestURL)
+                  .then(response => response.json())
+                  .then(data => {
+                    unit1Rate = data['rates'][unit1];
+                    var unit2 = document.getElementById("secondarySelect").value;
+                    var unit2Rate;
+                    if (unit2 != "EUR"){
+                      var requestURL = "https://api.exchangeratesapi.io/latest?symbols=" + unit2;
+                      fetch(requestURL)
+                        .then(response => response.json())
+                        .then(data => {
+                          unit2Rate = data['rates'][unit2];
+                          var conversionRatio = unit2Rate / unit1Rate;
+                          var converted = Math.round(100 * convertable * conversionRatio) / 100.0;
+                          document.getElementById("secondaryInput").value = converted;
+                        });
+                    }
+                    else {
+                      unit2Rate = 1;
+                      var conversionRatio = unit2Rate / unit1Rate;
+                      var converted = Math.round(100 * convertable * conversionRatio) / 100.0;
+                      document.getElementById("secondaryInput").value = converted;
+                    }
+                  });
+              }
+              else {
+                unit1Rate = 1;
+                var unit2 = document.getElementById("secondarySelect").value;
+                var unit2Rate;
+                if (unit2 != "EUR"){
+                  var requestURL = "https://api.exchangeratesapi.io/latest?symbols=" + unit2;
+                  fetch(requestURL)
+                    .then(response => response.json())
+                    .then(data => {
+                      unit2Rate = data['rates'][unit2];
+                      var conversionRatio = unit2Rate / unit1Rate;
+                      var converted = Math.round(100 * convertable * conversionRatio) / 100.0;
+                      document.getElementById("secondaryInput").value = converted;
+                    });
+                }
+                else {
+                  unit2Rate = 1;
+                  var conversionRatio = unit2Rate / unit1Rate;
                   var converted = Math.round(100 * convertable * conversionRatio) / 100.0;
                   document.getElementById("secondaryInput").value = converted;
-                  generateVisual()
-                });
+                }
+              }
             }
 
             // function generateVisual(){
