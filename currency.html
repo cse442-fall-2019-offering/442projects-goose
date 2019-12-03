@@ -8,9 +8,8 @@
         <script src="JavaScript/unit_switcher.js" charset="utf-8"></script>
         <script src="JavaScript/visual_maker.js" charset="utf-8"></script>
         <script src="JavaScript/input_checker.js" charset="utf-8"></script>
-        <script src="JavaScript/speed_conversion.js" charset="utf-8"></script>
     </head>
-    <body>
+    <body onload="fetchExchangeRates()" onresize="generateVisual()">
         <header>
           <!-- select measures here -->
           <nav>
@@ -119,7 +118,7 @@
             </div>
           </div>
           <div class="center">
-            <button id="convertButton" disabled="disabled" onclick="convertCurrency()">
+            <button id="convertButton" disabled="disabled" onclick="convertUnits(); generateVisual();">
               Convert
             </button>
           </div>
@@ -147,88 +146,51 @@
             </div>
           </div>
           <script>
-
-            var conversionRatio;
-
-            function convertCurrency(){
-              // var convertable = document.getElementById("primaryInput").value;
-              // var unit1 = document.getElementById("primarySelect").value;
-              // var unit2 = document.getElementById("secondarySelect").value;
-              // var requestURL = "https://api.exchangeratesapi.io/latest?symbols=" + unit1 + "," + unit2;
-              //
-              // fetch(requestURL)
-              //   .then(response => response.json())
-              //   .then(data => {
-              //     conversionRatio = data['rates'][unit2] / data['rates'][unit1]
-              //     var converted = Math.round(100 * convertable * conversionRatio) / 100.0;
-              //     document.getElementById("secondaryInput").value = converted;
-              //   });
-              var convertable = document.getElementById("primaryInput").value;
-
-              var unit1 = document.getElementById("primarySelect").value;
-              var unit1Rate;
-              if (unit1 != "EUR"){
-                var requestURL = "https://api.exchangeratesapi.io/latest?symbols=" + unit1;
-                fetch(requestURL)
-                  .then(response => response.json())
-                  .then(data => {
-                    unit1Rate = data['rates'][unit1];
-                    var unit2 = document.getElementById("secondarySelect").value;
-                    var unit2Rate;
-                    if (unit2 != "EUR"){
-                      var requestURL = "https://api.exchangeratesapi.io/latest?symbols=" + unit2;
-                      fetch(requestURL)
-                        .then(response => response.json())
-                        .then(data => {
-                          unit2Rate = data['rates'][unit2];
-                          var conversionRatio = unit2Rate / unit1Rate;
-                          var converted = Math.round(100 * convertable * conversionRatio) / 100.0;
-                          document.getElementById("secondaryInput").value = converted;
-                        });
-                    }
-                    else {
-                      unit2Rate = 1;
-                      var conversionRatio = unit2Rate / unit1Rate;
-                      var converted = Math.round(100 * convertable * conversionRatio) / 100.0;
-                      document.getElementById("secondaryInput").value = converted;
-                    }
-                  });
+          var exchangeRates;
+          function fetchExchangeRates(){
+            fetch("https://api.exchangeratesapi.io/latest")
+              .then(response => response.json())
+              .then(data => {
+                exchangeRates = data;
+                console.log(data);
+              });
+          }
+          function calculateConversion(input, primaryUnit, secondaryUnit){
+            var primaryRate;
+            var secondaryRate;
+            if (primaryUnit != "EUR"){
+              primaryRate = exchangeRates['rates'][primaryUnit];
+              if (secondaryUnit != "EUR"){
+                secondaryRate = exchangeRates['rates'][secondaryUnit];
+                var conversionRatio = secondaryRate / primaryRate;
+                return Math.round(100 * input * conversionRatio) / 100.0;
               }
               else {
-                unit1Rate = 1;
-                var unit2 = document.getElementById("secondarySelect").value;
-                var unit2Rate;
-                if (unit2 != "EUR"){
-                  var requestURL = "https://api.exchangeratesapi.io/latest?symbols=" + unit2;
-                  fetch(requestURL)
-                    .then(response => response.json())
-                    .then(data => {
-                      unit2Rate = data['rates'][unit2];
-                      var conversionRatio = unit2Rate / unit1Rate;
-                      var converted = Math.round(100 * convertable * conversionRatio) / 100.0;
-                      document.getElementById("secondaryInput").value = converted;
-                    });
-                }
-                else {
-                  unit2Rate = 1;
-                  var conversionRatio = unit2Rate / unit1Rate;
-                  var converted = Math.round(100 * convertable * conversionRatio) / 100.0;
-                  document.getElementById("secondaryInput").value = converted;
-                }
+                secondaryRate = 1;
+                var conversionRatio = secondaryRate / primaryRate;
+                return Math.round(100 * input * conversionRatio) / 100.0;
               }
             }
-
-            // function generateVisual(){
-            //   var convertable = parseFloat(document.getElementById("primaryInput").value);
-            //   var lowerBoundPrimary = convertable - 30;
-            //   var upperBoundPrimary = convertable + 30;
-            //   var converted = parseFloat(document.getElementById("secondaryInput").value);
-            //   var ratio = converted / convertable;
-            //   var lowerBoundSecond = lowerBoundPrimary * ratio;
-            //   var upperBoundSecond = upperBoundPrimary * ratio;
-            //   makeVisual(lowerBoundSecond, upperBoundSecond)
-            // }
-
+            else {
+              primaryRate = 1;
+              if (secondaryUnit != "EUR"){
+                secondaryRate = exchangeRates['rates'][secondaryUnit];
+                var conversionRatio = secondaryRate / primaryRate;
+                return Math.round(100 * input * conversionRatio) / 100.0;
+              }
+              else {
+                secondaryRate = 1;
+                var conversionRatio = secondaryRate / primaryRate;
+                return Math.round(100 * input * conversionRatio) / 100.0;
+              }
+            }
+          }
+          function convertUnits(){
+            var input = document.getElementById("primaryInput").value;
+            var primaryUnit = document.getElementById("primarySelect").value;
+            var secondaryUnit = document.getElementById("secondarySelect").value;
+            document.getElementById("secondaryInput").value = calculateConversion(input, primaryUnit, secondaryUnit);
+          }
           </script>
         </main>
     </body>
