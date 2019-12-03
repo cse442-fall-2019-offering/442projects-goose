@@ -1,6 +1,8 @@
 // JavaScript file for volume portion of application
 // @author: Damon L
 
+var input = 0;
+var output = 0;
 
 //Cubic Centimeter (Milliliter) Conversions
 function convertCM(input, secondaryUnit){
@@ -878,12 +880,11 @@ function calculateConversion(input, primaryUnit, secondaryUnit){
 
 //main function
 function convertUnits(){
-  var input = document.getElementById("primaryInput").value;
+  input = document.getElementById("primaryInput").value;
   var primaryUnit = document.getElementById("primarySelect").value;
   var secondaryUnit = document.getElementById("secondarySelect").value;
-  ret = calculateConversion(input, primaryUnit, secondaryUnit);
-  document.getElementById("secondaryInput").value = calculateConversion(input, primaryUnit, secondaryUnit);
-
+  output = calculateConversion(input, primaryUnit, secondaryUnit);
+  document.getElementById("secondaryInput").value = output;
 }
 
 //File ends here

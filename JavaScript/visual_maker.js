@@ -25,8 +25,8 @@ function generateVisual()
   ctx.stroke();
   /* drawing the markings in the primary axis */
   var zoomlevel = document.getElementById("zoomlevel").value;
-  var lowerBoundPrimary = parseFloat(document.getElementById("primaryInput").value) - (canvas.width/2)/(20**zoomlevel);
-  var upperBoundPrimary = parseFloat(document.getElementById("primaryInput").value) + (canvas.width/2)/(20**zoomlevel);
+  var lowerBoundPrimary = parseFloat(input) - (canvas.width/2)/(20**zoomlevel);
+  var upperBoundPrimary = parseFloat(input) + (canvas.width/2)/(20**zoomlevel);
   var scaleFactor = canvas.width/(upperBoundPrimary - lowerBoundPrimary);
   var increment = 1;
   while (canvas.width/((upperBoundPrimary - lowerBoundPrimary)/increment) > 60){
@@ -76,7 +76,7 @@ function generateVisual()
     ctx.restore();
   }
   for (var i = Math.ceil(lowerBoundPrimary/increment)*increment; i <= upperBoundPrimary; i += increment){
-    if (i != document.getElementById("primaryInput").value && i > 0){
+    if (i != input && i > 0){
       ctx.font = "10px Overpass";
       ctx.fillStyle = "#000000";
       ctx.beginPath();
@@ -122,7 +122,7 @@ function generateVisual()
     ctx.restore();
   }
   for (var i = Math.ceil(lowerBoundSecondary/increment)*increment; i <= upperBoundSecondary; i += increment){
-    if (i != document.getElementById("secondaryInput").value && i > 0){
+    if (i != output && i > 0){
       ctx.beginPath();
       ctx.moveTo(scaleFactor*(i-lowerBoundSecondary), canvas.height/2 + 3);
       ctx.lineTo(scaleFactor*(i-lowerBoundSecondary), canvas.height - canvas.height/2.6);
@@ -157,8 +157,8 @@ function generateVisual()
   ctx.stroke();
   ctx.textAlign = "center";
   ctx.textBaseline = "middle";
-  ctx.fillText(document.getElementById("primaryInput").value + " " + document.getElementById("primarySelect").value, canvas.width/2, 30);
-  ctx.fillText(document.getElementById("secondaryInput").value + " " + document.getElementById("secondarySelect").value, canvas.width/2, canvas.height-30);
+  ctx.fillText(input + " " + document.getElementById("primarySelect").value, canvas.width/2, 30);
+  ctx.fillText(output + " " + document.getElementById("secondarySelect").value, canvas.width/2, canvas.height-30);
 }
 
 function generateVisualTemp()
@@ -184,8 +184,8 @@ function generateVisualTemp()
   ctx.stroke();
   /* drawing the markings in the primary axis */
   var zoomlevel = document.getElementById("zoomlevel").value;
-  var lowerBoundPrimary = parseFloat(document.getElementById("primaryInput").value) - (canvas.width/2)/(20**zoomlevel);
-  var upperBoundPrimary = parseFloat(document.getElementById("primaryInput").value) + (canvas.width/2)/(20**zoomlevel);
+  var lowerBoundPrimary = parseFloat(input) - (canvas.width/2)/(20**zoomlevel);
+  var upperBoundPrimary = parseFloat(input) + (canvas.width/2)/(20**zoomlevel);
   var scaleFactor = canvas.width/(upperBoundPrimary - lowerBoundPrimary);
   var increment = 1;
   while (canvas.width/((upperBoundPrimary - lowerBoundPrimary)/increment) > 60){
@@ -226,7 +226,7 @@ function generateVisualTemp()
     ctx.restore();
   }
   for (var i = Math.ceil(lowerBoundPrimary/increment)*increment; i <= upperBoundPrimary; i += increment){
-    if (i != document.getElementById("primaryInput").value && calculateConversion(i, document.getElementById("primarySelect").value, "K") > 0){
+    if (i != input && calculateConversion(i, document.getElementById("primarySelect").value, "K") > 0){
       ctx.beginPath();
       ctx.moveTo(scaleFactor*(i-lowerBoundPrimary), canvas.height/2.6);
       ctx.lineTo(scaleFactor*(i-lowerBoundPrimary), canvas.height/2 - 3);
@@ -270,7 +270,7 @@ function generateVisualTemp()
     ctx.restore();
   }
   for (var i = Math.ceil(lowerBoundSecondary/increment)*increment; i <= upperBoundSecondary; i += increment){
-    if (i != document.getElementById("secondaryInput").value && calculateConversion(i, document.getElementById("secondarySelect").value, "K") > 0){
+    if (i != output && calculateConversion(i, document.getElementById("secondarySelect").value, "K") > 0){
       ctx.beginPath();
       ctx.moveTo(scaleFactor*(i-lowerBoundSecondary), canvas.height/2 + 3);
       ctx.lineTo(scaleFactor*(i-lowerBoundSecondary), canvas.height - canvas.height/2.6);
@@ -305,6 +305,6 @@ function generateVisualTemp()
   ctx.stroke();
   ctx.textAlign = "center";
   ctx.textBaseline = "middle";
-  ctx.fillText(document.getElementById("primaryInput").value + " " + document.getElementById("primarySelect").value, canvas.width/2, 30);
-  ctx.fillText(document.getElementById("secondaryInput").value + " " + document.getElementById("secondarySelect").value, canvas.width/2, canvas.height-30);
+  ctx.fillText(input + " " + document.getElementById("primarySelect").value, canvas.width/2, 30);
+  ctx.fillText(output + " " + document.getElementById("secondarySelect").value, canvas.width/2, canvas.height-30);
 }

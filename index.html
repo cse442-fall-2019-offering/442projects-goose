@@ -10,7 +10,7 @@
         <script src="JavaScript/visual_maker.js" charset="utf-8"></script>
         <script src="JavaScript/scrollable.js" charset="utf-8"></script>
     </head>
-    <body onresize="generateVisual(); generateEquation();">
+    <body onload="generateVisual()" onresize="generateVisual()">
       <script type="text/javascript" src="Javascript/input_checker.js"></script>
       <script type="text/javascript" src="Javascript/area_conversion.js"></script>
       <script type="text/javascript" src="Javascript/visual_maker.js"></script>
@@ -111,6 +111,8 @@
             </div>
           </div>
           <script>
+          var input = 0;
+          var output = 0;
           function switchUnits(){
             var holdSelect = document.getElementById("primarySelect").options[document.getElementById("primarySelect").selectedIndex].value;
             var holdInput = document.getElementById("primaryInput").value;
@@ -171,10 +173,11 @@
             return meter;
           }
           function convertUnits(){
-            var input = document.getElementById("primaryInput").value;
+            input = document.getElementById("primaryInput").value;
             var primaryUnit = document.getElementById("primarySelect").value;
             var secondaryUnit = document.getElementById("secondarySelect").value;
-            document.getElementById("secondaryInput").value = calculateConversion(input, primaryUnit, secondaryUnit);
+            output = calculateConversion(input, primaryUnit, secondaryUnit);
+            document.getElementById("secondaryInput").value = output;
           }
           //Swaps units
           function switchUnits(){

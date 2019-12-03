@@ -9,7 +9,7 @@
         <script src="JavaScript/visual_maker.js" charset="utf-8"></script>
         <script src="JavaScript/input_checker.js" charset="utf-8"></script>
     </head>
-    <body onresize="generateVisualTemp()">
+    <body onload="generateVisualTemp()" onresize="generateVisualTemp()">
       <script type="text/javascript" src="Javascript/scrollable.js"></script>
         <!-- TODO: add tiles, text inputs, dropdowns, and swap box -->
         <!-- TODO: change dropdown menu based on tile selection -->
@@ -96,6 +96,8 @@
             <canvas id="EquationVis">
           </div>
           <script>
+          var input = 0;
+          var output = 0;
             function switchUnits(){
               var holdSelect = document.getElementById("primarySelect").options[document.getElementById("primarySelect").selectedIndex].value;
               var holdInput = document.getElementById("primaryInput").value;
@@ -128,10 +130,11 @@
               return temp;
             }
             function convertUnits(){
-              var input = document.getElementById("primaryInput").value;
+              input = document.getElementById("primaryInput").value;
               var primaryUnit = document.getElementById("primarySelect").value;
               var secondaryUnit = document.getElementById("secondarySelect").value;
-              document.getElementById("secondaryInput").value = calculateConversion(input, primaryUnit, secondaryUnit);
+              output = calculateConversion(input, primaryUnit, secondaryUnit);
+              document.getElementById("secondaryInput").value = output;
             }
             //Swaps units
             function switchUnits(){

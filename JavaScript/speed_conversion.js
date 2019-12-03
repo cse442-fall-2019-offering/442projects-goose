@@ -4,6 +4,10 @@
  *  quantity is being converted to. A number is returned equal to the converted
  *  quantity
  */
+
+var input = 0;
+var output = 0;
+
 function calculateConversion(input, primaryUnit, secondaryUnit){
     var value; //this is the base unit
     if(primaryUnit == secondaryUnit){
@@ -41,10 +45,9 @@ function calculateConversion(input, primaryUnit, secondaryUnit){
   }
 
   function convertUnits(){
-    var input = document.getElementById("primaryInput").value;
+    input = document.getElementById("primaryInput").value;
     var primaryUnit = document.getElementById("primarySelect").value;
     var secondaryUnit = document.getElementById("secondarySelect").value;
-    ret = calculateConversion(input, primaryUnit, secondaryUnit);
-    document.getElementById("secondaryInput").value = calculateConversion(input, primaryUnit, secondaryUnit);
-
+    output = calculateConversion(input, primaryUnit, secondaryUnit);
+    document.getElementById("secondaryInput").value = output;
   }

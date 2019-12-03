@@ -9,7 +9,7 @@
   <script src="JavaScript/input_checker.js" charset="utf-8"></script>
   <script src="JavaScript/mass_weight.js" charset="utf-8"></script>
 </head>
-<body onresize="generateVisual()">
+<body onload="generateVisual()" onresize="generateVisual()">
   <script type="text/javascript" src="Javascript/input_checker.js"></script>
   <script type="text/javascript" src="Javascript/mass_weight.js"></script>
   <script type="text/javascript" src="Javascript/visual_maker.js"></script>
@@ -50,7 +50,7 @@
         </form>
       </div>
       <div id="swap">
-        <button class="swapButton" onclick="switchUnits(); generateVisual();">
+        <button class="swapButton" onclick="switchUnits(); checkInput(); generateVisual();">
           ⇌
         </button>
       </div>

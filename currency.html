@@ -150,13 +150,14 @@
             </div>
           </div>
           <script>
+          var input = 0;
+          var output = 0;
           var exchangeRates;
           function fetchExchangeRates(){
             fetch("https://api.exchangeratesapi.io/latest")
               .then(response => response.json())
               .then(data => {
                 exchangeRates = data;
-                console.log(data);
               });
           }
           function calculateConversion(input, primaryUnit, secondaryUnit){
@@ -190,10 +191,11 @@
             }
           }
           function convertUnits(){
-            var input = document.getElementById("primaryInput").value;
+            input = document.getElementById("primaryInput").value;
             var primaryUnit = document.getElementById("primarySelect").value;
             var secondaryUnit = document.getElementById("secondarySelect").value;
-            document.getElementById("secondaryInput").value = calculateConversion(input, primaryUnit, secondaryUnit);
+            output = calculateConversion(input, primaryUnit, secondaryUnit);
+            document.getElementById("secondaryInput").value = output;
           }
           </script>
         </main>
