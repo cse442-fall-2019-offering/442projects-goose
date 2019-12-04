@@ -9,6 +9,7 @@
         <script src="JavaScript/unit_switcher.js" charset="utf-8"></script>
         <script src="JavaScript/visual_maker.js" charset="utf-8"></script>
         <script src="JavaScript/input_checker.js" charset="utf-8"></script>
+        <script src="JavaScript/equation_display.js" charset="utf-8"></script>
     </head>
     <body onload="generateVisualTemp()" onresize="generateVisualTemp()">
       <script type="text/javascript" src="Javascript/scrollable.js"></script>
@@ -115,7 +116,7 @@
               </form>
             </div>
             <div id="swap">
-              <button class="swapButton" onclick="switchUnits(); checkInput(); generateVisualTemp();">
+              <button class="swapButton" onclick="switchUnits(); checkInput(); generateVisualTemp(); generateEquation();">
                 ⇌
               </button>
             </div>
@@ -132,7 +133,7 @@
             </div>
           </div>
           <div class="center">
-            <button id="convertButton" disabled="disabled" onclick="convertUnits(); generateVisualTemp();">
+            <button id="convertButton" disabled="disabled" onclick="convertUnits(); generateVisualTemp(); generateEquation();">
               Convert
             </button>
           </div>
