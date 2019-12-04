@@ -37,10 +37,20 @@ function generateVisual()
     increment *= 10;
   }
   /* finds the highest labelled value displayed on the visual to scroll up to */
-  document.getElementById("upTo").value = (Math.floor(upperBoundPrimary/increment)*increment).toFixed(Math.abs(Math.floor(Math.log10(increment))));
+  if (increment < 1){
+    document.getElementById("upTo").value = (Math.floor(upperBoundPrimary/increment)*increment).toFixed(Math.abs(Math.floor(Math.log10(increment))));
+  }
+  else{
+    document.getElementById("upTo").value = (Math.floor(upperBoundPrimary/increment)*increment);
+  }
   /* finds the highest labelled value displayed on the visual to scroll down to */
   if (lowerBoundPrimary > 0){
-    document.getElementById("downTo").value = (Math.ceil(lowerBoundPrimary/increment)*increment).toFixed(Math.abs(Math.floor(Math.log10(increment))));
+    if (increment < 1){
+      document.getElementById("downTo").value = (Math.ceil(lowerBoundPrimary/increment)*increment).toFixed(Math.abs(Math.floor(Math.log10(increment))));
+    }
+    else{
+      document.getElementById("downTo").value = (Math.ceil(lowerBoundPrimary/increment)*increment);
+    }
     document.getElementById("downTo").disabled = false;
     document.getElementById("scrollDown").disabled = false;
   }
@@ -205,11 +215,21 @@ function generateVisualTemp()
   while (canvas.width/((upperBoundPrimary - lowerBoundPrimary)/increment) < 15){
     increment *= 10;
   }
-    /* finds the highest labelled value displayed on the visual to scroll up to */
-  document.getElementById("upTo").value = (Math.floor(upperBoundPrimary/increment)*increment).toFixed(Math.abs(Math.floor(Math.log10(increment))));
+  /* finds the highest labelled value displayed on the visual to scroll up to */
+  if (increment < 1){
+    document.getElementById("upTo").value = (Math.floor(upperBoundPrimary/increment)*increment).toFixed(Math.abs(Math.floor(Math.log10(increment))));
+  }
+  else{
+    document.getElementById("upTo").value = (Math.floor(upperBoundPrimary/increment)*increment);
+  }
   /* finds the highest labelled value displayed on the visual to scroll down to */
   if (calculateConversion(lowerBoundPrimary, inputUnit, "K") > 0){
-    document.getElementById("downTo").value = (Math.ceil(lowerBoundPrimary/increment)*increment).toFixed(Math.abs(Math.floor(Math.log10(increment))));
+    if (increment < 1){
+      document.getElementById("downTo").value = (Math.ceil(lowerBoundPrimary/increment)*increment).toFixed(Math.abs(Math.floor(Math.log10(increment))));
+    }
+    else{
+      document.getElementById("downTo").value = (Math.ceil(lowerBoundPrimary/increment)*increment);
+    }
     document.getElementById("downTo").disabled = false;
     document.getElementById("scrollDown").disabled = false;
   }
@@ -248,7 +268,7 @@ function generateVisualTemp()
     ctx.fillText(calculateConversion(0, "K", inputUnit).toFixed(2), 0, 0);
     ctx.restore();
   }
-/* drawing the markings and labels in the primary axis */
+  /* drawing the markings and labels in the primary axis */
   for (var i = Math.ceil(lowerBoundPrimary/increment)*increment; i <= upperBoundPrimary; i += increment){
     if (i != input && calculateConversion(i, inputUnit, "K") > 0){
       ctx.beginPath();
