@@ -1,4 +1,4 @@
-function generateEquation()
+async function generateEquation()
 {
   /* creating the canvas */
   var canvas = document.getElementById("EquationVis");
@@ -13,7 +13,7 @@ function generateEquation()
   ctx.fillStyle = "#000000";
   ctx.textAlign = "left";
   ctx.textBaseline = "middle";
-  var ratio = calculateConversion(1, document.getElementById("primarySelect").value, document.getElementById("secondarySelect").value)
+  var ratio = await calculateConversion(1, document.getElementById("primarySelect").value, document.getElementById("secondarySelect").value)
   ctx.fillText(document.getElementById("primaryInput").value + " " + document.getElementById("primarySelect").value
   + " = "+ document.getElementById("primaryInput").value +" "+ document.getElementById("primarySelect").value +" * "
    + ratio +" " + document.getElementById("secondarySelect").value
