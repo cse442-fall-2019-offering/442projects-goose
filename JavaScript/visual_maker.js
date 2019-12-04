@@ -265,7 +265,7 @@ function generateVisualTemp()
     ctx.textBaseline = "middle";
     ctx.translate(scaleFactor*(calculateConversion(0, "K", inputUnit)-lowerBoundPrimary), canvas.height/2.8);
     ctx.rotate(-60 * Math.PI / 180);
-    ctx.fillText(calculateConversion(0, "K", inputUnit).toFixed(2), 0, 0);
+    ctx.fillText(Math.round(100 * calculateConversion(0, "K", inputUnit)) / 100.0, 0, 0);
     ctx.restore();
   }
   /* drawing the markings and labels in the primary axis */
@@ -312,7 +312,7 @@ function generateVisualTemp()
     ctx.textBaseline = "middle";
     ctx.translate(scaleFactor*(calculateConversion(0, "K", outputUnit)-lowerBoundSecondary), canvas.height - canvas.height/2.8);
     ctx.rotate(-60 * Math.PI / 180);
-    ctx.fillText(calculateConversion(0, "K", outputUnit).toFixed(2), 0, 0);
+    ctx.fillText(Math.round(100 * calculateConversion(0, "K", outputUnit)) / 100.0, 0, 0);
     ctx.restore();
   }
   /* mark the rest of the scale above absolute zero */
