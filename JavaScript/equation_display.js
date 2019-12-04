@@ -1,4 +1,4 @@
-function generateEquation()
+async function generateEquation()
 {
   /* creating the canvas */
   var canvas = document.getElementById("EquationVis");
@@ -13,62 +13,46 @@ function generateEquation()
   ctx.fillStyle = "#000000";
   ctx.textAlign = "left";
   ctx.textBaseline = "middle";
-  ctx.fillText(document.getElementById("primarySelect").value, 10, 30);
-  ctx.fillText(document.getElementById("secondarySelect").value, 10, canvas.height-30);
-  /* labelling the converted unit */
-  ctx.beginPath();
-  ctx.moveTo(canvas.width/2, canvas.height/2.7);
-  ctx.lineTo(canvas.width/2, canvas.height-(canvas.height/2.7));
-  ctx.strokeStyle = "#000000";
-  ctx.lineWidth = 2;
-  ctx.stroke();
-  ctx.textAlign = "center";
-  ctx.textBaseline = "middle";
-  ctx.fillText(document.getElementById("primaryInput").value, canvas.width/2, 30);
-  ctx.fillText(document.getElementById("secondaryInput").value, canvas.width/2, canvas.height-30);
-}
-function generateEquationTemp()
-{
+  var ratio = 420
 
-    first
-    second
-
-    switch(unit1){
-        case "Celsius":
-          first = 0;
-          break;
-        case "Kelvin":
-            first = 1;
-          break;
-        case "Fahrenheit":
-            first = 2;
-          break;
+  if (document.getElementById("primarySelect").value == "°F"){
+    if(document.getElementById("secondarySelect").value == "°C"){
+      ratio = "( "+ document.getElementById("primaryInput").value + " °F - 32 °F) * 5 °C / 9 °F";
+    }
+    else if(document.getElementById("secondarySelect").value == "K"){
+      ratio = "( "+ document.getElementById("primaryInput").value + " °F - 32 °F) * 5 K / 9 °F + 273.15 K";
+    }
+    else{
+      ratio = document.getElementById("primaryInput").value + "°F * 1 °F / 1 °F";
     }
 
-    switch(unit2){
-        case "Celsius"
-            second = 0;
-          break;
-        case "Kelvin":
-            second = 1;
-          break;
-        case "Fahrenheit":
-            second = 2;
-          break;
+  }
+  if (document.getElementById("primarySelect").value == "°C"){
+    if(document.getElementById("secondarySelect").value == "°F"){
+      ratio = "( "+ document.getElementById("primaryInput").value + " * 9 °F / 5 °C ) + 32 °F";
+    }
+    else if(document.getElementById("secondarySelect").value == "K"){
+      ratio = document.getElementById("primaryInput").value + " °C * (1 K / 1 °C) + 273.15 K";
+    }
+    else{
+      ratio = document.getElementById("primaryInput").value + "°C * 1 °C / 1 °C";
     }
 
-    /*
-     * cel-cel, in-ft, in-yd
-     * ft-in, ft-ft, ft-yd
-     * yd-in, yd-ft, yd-yd
-     */
+  }
+  if (document.getElementById("primarySelect").value == "K"){
+    if(document.getElementById("secondarySelect").value == "°C"){
+      ratio = + document.getElementById("primaryInput").value + " K * (1 °C / 1 K) - 273.15 °C";
+    }
+    else if(document.getElementById("secondarySelect").value == "°F"){
+      ratio = "( "+ document.getElementById("primaryInput").value + " K - 273.15 K) * ( 9 °F / 5 K ) + 32 °F";
+    }
+    else{
+      ratio = document.getElementById("primaryInput").value + "K * 1 K / 1 K";
+    }
 
-    images = [
-        ["CeltoCel.png", "inToFt.png", "inToYd.png"],
-        ["inToFt.png", "KeltoKel.png", "ftToYd.png"],
-        ["inToYd.png", "ftToYd.png", "FahrtoFahr.png"]
-    ]
-
-    return images[first, second];
-
+  }
+  //ratio = 420
+  ctx.fillText(document.getElementById("primaryInput").value + " " + document.getElementById("primarySelect").value
+  + " = " + ratio +" = "
+  + document.getElementById("secondaryInput").value+" "+ document.getElementById("secondarySelect").value, 10, 30);
 }
