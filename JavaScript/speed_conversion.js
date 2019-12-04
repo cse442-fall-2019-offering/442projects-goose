@@ -5,9 +5,6 @@
  *  quantity
  */
 
-var input = 0;
-var output = 0;
-
 function calculateConversion(input, primaryUnit, secondaryUnit){
     var value; //this is the base unit
     if(primaryUnit == secondaryUnit){
@@ -46,8 +43,8 @@ function calculateConversion(input, primaryUnit, secondaryUnit){
 
   function convertUnits(){
     input = document.getElementById("primaryInput").value;
-    var primaryUnit = document.getElementById("primarySelect").value;
-    var secondaryUnit = document.getElementById("secondarySelect").value;
-    output = Math.round(100000000 * calculateConversion(input, primaryUnit, secondaryUnit)) / 100000000.0;
+    inputUnit = document.getElementById("primarySelect").value;
+    outputUnit = document.getElementById("secondarySelect").value;
+    output = Math.round(100000000 * calculateConversion(input, inputUnit, outputUnit)) / 100000000.0;
     document.getElementById("secondaryInput").value = output;
   }

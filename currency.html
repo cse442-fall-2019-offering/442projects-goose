@@ -218,9 +218,14 @@
               <input type="range" id="zoomlevel" min="0.000001" max="4" value="1" step=".000001" oninput="generateVisual()">
             </div>
           </div>
+          <div class="center" id="EquationVisClass">
+            <canvas id="EquationVis">
+          </div>
           <script>
           var input = 0;
           var output = 0;
+          var inputUnit = document.getElementById("primarySelect").value;
+          var outputUnit = document.getElementById("secondarySelect").value;
           var exchangeRates;
           function fetchExchangeRates(){
             fetch("https://api.exchangeratesapi.io/latest")
@@ -262,14 +267,12 @@
           }
           function convertUnits(){
             input = document.getElementById("primaryInput").value;
-            var primaryUnit = document.getElementById("primarySelect").value;
-            var secondaryUnit = document.getElementById("secondarySelect").value;
-            output = calculateConversion(input, primaryUnit, secondaryUnit);
+            inputUnit = document.getElementById("primarySelect").value;
+            outputUnit = document.getElementById("secondarySelect").value;
+            output = Math.round(100000000 * calculateConversion(input, inputUnit, outputUnit)) / 100000000.0;
             document.getElementById("secondaryInput").value = output;
           }
           </script>
-          <div class="center" id="EquationVisClass">
-            <canvas id="EquationVis">
         </main>
     </body>
 </html>
