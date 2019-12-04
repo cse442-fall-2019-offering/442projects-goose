@@ -10,6 +10,7 @@
         <script src="JavaScript/visual_maker.js" charset="utf-8"></script>
         <script src="JavaScript/unit_switcher.js" charset="utf-8"></script>
         <script src="JavaScript/input_checker.js" charset="utf-8"></script>
+        <script src="JavaScript/speed_equation_display.js" charset="utf-8"></script>
     </head>
     <body onresize="generateVisual()">
         <script type="text/javascript" src="JavaScript/volume.js"></script>
@@ -121,7 +122,7 @@
               </form>
             </div>
             <div id="swap">
-              <button class="swapButton" onclick="switchUnits(); checkInputs(); generateVisual();">
+              <button class="swapButton" onclick="switchUnits(); checkInputs(); generateVisual(); generateEquation();">
                 ⇌
               </button>
             </div>
@@ -147,13 +148,16 @@
             </div>
           </div>
           <div class="center">
-            <button id="convertButton" onclick="convertUnits(); generateVisual();" disabled="disabled">
+            <button id="convertButton" onclick="convertUnits(); generateVisual(); generateEquation();" disabled="disabled">
               Convert
             </button>
           </div>
           <!-- visual output is displayed here -->
           <div class="center" id="visualizer">
             <canvas id="visual">
+          </div>
+          <div class="center" id="EquationVisClass">
+            <canvas id="EquationVis">
           </div>
         </main>
     </body>
