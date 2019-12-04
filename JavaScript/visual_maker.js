@@ -2,7 +2,7 @@
  *Takes in the converted bounds and displays the visual comparison on the the webpage
  */
 
-async function generateVisual()
+function generateVisual()
 {
   /* creating the canvas */
   var canvas = document.getElementById("visual");
@@ -23,24 +23,28 @@ async function generateVisual()
   ctx.lineTo(canvas.width, canvas.height/2 + 3);
   ctx.strokeStyle = String(getComputedStyle(document.documentElement).getPropertyValue('--secondary-color'));
   ctx.stroke();
-  /* drawing the markings in the primary axis */
+  /* PRIMARY AXIS */
   var zoomlevel = document.getElementById("zoomlevel").value;
   var lowerBoundPrimary = parseFloat(input) - (canvas.width/2)/(20**zoomlevel);
   var upperBoundPrimary = parseFloat(input) + (canvas.width/2)/(20**zoomlevel);
   var scaleFactor = canvas.width/(upperBoundPrimary - lowerBoundPrimary);
   var increment = 1;
+  /* determine the best interval to use */
   while (canvas.width/((upperBoundPrimary - lowerBoundPrimary)/increment) > 60){
     increment /= 10;
   }
   while (canvas.width/((upperBoundPrimary - lowerBoundPrimary)/increment) < 15){
     increment *= 10;
   }
+  /* finds the highest labelled value displayed on the visual to scroll up to */
   document.getElementById("upTo").value = (Math.floor(upperBoundPrimary/increment)*increment).toFixed(Math.abs(Math.floor(Math.log10(increment))));
+  /* finds the highest labelled value displayed on the visual to scroll down to */
   if (lowerBoundPrimary > 0){
     document.getElementById("downTo").value = (Math.ceil(lowerBoundPrimary/increment)*increment).toFixed(Math.abs(Math.floor(Math.log10(increment))));
     document.getElementById("downTo").disabled = false;
     document.getElementById("scrollDown").disabled = false;
   }
+  /* cut off the line and disable scrolling down if the bottom of the scale is reached*/
   if (lowerBoundPrimary <= 0){
     document.getElementById("downTo").value = "";
     document.getElementById("downTo").disabled = true;
@@ -59,7 +63,7 @@ async function generateVisual()
     ctx.strokeStyle = "#FFFFFF";
     ctx.stroke();
     ctx.restore();
-
+    /* marks the origin of the line (zero) */
     ctx.beginPath();
     ctx.moveTo(scaleFactor*(0-lowerBoundPrimary), canvas.height/2.6);
     ctx.lineTo(scaleFactor*(0-lowerBoundPrimary), canvas.height - canvas.height/2.6);
@@ -75,6 +79,7 @@ async function generateVisual()
     ctx.fillText(0, 0, 0);
     ctx.restore();
   }
+  /* drawing the markings and labels in the primary axis */
   for (var i = Math.ceil(lowerBoundPrimary/increment)*increment; i <= upperBoundPrimary; i += increment){
     if (i != input && i > 0){
       ctx.font = "10px Overpass";
@@ -100,17 +105,19 @@ async function generateVisual()
       ctx.restore();
     }
   }
-  /* drawing the markings in the secondary axis */
-  var lowerBoundSecondary = await calculateConversion(lowerBoundPrimary, document.getElementById("primarySelect").value, document.getElementById("secondarySelect").value);
-  var upperBoundSecondary = await calculateConversion(upperBoundPrimary, document.getElementById("primarySelect").value, document.getElementById("secondarySelect").value);
+  /* SECONDARY AXIS */
+  var lowerBoundSecondary = calculateConversion(lowerBoundPrimary, document.getElementById("primarySelect").value, document.getElementById("secondarySelect").value);
+  var upperBoundSecondary = calculateConversion(upperBoundPrimary, document.getElementById("primarySelect").value, document.getElementById("secondarySelect").value);
   var scaleFactor = canvas.width/(upperBoundSecondary - lowerBoundSecondary);
   var increment = 1;
+  /* determine the best interval to use */
   while (canvas.width/((upperBoundSecondary - lowerBoundSecondary)/increment) > 60){
     increment /= 10;
   }
   while (canvas.width/((upperBoundSecondary - lowerBoundSecondary)/increment) < 15){
     increment *= 10;
   }
+  /* start at zero */
   if (lowerBoundSecondary <= 0){
     ctx.font = "10px Overpass";
     ctx.save();
@@ -121,6 +128,7 @@ async function generateVisual()
     ctx.fillText(0, 0, 0);
     ctx.restore();
   }
+  /* mark the rest of the scale above zero */
   for (var i = Math.ceil(lowerBoundSecondary/increment)*increment; i <= upperBoundSecondary; i += increment){
     if (i != output && i > 0){
       ctx.beginPath();
@@ -161,6 +169,8 @@ async function generateVisual()
   ctx.fillText(output + " " + document.getElementById("secondarySelect").value, canvas.width/2, canvas.height-30);
 }
 
+
+
 function generateVisualTemp()
 {
   /* creating the canvas */
@@ -182,24 +192,28 @@ function generateVisualTemp()
   ctx.lineTo(canvas.width, canvas.height/2 + 3);
   ctx.strokeStyle = String(getComputedStyle(document.documentElement).getPropertyValue('--secondary-color'));
   ctx.stroke();
-  /* drawing the markings in the primary axis */
+  /* PRIMARY AXIS */
   var zoomlevel = document.getElementById("zoomlevel").value;
   var lowerBoundPrimary = parseFloat(input) - (canvas.width/2)/(20**zoomlevel);
   var upperBoundPrimary = parseFloat(input) + (canvas.width/2)/(20**zoomlevel);
   var scaleFactor = canvas.width/(upperBoundPrimary - lowerBoundPrimary);
   var increment = 1;
+  /* determine the best interval to use */
   while (canvas.width/((upperBoundPrimary - lowerBoundPrimary)/increment) > 60){
     increment /= 10;
   }
   while (canvas.width/((upperBoundPrimary - lowerBoundPrimary)/increment) < 15){
     increment *= 10;
   }
+    /* finds the highest labelled value displayed on the visual to scroll up to */
   document.getElementById("upTo").value = (Math.floor(upperBoundPrimary/increment)*increment).toFixed(Math.abs(Math.floor(Math.log10(increment))));
+  /* finds the highest labelled value displayed on the visual to scroll down to */
   if (calculateConversion(lowerBoundPrimary, document.getElementById("primarySelect").value, "K") > 0){
     document.getElementById("downTo").value = (Math.ceil(lowerBoundPrimary/increment)*increment).toFixed(Math.abs(Math.floor(Math.log10(increment))));
     document.getElementById("downTo").disabled = false;
     document.getElementById("scrollDown").disabled = false;
   }
+  /* cut off the line and disable scrolling down if the bottom of the scale is reached*/
   if (calculateConversion(lowerBoundPrimary, document.getElementById("primarySelect").value, "K") <= 0){
     document.getElementById("downTo").value = "";
     document.getElementById("downTo").disabled = true;
@@ -209,19 +223,19 @@ function generateVisualTemp()
     ctx.lineWidth = 5;
     ctx.beginPath();
     ctx.moveTo(0, canvas.height/2 - 3);
-    ctx.lineTo(scaleFactor*(0-lowerBoundPrimary), canvas.height/2 - 3);
+    ctx.lineTo(scaleFactor*(calculateConversion(0, "K", document.getElementById("primarySelect").value)-lowerBoundPrimary), canvas.height/2 - 3);
     ctx.strokeStyle = "#FFFFFF";
     ctx.stroke();
     ctx.beginPath();
     ctx.moveTo(0, canvas.height/2 + 3);
-    ctx.lineTo(scaleFactor*(0-lowerBoundPrimary), canvas.height/2 + 3);
+    ctx.lineTo(scaleFactor*(calculateConversion(0, "K", document.getElementById("primarySelect").value)-lowerBoundPrimary), canvas.height/2 + 3);
     ctx.strokeStyle = "#FFFFFF";
     ctx.stroke();
     ctx.restore();
-
+    /* marks the origin of the line (absolute zero) */
     ctx.beginPath();
-    ctx.moveTo(scaleFactor*(0-lowerBoundPrimary), canvas.height/2.6);
-    ctx.lineTo(scaleFactor*(0-lowerBoundPrimary), canvas.height - canvas.height/2.6);
+    ctx.moveTo(scaleFactor*(calculateConversion(0, "K", document.getElementById("primarySelect").value)-lowerBoundPrimary), canvas.height/2.6);
+    ctx.lineTo(scaleFactor*(calculateConversion(0, "K", document.getElementById("primarySelect").value)-lowerBoundPrimary), canvas.height - canvas.height/2.6);
     ctx.strokeStyle = "#FF0000";
     ctx.stroke();
     ctx.font = "10px Overpass";
@@ -229,11 +243,12 @@ function generateVisualTemp()
     ctx.save();
     ctx.textAlign = "left";
     ctx.textBaseline = "middle";
-    ctx.translate(scaleFactor*(0-lowerBoundPrimary), canvas.height/2.8);
+    ctx.translate(scaleFactor*(calculateConversion(0, "K", document.getElementById("primarySelect").value)-lowerBoundPrimary), canvas.height/2.8);
     ctx.rotate(-60 * Math.PI / 180);
-    ctx.fillText(0, 0, 0);
+    ctx.fillText(calculateConversion(0, "K", document.getElementById("primarySelect").value).toFixed(2), 0, 0);
     ctx.restore();
   }
+/* drawing the markings and labels in the primary axis */
   for (var i = Math.ceil(lowerBoundPrimary/increment)*increment; i <= upperBoundPrimary; i += increment){
     if (i != input && calculateConversion(i, document.getElementById("primarySelect").value, "K") > 0){
       ctx.beginPath();
@@ -257,17 +272,19 @@ function generateVisualTemp()
       ctx.restore();
     }
   }
-  /* drawing the markings in the secondary axis */
+  /* SECONDARY AXIS */
   var lowerBoundSecondary = calculateConversion(lowerBoundPrimary, document.getElementById("primarySelect").value, document.getElementById("secondarySelect").value);
   var upperBoundSecondary = calculateConversion(upperBoundPrimary, document.getElementById("primarySelect").value, document.getElementById("secondarySelect").value);
   var scaleFactor = canvas.width/(upperBoundSecondary - lowerBoundSecondary);
   var increment = 1;
+  /* determine the best interval to use */
   while (canvas.width/((upperBoundSecondary - lowerBoundSecondary)/increment) > 60){
     increment /= 10;
   }
   while (canvas.width/((upperBoundSecondary - lowerBoundSecondary)/increment) < 15){
     increment *= 10;
   }
+  /* start at absolute zero */
   if (calculateConversion(lowerBoundSecondary, document.getElementById("secondarySelect").value, "K") <= 0){
     ctx.font = "10px Overpass";
     ctx.save();
@@ -278,6 +295,7 @@ function generateVisualTemp()
     ctx.fillText(calculateConversion(0, "K", document.getElementById("secondarySelect").value).toFixed(2), 0, 0);
     ctx.restore();
   }
+  /* mark the rest of the scale above absolute zero */
   for (var i = Math.ceil(lowerBoundSecondary/increment)*increment; i <= upperBoundSecondary; i += increment){
     if (i != output && calculateConversion(i, document.getElementById("secondarySelect").value, "K") > 0){
       ctx.beginPath();
